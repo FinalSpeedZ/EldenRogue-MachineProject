@@ -1,3 +1,5 @@
+#include "titlescreen.h"
+
 void openTitleScreen () {
 	printTitleScreen();
 }
