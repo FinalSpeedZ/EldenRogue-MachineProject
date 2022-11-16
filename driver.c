@@ -6,7 +6,7 @@
 #include "utility/printer.c"
 #include "utility/scanner.c"
 
-#include "EldenRogueScreens/title_screen.c"
+#include "screens/title_screen.c"
 
 int main() {
 	openTitleScreen();
