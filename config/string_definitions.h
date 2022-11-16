@@ -1,0 +1,6 @@
+#ifndef STRING_DEFINITIONS_H
+#define STRING_DEFINITIONS_H
+
+#define OPTIONS_TEXT_LENGTH 20
+
+#endif
