@@ -1,14 +1,17 @@
-#ifndef SETTINGS
-#define SETTINGS
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
-#define SCREEN_WIDTH	70
-#define SCREEN_PADDING	7
-#define HEADER_WIDTH	30
-#define OPTION_PADDING	10
+#define SCREEN_WIDTH          85
 
-#define TILE_PLAYER_ORIGIN_ROW	2
-#define TILE_PLAYER_ORIGIN_COL  3
+#define HEADER_PADDING_LEFT    5
 
-#define MAX_PLAYER_HEALTH  5
+#define INPUT_LINE             7
+#define INPUT_PADDING         14
+
+#define SCREEN_PADDING_TOP     3
+#define SCREEN_PADDING_LEFT   20
+
+#define TWO_OPTION_PADDING    10
+#define CENTER_OPTION_PADDING 25
 
 #endif
