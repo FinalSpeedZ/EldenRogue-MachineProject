@@ -7,5 +7,6 @@
 
 void openTitleScreen();
 void processTitleScreenInput(int nInput);
+void processCharacterCreationScreenInput(int nInput, Player* pPlayer);
 
 #endif

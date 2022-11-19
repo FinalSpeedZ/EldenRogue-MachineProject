@@ -3,7 +3,7 @@
 
 void getIntInput(int *pInput, int nMin, int nMax) {
 	if (*pInput < nMin || *pInput > nMax){
-		printInvalidInputMsg();
+		printInvalidInputMsg("ENTER THE NUMBER OF YOUR SELECTION");
 	}
 
 	printInputTag(STD_INPUT_TAG);
@@ -11,20 +11,38 @@ void getIntInput(int *pInput, int nMin, int nMax) {
 	while ((getchar()) != '\n'); // to clear input buffer
 } 
 
-
-void getNameInput(StringPlayerName strPlayerName) {
-	StringPlayerName strTempPlayerName;
-	int nStart = 0;
+char* getStringInput(char strInputTag[]) {
+	char* pUnknownLength = malloc(sizeof(char));
+	int nReadCharacter;
+	int nIndex = 0;
 
 	printf("\n");
-	printInputTag(NAME_INPUT_TAG);
-	
-	scanf("%25[^\n]s", strTempPlayerName);
-	while ((getchar()) != '\n'); // to clear input buffer
+	printInputTag(strInputTag);
 
-	while (strTempPlayerName[nStart] == ' ') {
+	while ((nReadCharacter = getchar()) != '\n' && nReadCharacter != EOF) {
+		pUnknownLength[nIndex++] = nReadCharacter;
+		pUnknownLength = realloc(pUnknownLength, nIndex+1);
+	}
+	
+	pUnknownLength[nIndex] = '\0';
+	return pUnknownLength;
+}
+
+void getNameInput(StringPlayerName strPlayerName) {
+	char* pTempPlayerName = getStringInput(NAME_INPUT_TAG);
+	int nStart = 0;
+
+	while (pTempPlayerName[nStart] == ' ') {
 		nStart++;
 	}
 
-	strncpy(strPlayerName, strTempPlayerName + nStart, PLAYER_NAME_LENGTH);
+	if (strlen(pTempPlayerName) > PLAYER_NAME_LENGTH) {
+		printMessage(SYSTEM_MESSAGE, "YOUR CHOSEN NAME IS TOO LONG");
+		printMessage(SYSTEM_MESSAGE, PRESS_ENTER);
+		while ((getchar()) != '\n'); 	
+	}
+
+	strncpy(strPlayerName, pTempPlayerName + nStart, PLAYER_NAME_LENGTH);
+
+	free(pTempPlayerName);
 }

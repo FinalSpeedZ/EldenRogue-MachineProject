@@ -44,10 +44,10 @@ void printMessage(char strMessageType[], char strMessage[]) {
 	printf("[%s]: %s\n", strMessageType, strMessage);
 }
 
-void printInvalidInputMsg() {
-	printMessage("SYSTEM MESSAGE", "INVALID INPUT");
+void printInvalidInputMsg(char strErrorMessage[]) {
+	printMessage(SYSTEM_MESSAGE, "INVALID INPUT");
 	printMultiple(" ", SCREEN_PADDING_LEFT + HEADER_PADDING_LEFT);
-	printf("ENTER THE NUMBER OF YOUR SELECTION\n\n");
+	printf("%s\n\n", strErrorMessage);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
