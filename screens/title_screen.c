@@ -3,8 +3,11 @@
 #include "../utility/printer.h"
 #include "../utility/scanner.h"
 
+#include "character_creation_screen.h"
+
 void openTitleScreen() {
 	int nInput = 0;
+
 	do {
 		system("cls");
 		
@@ -25,8 +28,15 @@ void openTitleScreen() {
 
 		getIntInput(&nInput, 0, 2);
 
+		processTitleScreenInput(nInput);
 	} while (nInput != 0);
-
 }
 
+void processTitleScreenInput(int nInput) {
+	switch (nInput) {
+		case 1:
+			openCharacterCreationScreen();
+			break;
+	}
+}
 

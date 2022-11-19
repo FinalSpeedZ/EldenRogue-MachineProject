@@ -6,5 +6,6 @@
 #define OPTION_EXIT     "EXIT"
 
 void openTitleScreen();
+void processTitleScreenInput(int nInput);
 
 #endif

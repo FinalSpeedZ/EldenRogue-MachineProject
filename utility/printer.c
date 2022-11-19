@@ -2,6 +2,7 @@
 
 #include "../config/settings.h"
 #include "../config/string_definitions.h"
+#include "../config/structures.h"
 
 void printMultiple(char strText[], int nTimes) {
 	int nCounter;
@@ -12,20 +13,30 @@ void printMultiple(char strText[], int nTimes) {
 
 void printInputDivider() {
 	printMultiple(" ", SCREEN_PADDING_LEFT + INPUT_PADDING);
-	printMultiple("─", INPUT_LINE);
-	printMultiple("═", INPUT_LINE);
+	printMultiple("─", INPUT_DESIGN);
+	printMultiple("═", INPUT_DESIGN);
 	printf("╣   ");
 	printf("USER INPUT");
 	printf("   ╠");
-	printMultiple("═", INPUT_LINE);	
-	printMultiple("─", INPUT_LINE);
+	printMultiple("═", INPUT_DESIGN);	
+	printMultiple("─", INPUT_DESIGN);
 	printf("\n");
 }
 
-void printInputTag() {
+void printInputTag(char strInputTag[]) {
 	printMultiple(" ", SCREEN_PADDING_LEFT);
-	printf("[INPUT]: ");
+	printf("[%s]: ", strInputTag);
 }
+
+void printFooter() {
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
+	printMultiple("─", SCREEN_WIDTH);
+	printf("\n\n");
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                            MESSAGE PRINTERS                             *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 void printMessage(char strMessageType[], char strMessage[]) {
 	printf("\n");
@@ -37,13 +48,6 @@ void printInvalidInputMsg() {
 	printMessage("SYSTEM MESSAGE", "INVALID INPUT");
 	printMultiple(" ", SCREEN_PADDING_LEFT + HEADER_PADDING_LEFT);
 	printf("ENTER THE NUMBER OF YOUR SELECTION\n\n");
-}
-
-
-void printFooter() {
-	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-	printMultiple("─", SCREEN_WIDTH);
-	printf("\n\n");
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -104,4 +108,12 @@ void printCenterOption(int nNumberOption, char strText[]) {
 	printf("└");
 	printMultiple("─", OPTIONS_TEXT_LENGTH);
 	printf("┘\n\n");
+}
+
+void printFieldedOption (int nNumberOption, char strText[]) {
+	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
+	printf("│");
+	printf("[%d] %s", nNumberOption, strText);
+	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText) + 4));
+	printf("│ ");
 }

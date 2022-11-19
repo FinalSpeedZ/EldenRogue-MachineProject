@@ -7,6 +7,7 @@
 #include "utility/scanner.c"
 
 #include "screens/title_screen.c"
+#include "screens/character_creation_screen.c"
 
 int main() {
 	openTitleScreen();

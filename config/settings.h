@@ -5,7 +5,7 @@
 
 #define HEADER_PADDING_LEFT    5
 
-#define INPUT_LINE             7
+#define INPUT_DESIGN           7
 #define INPUT_PADDING         14
 
 #define SCREEN_PADDING_TOP     3
