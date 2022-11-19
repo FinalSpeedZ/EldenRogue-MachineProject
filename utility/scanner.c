@@ -21,7 +21,7 @@ char* getStringInput(char strInputTag[]) {
 
 	while ((nReadCharacter = getchar()) != '\n' && nReadCharacter != EOF) {
 		pUnknownLength[nIndex++] = nReadCharacter;
-		pUnknownLength = realloc(pUnknownLength, nIndex+1);
+		pUnknownLength = realloc(pUnknownLength, nIndex + 1);
 	}
 	
 	pUnknownLength[nIndex] = '\0';
