@@ -1,6 +1,6 @@
-#ifndef STRING_DEFINITIONS
-#define STRING_DEFINITIONS
+#ifndef STRING_DEFINITIONS_H
+#define STRING_DEFINITIONS_H
 
-typedef char String[50];
+#define OPTIONS_TEXT_LENGTH 20
 
-#endif 
+#endif
