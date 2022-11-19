@@ -17,7 +17,7 @@ char* getStringInput(char strInputTag[]) {
 	int nIndex = 0;
 
 	printf("\n");
-	printInputTag(strInputTag);
+	printInputTag(strInputTag); 
 
 	while ((nReadCharacter = getchar()) != '\n' && nReadCharacter != EOF) {
 		pUnknownLength[nIndex++] = nReadCharacter;
