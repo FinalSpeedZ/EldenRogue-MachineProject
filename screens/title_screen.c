@@ -3,9 +3,9 @@
 #include "../utility/printer.h"
 #include "../utility/scanner.h"
 
-#include "character_creation_screen.h"
+#include "character_creation_screens/character_creation_screen.h"
 
-void openTitleScreen() {
+void openTitleScreen(Player* pPlayer) {
 	int nInput = 0;
 
 	do {
@@ -23,19 +23,17 @@ void openTitleScreen() {
 		printCenterOption(0, OPTION_EXIT);
 		
 		printFooter();
-
 		printInputDivider();
 
 		getIntInput(&nInput, 0, 2);
-
-		processTitleScreenInput(nInput);
+		processTitleScreenInput(nInput, pPlayer);
 	} while (nInput != 0);
 }
 
-void processTitleScreenInput(int nInput) {
+void processTitleScreenInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1:
-			openCharacterCreationScreen();
+			openCharacterCreationScreen(pPlayer);
 			break;
 	}
 }

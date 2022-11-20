@@ -1,11 +1,11 @@
 #include "character_creation_screen.h"
+#include "job_class_creation.h"
 
-#include "../config/structures.h"
+#include "../../config/structures.h"
 
-void openCharacterCreationScreen() {
+void openCharacterCreationScreen(Player* pPlayer) {
 	int nInput = 0;
-	
-	Player sPlayer = initializePlayer();
+
 	do {
 		system("cls");
 
@@ -18,19 +18,18 @@ void openCharacterCreationScreen() {
 		printf("\n\n");
 
 		printFieldedOption(1, TAG_NAME);
-		printf("%s\n", sPlayer.strPlayerName);
+		printf("%s\n", pPlayer->strPlayerName);
 		printFieldedOption(2, TAG_JOB_CLASS);
-		printf("\n\n");
+		printf("%s\n", pPlayer->strPlayerJobClass);
 
+		printf("\n");
 		printTwoOptions(0, OPTION_BACK, 3, OPTION_CONFIRM);
 
 		printFooter();
-
 		printInputDivider();
 
 		getIntInput(&nInput, 0, 3);
-
-		processCharacterCreationScreenInput(nInput, &sPlayer);
+		processCharacterCreationScreenInput(nInput, pPlayer);
 	} while (nInput != 0);
 }
 
@@ -39,7 +38,7 @@ void processCharacterCreationScreenInput(int nInput, Player* pPlayer) {
 		case 1:
 			getNameInput(pPlayer->strPlayerName);
 			break;	
-		case 3: 
+		case 2: 
 			openJobClassSelection(pPlayer);
 			break;
 
@@ -50,6 +49,7 @@ Player initializePlayer() {
 	Player sPlayer;
 
 	strcpy(sPlayer.strPlayerName, "");
+	ResetJobClassStats(&sPlayer);
 
 	return sPlayer;
 }

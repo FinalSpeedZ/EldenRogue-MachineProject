@@ -11,6 +11,15 @@ void printMultiple(char strText[], int nTimes) {
 	}
 }
 
+void printMiddleSubHeader(char strText[]) {
+	int nOffset = (SCREEN_WIDTH - strlen(strText)) / 2;
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
+	printf("%s\n", strText);
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset - 1);
+	printMultiple("─", strlen(strText) + 2);
+	printf("\n\n");
+}
+
 void printInputDivider() {
 	printMultiple(" ", SCREEN_PADDING_LEFT + INPUT_PADDING);
 	printMultiple("─", INPUT_DESIGN);
@@ -116,4 +125,29 @@ void printFieldedOption (int nNumberOption, char strText[]) {
 	printf("[%d] %s", nNumberOption, strText);
 	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText) + 4));
 	printf("│ ");
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                        STATS VALUE PRINTERS                             *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void printMiddleStats(char strLabel[], int nValue) {
+	int nOffset = (SCREEN_WIDTH - (strlen(strLabel) + 4)) / 2;
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
+	printf("%s: %d\n", strLabel, nValue);
+	printf("\n");
+}
+
+void printTwoStats(char strLabel1[], int nValue1, 
+	               char strLabel2[], int nValue2) {
+	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING + HEADER_PADDING_LEFT);
+	
+	printf("%s: ", strLabel1);
+	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strLabel1) + 1) - 3);
+	printf("%3d ", nValue1);
+	printf("│ ");
+
+	printf("%s: ", strLabel2);
+	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strLabel2) + 1) - 3);
+	printf("%3d", nValue2);
+	printf("│\n");
 }

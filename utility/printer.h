@@ -3,7 +3,14 @@
 
 #define SYSTEM_MESSAGE "SYSTEM MESSAGE"
 
+#define OPTION_START    "START"
+#define OPTION_CONTINUE "CONTINUE"
+#define OPTION_EXIT     "EXIT"
+#define OPTION_BACK     "BACK"
+#define OPTION_CONFIRM  "CONFIRM"
+
 void printMultiple(char strText[], int nTimes);
+void printMiddleSubHeader(char strText[]);
 
 void printInputDivider();
 void printInputTag(char strInputTag[]);
@@ -18,4 +25,7 @@ void printTwoOptions(int nNumberOption1, char strText1[],
 void printCenterOption(int nNumberOption, char strText[]);
 void printFieldedOption (int nNumberOption, char strText1[]);
 
+void printMiddleStats(char strLabel[], int nValue);
+void printTwoStats(char strLabel1[], int nValue1, 
+	               char strLabel2[], int nValue2);
 #endif 

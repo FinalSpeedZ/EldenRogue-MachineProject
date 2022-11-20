@@ -7,7 +7,7 @@
 #define TAG_NAME        "NAME"
 #define TAG_JOB_CLASS   "JOB CLASS"
 
-void openCharacterCreationScreen();
+void openCharacterCreationScreen(Player* pPlayer);
 void processCharacterCreationScreenInput(int nInput, Player* pPlayer);
 Player initializePlayer();
 
