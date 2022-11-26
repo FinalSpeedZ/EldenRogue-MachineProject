@@ -1,8 +1,8 @@
 #include "printer.h"
 
-#include "../config/settings.h"
-#include "../config/string_definitions.h"
-#include "../config/structures.h"
+#include "../../config/settings.h"
+#include "../../config/string_definitions.h"
+#include "../../config/structures.h"
 
 void printMultiple(char strText[], int nTimes) {
 	int nCounter;
@@ -15,9 +15,15 @@ void printMiddleSubHeader(char strText[]) {
 	int nOffset = (SCREEN_WIDTH - strlen(strText)) / 2;
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
 	printf("%s\n", strText);
-	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset - 1);
-	printMultiple("─", strlen(strText) + 2);
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset - 5);
+	printMultiple("─", strlen(strText) + 10);
 	printf("\n\n");
+}
+
+void printMiddleText(char strText[], char strDesignLeft[], char strDesignRight[]) {
+	int nOffset = (SCREEN_WIDTH - strlen(strText) - 4) / 2;
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
+	printf("%s %s %s\n\n", strDesignLeft, strText, strDesignRight);
 }
 
 void printInputDivider() {
@@ -65,28 +71,28 @@ void printInvalidInputMsg(char strErrorMessage[]) {
 
 void printTwoOptions(int nNumberOption1, char strText1[], 
 		 		     int nNumberOption2, char strText2[]) {
-	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
+	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING );
 	printf("┌");
 	printMultiple("─", OPTIONS_TEXT_LENGTH);
 	printf("┐"); 
 
-	printMultiple(" ", TWO_OPTION_PADDING);
+	printMultiple(" ", TWO_OPTION_PADDING );
 
 	printf("┌");
 	printMultiple("─", OPTIONS_TEXT_LENGTH); 
 	printf("┐\n"); 
 
 	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
-	printf("│");
+	printf("│ ");
 	printf("[%d] %s", nNumberOption1, strText1);
-	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText1) + 4));
+	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText1) + 5));
 	printf("│");
 
 	printMultiple(" ", TWO_OPTION_PADDING);
 
-	printf("│");
+	printf("│ ");
 	printf("[%d] %s", nNumberOption2, strText2);
-	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText2) + 4));
+	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText2) + 5));
 	printf("│\n");
 
 	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
@@ -101,6 +107,44 @@ void printTwoOptions(int nNumberOption1, char strText1[],
 	printf("┘\n\n");
 }
 
+void printTwoLongOptions(int nNumberOption1, char strText1[], 
+		 		         int nNumberOption2, char strText2[]) {
+	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_LONG_OPTION_PADDING);
+	printf("┌");
+	printMultiple("─", OPTIONS_LONG_TEXT_LENGTH);
+	printf("┐"); 
+
+	printMultiple(" ", TWO_LONG_OPTION_PADDING );
+
+	printf("┌");
+	printMultiple("─",OPTIONS_LONG_TEXT_LENGTH); 
+	printf("┐\n"); 
+
+	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_LONG_OPTION_PADDING);
+	printf("│ ");
+	printf("[%d] %s", nNumberOption1, strText1);
+	printMultiple(" ", OPTIONS_LONG_TEXT_LENGTH - (strlen(strText1) + 5));
+	printf("│");
+
+	printMultiple(" ", TWO_LONG_OPTION_PADDING);
+
+	printf("│ ");
+	printf("[%d] %s", nNumberOption2, strText2);
+	printMultiple(" ", OPTIONS_LONG_TEXT_LENGTH - (strlen(strText2) + 5));
+	printf("│\n");
+
+	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_LONG_OPTION_PADDING);
+	printf("└");
+	printMultiple("─", OPTIONS_LONG_TEXT_LENGTH);
+	printf("┘");
+
+	printMultiple(" ", TWO_LONG_OPTION_PADDING);
+
+	printf("└");
+	printMultiple("─", OPTIONS_LONG_TEXT_LENGTH);
+	printf("┘\n\n");
+}
+
 void printCenterOption(int nNumberOption, char strText[]) {
 	printMultiple(" ", SCREEN_PADDING_LEFT + CENTER_OPTION_PADDING);
 	printf("┌");
@@ -108,9 +152,9 @@ void printCenterOption(int nNumberOption, char strText[]) {
 	printf("┐\n");
 
 	printMultiple(" ", SCREEN_PADDING_LEFT + CENTER_OPTION_PADDING);
-	printf("│");
+	printf("│ ");
 	printf("[%d] %s", nNumberOption, strText);
-	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText) + 4));
+	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText) + 5));
 	printf("│\n");
 
 	printMultiple(" ", SCREEN_PADDING_LEFT + CENTER_OPTION_PADDING);
@@ -121,9 +165,9 @@ void printCenterOption(int nNumberOption, char strText[]) {
 
 void printFieldedOption (int nNumberOption, char strText[]) {
 	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
-	printf("│");
+	printf("│ ");
 	printf("[%d] %s", nNumberOption, strText);
-	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText) + 4));
+	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText) + 5));
 	printf("│ ");
 }
 
@@ -139,7 +183,7 @@ void printMiddleStats(char strLabel[], int nValue) {
 
 void printTwoStats(char strLabel1[], int nValue1, 
 	               char strLabel2[], int nValue2) {
-	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING + HEADER_PADDING_LEFT);
+	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING + HEADER_PADDING_LEFT - 1);
 	
 	printf("%s: ", strLabel1);
 	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strLabel1) + 1) - 3);
@@ -149,31 +193,6 @@ void printTwoStats(char strLabel1[], int nValue1,
 	printf("%s: ", strLabel2);
 	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strLabel2) + 1) - 3);
 	printf("%3d", nValue2);
-	printf("│\n");
+	printf(" │\n");
 }
 
-void printOneBoxedStats(char strLabel[], int nValue) {
-	int nValueDigits = 0;
-	int nValueCopy = nValue;
-	int nLeftPadding = SCREEN_WIDTH - (strlen(strLabel) + nValueDigits);
-
-	while (nValueCopy != 0) {
-		nValueCopy = nValueCopy / 10;
-		nValueDigits++;
-	}
-
-	printMultiple(" ", nLeftPadding);
-	printf("┌");
-	printMultiple("─", strlen(strLabel) + 5 + nValueDigits); 
-	printf("┐\n");
-
-	printMultiple(" ", nLeftPadding);
-	printf("│");
-	printf(" %s | %d", strLabel, nValue);
-	printf(" │\n");	
-
-	printMultiple(" ", nLeftPadding);
-	printf("└");
-	printMultiple("─", strlen(strLabel) + 5 + nValueDigits);
-	printf("┘\n\n");
-}

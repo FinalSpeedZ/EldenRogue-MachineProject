@@ -1,0 +1,45 @@
+#include "fast_travel.h"
+
+void openFastTravel(Player* pPlayer) {
+	int nInput = 0;
+	
+	do {
+		system("cls");
+
+		// change to printHeader (ascii header)
+		printMultiple("\n", SCREEN_PADDING_TOP);
+		printMultiple(" ", SCREEN_PADDING_LEFT + CENTER_OPTION_PADDING + HEADER_PADDING_LEFT);
+		printf("ROUNDTABLE HOLD\n");
+		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
+		printMultiple("─", SCREEN_WIDTH);
+		printf("\n\n");
+
+		printMiddleSubHeader("FAST TRAVEL");
+
+		//fix UI of this
+		printTwoLongOptions(STORMVEIL_CASTLE, "STORMVEIL CASTLE", RAYA_LUCARIA_ACADEMY, "RAYA LUCARIA ACADEMY");
+		printTwoLongOptions(REDMANE_CASTLE, "REDMANE CASTLE", VOLCANO_MANOR, "VOLCANO MANOR");
+		printTwoLongOptions(LEYNDELL_ROYAL_CAPITAL, "LEYNDELL ROYAL CAPITAL", THE_ELDEN_THRONE, "THE ELDEN THRONE");
+		printCenterOption(0, OPTION_BACK);
+
+		printFooter();
+		printInputDivider();
+
+		getIntInput(&nInput, 0, 6);
+		processFastTravelInput(nInput, pPlayer);	
+	} while (nInput != 0);
+}
+
+void processFastTravelInput(int nInput, Player* pPlayer) {
+	switch (nInput) {
+		case STORMVEIL_CASTLE:
+		case RAYA_LUCARIA_ACADEMY:
+		case REDMANE_CASTLE:
+		case VOLCANO_MANOR:
+		case LEYNDELL_ROYAL_CAPITAL:
+		case THE_ELDEN_THRONE:
+			printf("Opened Fast Travel\n");
+			Sleep(500);
+	}
+
+}

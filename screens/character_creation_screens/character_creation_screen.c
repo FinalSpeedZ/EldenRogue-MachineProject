@@ -1,9 +1,9 @@
 #include "character_creation_screen.h"
 #include "job_class_creation.h"
 
-#include "../../config/structures.h"
+#include "../roundtable_hold_screens/roundtable_hold.h"
 
-void openCharacterCreationScreen(Player* pPlayer) {
+void openCharacterCreationScreen(Player sPlayer) {
 	int nInput = 0;
 
 	do {
@@ -17,20 +17,20 @@ void openCharacterCreationScreen(Player* pPlayer) {
 		printMultiple("─", SCREEN_WIDTH);
 		printf("\n\n");
 
-		printFieldedOption(1, TAG_NAME);
-		printf("%s\n", pPlayer->strPlayerName);
-		printFieldedOption(2, TAG_JOB_CLASS);
-		printf("%s\n", pPlayer->strPlayerJobClass);
+		printFieldedOption(1, "NAME");
+		printf("%s\n", sPlayer.strPlayerName);
+		printFieldedOption(2, "JOB CLASS");
+		printf("%s\n\n", sPlayer.strPlayerJobClass);
+		printJobClassStats(sPlayer);
 
-		printf("\n");
 		printTwoOptions(0, OPTION_BACK, 3, OPTION_CONFIRM);
 
 		printFooter();
 		printInputDivider();
 
 		getIntInput(&nInput, 0, 3);
-		processCharacterCreationScreenInput(nInput, pPlayer);
-	} while (nInput != 0);
+		processCharacterCreationScreenInput(nInput, &sPlayer);
+	} while (nInput != 0 && (nInput != 3 || (strlen(sPlayer.strPlayerName) == 0) || strlen(sPlayer.strPlayerJobClass) == 0));
 }
 
 void processCharacterCreationScreenInput(int nInput, Player* pPlayer) {
@@ -41,18 +41,41 @@ void processCharacterCreationScreenInput(int nInput, Player* pPlayer) {
 		case 2: 
 			openJobClassSelection(pPlayer);
 			break;
-
+		case 3: 
+			if (checkCharacterCreation(*pPlayer) == TRUE) {
+				openRoundTableHold(*pPlayer);
+			}
+			break;
 	}
 }
 
-Player initializePlayer() {
-	Player sPlayer;
+int checkCharacterCreation(Player sPlayer) {
+	if (strlen(sPlayer.strPlayerName) == 0) {
+		printMessage(SYSTEM_MESSAGE, "ENTER YOUR CHOSEN NAME");
+		printMessage(SYSTEM_MESSAGE, PRESS_ENTER);
+		while ((getchar()) != '\n');
+		return FALSE; 	
+	}
 
-	strcpy(sPlayer.strPlayerName, "");
-	ResetJobClassStats(&sPlayer);
-
-	return sPlayer;
+	else if (strlen(sPlayer.strPlayerJobClass) == 0) {
+		printMessage(SYSTEM_MESSAGE, "CHOOSE A DESIRED JOB CLASS");
+		printMessage(SYSTEM_MESSAGE, PRESS_ENTER);
+		while ((getchar()) != '\n'); 	
+		return FALSE;
+	}
+	else {
+		return TRUE;
+	}
 }
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                            PRINTER FUNCTIONS                            *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void printJobClassStats(Player sPlayer) {
+	if (strlen(sPlayer.strPlayerJobClass) != 0) {
+		printStats(sPlayer);
+	}
+}
 
 

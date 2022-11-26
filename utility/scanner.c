@@ -1,5 +1,4 @@
 #include "scanner.h"
-#include "printer.h"
 
 void getIntInput(int *pInput, int nMin, int nMax) {
 	if (*pInput < nMin || *pInput > nMax){

@@ -17,6 +17,8 @@ struct playerTag {
 	StringPlayerName strPlayerName;
 	StringJobClass strPlayerJobClass;  
 	int nLevel;
+	int nRunes;
+	int nShards;
 	Statistics sPlayerStats;
 };
 typedef struct playerTag Player;

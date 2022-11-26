@@ -25,11 +25,11 @@ void openJobClassSelection(Player* pPlayer) {
 		printInputDivider();
 
 		getIntInput(&nInput, 0, 6);
-		processJobCreationInput(nInput, pPlayer);
+		processJobSelectionInput(nInput, pPlayer);
 	} while (nInput < 0 || nInput > 6);
 }
 
-void processJobCreationInput(int nInput, Player* pPlayer) {
+void processJobSelectionInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1:
 		case 2:
@@ -73,22 +73,9 @@ void processJobClassStatsInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 0:
 			openJobClassSelection(pPlayer);
-			ResetJobClassStats(pPlayer);
+			InitializeJobClassStats(pPlayer);
 	}
 }
-
-void ResetJobClassStats(Player* pPlayer) {
-	pPlayer->nLevel = 0;
-	strcpy(pPlayer->strPlayerJobClass, "");
-
-	pPlayer->sPlayerStats.nHealth       = 0;
-	pPlayer->sPlayerStats.nEndurance    = 0;
-	pPlayer->sPlayerStats.nDexterity    = 0;
-	pPlayer->sPlayerStats.nStrength     = 0;
-	pPlayer->sPlayerStats.nIntelligence = 0;
-	pPlayer->sPlayerStats.nFaith        = 0;
-}
-
 
 void loadJobClassStats(int nJobClass, Player* pPlayer) {
 	switch (nJobClass) {
@@ -193,12 +180,16 @@ void loadProphetStats(Player* pPlayer) {
  *                            PRINTER FUNCTIONS                            *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
  void printStats(Player sPlayer) {
- 	printMiddleStats("LEVEL", sPlayer.nLevel);
+ 	printPlayerLevel(sPlayer.nLevel);
  	printTwoStats("HEALTH", sPlayer.sPlayerStats.nHealth, 
  				  "ENDURANCE", sPlayer.sPlayerStats.nEndurance);
  	printTwoStats("DEXTERITY", sPlayer.sPlayerStats.nDexterity,
  		          "STRENGTH", sPlayer.sPlayerStats.nStrength);
  	printTwoStats("INTELLIGENCE", sPlayer.sPlayerStats.nIntelligence,
  		          "FAITH", sPlayer.sPlayerStats.nFaith);
- 	printf("\n\n");
+ 	printf("\n");
+ }
+
+void printPlayerLevel(int nLevel) {
+ 	printMiddleStats("LEVEL", nLevel);
  }
