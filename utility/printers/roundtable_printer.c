@@ -1,14 +1,16 @@
 #include "roundtable_printer.h"
 
 void printOneBoxedStats(char strLabel[], int nValue) {
-	int nValueDigits = 1;
+	int nValueDigits = 0;
 	int nValueCopy = nValue;
-	int nLeftPadding = SCREEN_WIDTH - (strlen(strLabel) + nValueDigits);
+	int nLeftPadding; 
 
-	while (nValueCopy != 0) {
+	do {
 		nValueCopy = nValueCopy / 10;
-		nValueDigits++;
-	}
+		nValueDigits += 1;	
+	} while (nValueCopy != 0);
+
+	nLeftPadding = SCREEN_WIDTH - (strlen(strLabel) + nValueDigits);
 
 	printMultiple(" ", nLeftPadding);
 	printf("┌");
@@ -18,7 +20,7 @@ void printOneBoxedStats(char strLabel[], int nValue) {
 	printMultiple(" ", nLeftPadding);
 	printf("│");
 	printf(" %s | %d", strLabel, nValue);
-	printf("  │\n");	
+	printf(" │\n");	
 
 	printMultiple(" ", nLeftPadding);
 	printf("└");

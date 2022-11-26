@@ -4,14 +4,14 @@ Player initializePlayer() {
 	Player sPlayer;
 
 	strcpy(sPlayer.strPlayerName, "");
-	InitializeJobClassStats(&sPlayer);
-	ResetRunes(&sPlayer.nRunes);
-	InitializeShards(&sPlayer.nShards);
+	initializeJobClassStats(&sPlayer);
+	resetRunes(&sPlayer.nRunes);
+	initializeShards(&sPlayer.nShards);
 
 	return sPlayer;
 }
 
-void InitializeJobClassStats(Player* pPlayer) {
+void initializeJobClassStats(Player* pPlayer) {
 	pPlayer->nLevel = 0;
 
 	strcpy(pPlayer->strPlayerJobClass, "");
@@ -24,10 +24,10 @@ void InitializeJobClassStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nFaith        = 0;
 }
 
-void ResetRunes(int* pRunes) {
-	*pRunes = 0;
+void resetRunes(int* pRunes) {
+	*pRunes = 1000;
 }
 
-void InitializeShards(int* pShards) {
+void initializeShards(int* pShards) {
 	*pShards = 0;
 }

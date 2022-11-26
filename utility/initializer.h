@@ -3,8 +3,8 @@
 
 Player initializePlayer();
 
-void InitializeJobClassStats(Player* pPlayer);
-void ResetRunes(int* pRunes);
-void InitializeShards(int* pShards);
+void initializeJobClassStats(Player* pPlayer);
+void resetRunes(int* pRunes);
+void initializeShards(int* pShards);
 
 #endif

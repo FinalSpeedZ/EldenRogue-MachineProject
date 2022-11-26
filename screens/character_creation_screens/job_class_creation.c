@@ -72,8 +72,8 @@ void openJobClassStats(int nJobClass, Player* pPlayer) {
 void processJobClassStatsInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 0:
+			initializeJobClassStats(pPlayer);
 			openJobClassSelection(pPlayer);
-			InitializeJobClassStats(pPlayer);
 	}
 }
 
