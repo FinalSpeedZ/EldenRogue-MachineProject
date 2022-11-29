@@ -34,6 +34,6 @@ void initializeShards(int* pShards) {
 }
 
 void initializeAreaDetails(AreaDetails* pPlayerAreaDetails) {
-	pPlayerAreaDetails->nRowLocation = 0;
-	pPlayerAreaDetails->nRowLocation = 0;
+	pPlayerAreaDetails->nRowLocation = 1;
+	pPlayerAreaDetails->nColumnLocation = 1;
 }

@@ -1,6 +1,6 @@
 #include "area_boards.h"
 
-int* generateStromveilCastle(int nFloor, int nRows, int nColumns) {
+int* generateStromveilCastle(int nFloorNumber, int nRows, int nColumns) {
 	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
 
 	int nRowCounter;
@@ -31,7 +31,7 @@ int* generateStromveilCastle(int nFloor, int nRows, int nColumns) {
 						  		 {0, 0, 3, 0, 0}};
 
 
-	switch(nFloor) {
+	switch(nFloorNumber) {
 		case 1:
 			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
 				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
@@ -60,7 +60,7 @@ int* generateStromveilCastle(int nFloor, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateRayaLucaria(int nFloor, int nRows, int nColumns) {
+int* generateRayaLucaria(int nFloorNumber, int nRows, int nColumns) {
 	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
 
 	int nRowCounter;
@@ -103,7 +103,7 @@ int* generateRayaLucaria(int nFloor, int nRows, int nColumns) {
 								   {0, 4, 0, 0, 0, 4, 0},
 								   {0, 0, 0, 3, 0, 0, 0}};
 
-	switch(nFloor) {
+	switch(nFloorNumber) {
 		case 1:
 			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
 				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
@@ -148,7 +148,7 @@ int* generateRayaLucaria(int nFloor, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateRedmaneCastle(int nFloor, int nRows, int nColumns) {
+int* generateRedmaneCastle(int nFloorNumber, int nRows, int nColumns) {
 	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
 
 	int nRowCounter;
@@ -194,7 +194,7 @@ int* generateRedmaneCastle(int nFloor, int nRows, int nColumns) {
 									 {0, 4, 0, 0, 0, 4, 0},
 									 {0, 0, 0, 0, 0, 0, 0}};
 
-    switch(nFloor) {
+    switch(nFloorNumber) {
 		case 1:
 			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
 				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
@@ -256,7 +256,7 @@ int* generateRedmaneCastle(int nFloor, int nRows, int nColumns) {
     return pFloor;
 }
 
-int* generateVolcanoManor(int nFloor, int nRows, int nColumns) {
+int* generateVolcanoManor(int nFloorNumber, int nRows, int nColumns) {
 	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
 
 	int nRowCounter;
@@ -311,7 +311,7 @@ int* generateVolcanoManor(int nFloor, int nRows, int nColumns) {
 									{0, 0, 0, 0, 0},
 									{0, 0, 3, 0, 0}}; 
 
-    switch(nFloor) {
+    switch(nFloorNumber) {
 		case 1:
 			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
 				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
@@ -372,7 +372,7 @@ int* generateVolcanoManor(int nFloor, int nRows, int nColumns) {
     return pFloor;
 }
 
-int* generateLeyndellRoyalCapital(int nFloor, int nRows, int nColumns) {
+int* generateLeyndellRoyalCapital(int nFloorNumber, int nRows, int nColumns) {
 	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
 
 	int nRowCounter;
@@ -469,7 +469,7 @@ int* generateLeyndellRoyalCapital(int nFloor, int nRows, int nColumns) {
 										{4, 0, 0, 0, 4}, 
 										{8, 0, 6, 0, 8}}; 	
 
-	switch(nFloor) {
+	switch(nFloorNumber) {
 		case 1:
 			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
 				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
@@ -586,7 +586,7 @@ int* generateLeyndellRoyalCapital(int nFloor, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateEldenThrone(int nFloor, int nRows, int nColumns) {
+int* generateEldenThrone(int nFloorNumber, int nRows, int nColumns) {
 	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
 
 	int nRowCounter;
@@ -620,7 +620,7 @@ int* generateEldenThrone(int nFloor, int nRows, int nColumns) {
 									{4, 0, 4}, 
 									{0, 6, 0}};	
 
-	switch(nFloor) {
+	switch(nFloorNumber) {
 		case 1:
 			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
 				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
@@ -649,32 +649,32 @@ int* generateEldenThrone(int nFloor, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateArea(int nAreaIndex, int nFloor, int nRows, int nColumns) {
+int* generateArea(int nAreaIndex, int nFloorNumber, int nRows, int nColumns) {
 	int* pFloor;
 
 	switch(nAreaIndex) {
 			case STORMVEIL_CASTLE:
-				pFloor = generateStromveilCastle(nFloor, nRows, nColumn);
+				pFloor = generateStromveilCastle(nFloorNumber, nRows, nColumns);
 				break;
 
 			case RAYA_LUCARIA_ACADEMY:
-				pFloor =  generateRayaLucaria(nFloor, nRows, nColumn);
+				pFloor =  generateRayaLucaria(nFloorNumber, nRows, nColumns);
 				break;
 
 			case REDMANE_CASTLE:
-				pFloor = generateRedmaneCastle(nFloor, nRows, nColumn);
+				pFloor = generateRedmaneCastle(nFloorNumber, nRows, nColumns);
 				break;
 
 			case VOLCANO_MANOR:
-				pFloor = generateVolcanoManor(nFloor, nRows, nColumn);
+				pFloor = generateVolcanoManor(nFloorNumber, nRows, nColumns);
 				break;
 
 			case LEYNDELL_ROYAL_CAPITAL:
-				pFloor = generateLeyndellRoyalCapital(nFloor, nRows, nColumn);
+				pFloor = generateLeyndellRoyalCapital(nFloorNumber, nRows, nColumns);
 				break;
 
 			case THE_ELDEN_THRONE:
-				pFloor = generateEldenThrone(nFloor, nRows, nColumn);
+				pFloor = generateEldenThrone(nFloorNumber, nRows, nColumns);
 	}
 
 	return pFloor;

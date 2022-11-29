@@ -7,8 +7,11 @@
 #define PRESS_ENTER     "PRESS ENTER TO CONTINUE..."
 
 void getIntInput(int *pInput, int nMin, int nMax);
-char* getStringInput(char strInputTag[]);
 
+char* getStringInput(char strInputTag[]);
 void getNameInput(StringPlayerName strPlayerName);
+
+void getCharAreaInput(char* cInput, char aValidCharInputs[], int nLength);
+int hasCharMatch(char cKey, char aValidCharInputs[], int nLength);
 
 #endif 

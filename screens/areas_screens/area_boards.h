@@ -11,13 +11,13 @@
 #define TILE_CREDITS     7
 #define TILE_INVALID     8
 
-int* generateStromveilCastle(int nFloor, int nRows, int nColumns);
-int* generateRayaLucaria(int nFloor, int nRows, int nColumns);
-int* generateRedmaneCastle(int nFloor, int nRows, int nColumns);
-int* generateVolcanoManor(int nFloor, int nRows, int nColumns);
-int* generateLeyndellRoyalCapital(int nFloor, int nRows, int nColumns);
-int* generateEldenThrone(int nFloor, int nRows, int nColumns);
+int* generateStromveilCastle(int nFloorNumber, int nRows, int nColumns);
+int* generateRayaLucaria(int nFloorNumber, int nRows, int nColumns);
+int* generateRedmaneCastle(int nFloorNumber, int nRows, int nColumns);
+int* generateVolcanoManor(int nFloorNumber, int nRows, int nColumns);
+int* generateLeyndellRoyalCapital(int nFloorNumber, int nRows, int nColumns);
+int* generateEldenThrone(int nFloorNumber, int nRows, int nColumns);
 
-int* generateArea(int nAreaIndex, int nFloor, int nRows, int nColumns);
+int* generateArea(int nAreaIndex, int nFloorNumber, int nRows, int nColumns);
 
 #endif

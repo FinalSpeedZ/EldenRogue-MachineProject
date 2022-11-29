@@ -1,36 +1,36 @@
 #include "area_printer.h"
 
+#include "../../screens/areas_screens/area_boards.h"
+#include "../../screens/roundtable_hold_screens/fast_travel.h"
 
-void printAreaMap(int nAreaIndex, int* pRows, int* pColumns, Player* pPlayer) {
+void printAreaMap(int nAreaIndex, int nFloorNumber, int nRows, int nColumns, AreaDetails* pPlayerAreaDetails) {
 	int nRowCounter;
 	int nColumnCounter;
 
-	int nFloor = 1;
+	int nPadding = SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + ((SCREEN_WIDTH	- 6 * nColumns) / 2);
 
-	int nPadding = SCREEN_PADDING_LEFT + ((SCREEN_WIDTH	- 7 * *pColumns) / 2);
+	int* pFloor = generateArea(nAreaIndex, nFloorNumber, nRows, nColumns);
 
-	int* pFloor = generateArea(nAreaIndex, nFloor, *pRows, *pColumns);
+	*(pFloor + (pPlayerAreaDetails->nRowLocation * nColumns) + 
+		pPlayerAreaDetails->nColumnLocation) = TILE_PLAYER;
 
-	*(pFloor + (pPlayer->sPlayerAreaDetails.nRowLocation * *pColumns) + 
-		pPlayer->sPlayerAreaDetails.nColumnLocation) = TILE_PLAYER;
-
-	for (nRowCounter = 0; nRowCounter < *pRows; nRowCounter++) {
+	for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
 
 		printMultiple(" ", nPadding);
-		for(nColumnCounter = 0; nColumnCounter< *pColumns; nColumnCounter++) {
-			printTileParts(*(pFloor + (nRowCounter * *pColumns) + nColumnCounter), TOP);
+		for(nColumnCounter = 0; nColumnCounter< nColumns; nColumnCounter++) {
+			printTileParts(*(pFloor + (nRowCounter * nColumns) + nColumnCounter), TOP);
 		}
 		printf("\n");
 
 		printMultiple(" ", nPadding);
-		for(nColumnCounter = 0; nColumnCounter< *pColumns; nColumnCounter++) {
-			printTileParts(*(pFloor + (nRowCounter * *pColumns) + nColumnCounter), MIDDLE);
+		for(nColumnCounter = 0; nColumnCounter< nColumns; nColumnCounter++) {
+			printTileParts(*(pFloor + (nRowCounter * nColumns) + nColumnCounter), MIDDLE);
 		}
 		printf("\n");
 
 		printMultiple(" ", nPadding);
-		for(nColumnCounter = 0; nColumnCounter< *pColumns; nColumnCounter++) {
-			printTileParts(*(pFloor + (nRowCounter * *pColumns) + nColumnCounter), BOTTOM);
+		for(nColumnCounter = 0; nColumnCounter< nColumns; nColumnCounter++) {
+			printTileParts(*(pFloor + (nRowCounter * nColumns) + nColumnCounter), BOTTOM);
 		}
 		printf("\n");
 	}
@@ -91,11 +91,8 @@ void printTileParts(int nTileType, int nTilePosition) {
 					break;
 
 				case TILE_DOOR_UP: 
-					printf("│   │ ");
-					break;
-
 				case TILE_DOOR_DOWN: 
-					printf("│   │ ");
+					printf("│ D │ ");
 					break;
 
 				case TILE_SPAWN: 
@@ -107,7 +104,7 @@ void printTileParts(int nTileType, int nTilePosition) {
 					break;
 
 				case TILE_FAST_TRAVEL: 
-					printf("│   │ ");
+					printf("│ F │ ");
 					break;
 
 				case TILE_CREDITS: 
@@ -158,5 +155,33 @@ void printTileParts(int nTileType, int nTilePosition) {
 					printf("└┴┴┴┘ ");
 					break;
 			}		
+	}
+}
+
+void printAreaName(int nAreaIndex) {
+	switch (nAreaIndex) {
+		case STORMVEIL_CASTLE:
+			printMiddleText("STORMVEIL CASTLE", "", "");
+			break;
+
+		case RAYA_LUCARIA_ACADEMY:
+			printMiddleText("RAYA LUCARIA ACADEMY", "", "");
+			break;
+
+		case REDMANE_CASTLE:
+			printMiddleText("REDMANE CASTLE", "", "");
+			break;
+
+		case VOLCANO_MANOR:
+			printMiddleText("VOLCANO MANOR", "", "");
+			break;
+
+		case LEYNDELL_ROYAL_CAPITAL:
+			printMiddleText("VOLCANO MANOR", "", "");
+			break;
+
+		case THE_ELDEN_THRONE:
+			printMiddleText("VOLCANO MANOR", "", "");
+			break;
 	}
 }

@@ -45,3 +45,26 @@ void getNameInput(StringPlayerName strPlayerName) {
 
 	free(pTempPlayerName);
 }
+
+void getCharAreaInput(char* cInput, char aValidCharInputs[], int nLength) {
+	if (!hasCharMatch(*cInput, aValidCharInputs, nLength)) {
+		printInvalidInputMsg("ENTER THE CHARACTER OF YOUR SELECTION");
+	}
+
+	printInputTag(STD_INPUT_TAG);
+	scanf("%c", cInput);
+	while ((getchar()) != '\n'); // to clear input buffer
+}
+
+int hasCharMatch(char cKey, char aValidCharInputs[], int nLength) {
+	int nIndex; 
+	int nMatch = 0;
+
+	for (nIndex = 0; nIndex < nLength; nIndex++) {
+		if (aValidCharInputs[nIndex] == cKey) {
+			nMatch = 1;
+		}
+	}
+
+	return nMatch;
+}

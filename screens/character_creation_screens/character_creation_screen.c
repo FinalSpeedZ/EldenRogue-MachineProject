@@ -11,8 +11,7 @@ void openCharacterCreationScreen(Player sPlayer) {
 
 		// change to printHeader (ascii header)
 		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMultiple(" ", SCREEN_PADDING_LEFT + CENTER_OPTION_PADDING + HEADER_PADDING_LEFT);
-		printf("CHARACTER CREATION\n");
+		printMiddleText("CHARACTER CREATION", "", "");
 		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
 		printMultiple("─", SCREEN_WIDTH);
 		printf("\n\n");
