@@ -6,6 +6,8 @@
 
 #define PRESS_ENTER     "PRESS ENTER TO CONTINUE..."
 
+void pressEnter();
+
 void getIntInput(int *pInput, int nMin, int nMax);
 
 char* getStringInput(char strInputTag[]);

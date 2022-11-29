@@ -1,12 +1,15 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+#include "time.h"
 #include "Windows.h"
 
 #include "utility/printers/printer.c"
 #include "utility/printers/roundtable_printer.c"
+#include "utility/printers/area_printer.c"
 #include "utility/scanner.c"
 #include "utility/initializer.c"
+#include "utility/randomizer.c"
 
 #include "screens/title_screen.c"
 
@@ -17,9 +20,13 @@
 #include "screens/roundtable_hold_screens/fast_travel.c"
 #include "screens/roundtable_hold_screens/level_up.c"
 
+#include "screens/areas_screens/area_boards.c"
+#include "screens/areas_screens/area_screens.c"
+
 int main() {
 	Player sPlayer = initializePlayer(); 
 	
+	srand(time(NULL));	
 	openTitleScreen(sPlayer);
 	return 0;
 }

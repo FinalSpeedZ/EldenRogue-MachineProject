@@ -87,8 +87,7 @@ void levelUpStatChecker(char strStatName[], Player* pPlayer, int* pPlayerStat) {
 		printf("YOU DON'T HAVE ENOUGH RUNES\n");
 	}
 
-	printMessage(SYSTEM_MESSAGE, PRESS_ENTER);
-	while ((getchar()) != '\n'); 
+	pressEnter();
 }
 
 void levelUpStat(int* pStat, Player* pPlayer) {

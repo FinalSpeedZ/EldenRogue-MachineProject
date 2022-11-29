@@ -1,5 +1,10 @@
 #include "scanner.h"
 
+void pressEnter() {
+	printMessage(SYSTEM_MESSAGE, PRESS_ENTER);
+	while ((getchar()) != '\n'); 
+}
+
 void getIntInput(int *pInput, int nMin, int nMax) {
 	if (*pInput < nMin || *pInput > nMax){
 		printInvalidInputMsg("ENTER THE NUMBER OF YOUR SELECTION");
@@ -7,7 +12,7 @@ void getIntInput(int *pInput, int nMin, int nMax) {
 
 	printInputTag(STD_INPUT_TAG);
 	scanf("%d", pInput);
-	while ((getchar()) != '\n'); // to clear input buffer
+	while ((getchar()) != '\n');
 } 
 
 char* getStringInput(char strInputTag[]) {
@@ -36,9 +41,8 @@ void getNameInput(StringPlayerName strPlayerName) {
 	}
 
 	if (strlen(pTempPlayerName) > PLAYER_NAME_LENGTH) {
-		printMessage(SYSTEM_MESSAGE, "YOUR CHOSEN NAME IS TOO LONG");
-		printMessage(SYSTEM_MESSAGE, PRESS_ENTER);
-		while ((getchar()) != '\n'); 	
+		printMessage(SYSTEM_MESSAGE, "YOUR CHOSEN NAME IS TOO LONG");	
+		pressEnter();
 	}
 
 	strncpy(strPlayerName, pTempPlayerName + nStart, PLAYER_NAME_LENGTH);

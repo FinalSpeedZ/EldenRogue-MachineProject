@@ -27,7 +27,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 		printInputDivider();
 
 		getCharAreaInput(&cInput, aPlayerCommands, 12);
-		processAreaScreenInput(cInput, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
+		processAreaScreenInput(cInput, nAreaIndex, nFloorNumber, nRows, nColumns, pPlayer);
 	} while (cInput != 'Q' && cInput != 'q');
 }
 
@@ -243,31 +243,31 @@ void findPlayerSpawn(int nAreaIndex, int nFloorNumber, int nRows, int nColumns,
 }
 
 void processAreaScreenInput(char cInput, int nAreaIndex, int nFloorNumber, 
-							int nRows, int nColumns, AreaDetails* pPlayerAreaDetails) {
+							int nRows, int nColumns, Player* pPlayer) {
 	switch(cInput) {
 		case 'W':
 		case 'w':
-			movePlayer(UP, nAreaIndex, nFloorNumber, nRows, nColumns, pPlayerAreaDetails);
+			movePlayer(UP, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'A':
 		case 'a':
-			movePlayer(LEFT, nAreaIndex, nFloorNumber, nRows, nColumns, pPlayerAreaDetails);
+			movePlayer(LEFT, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'S':
 		case 's':
-			movePlayer(DOWN, nAreaIndex, nFloorNumber, nRows, nColumns, pPlayerAreaDetails);
+			movePlayer(DOWN, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'D':
 		case 'd':
-			movePlayer(RIGHT, nAreaIndex, nFloorNumber, nRows, nColumns, pPlayerAreaDetails);
+			movePlayer(RIGHT, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'E':
 		case 'e':
-			printf("Interact\n");
+			interactTile(nAreaIndex, nFloorNumber, nRows, nColumns, pPlayer);
 	}
 }
 
@@ -305,4 +305,44 @@ void movePlayer(int nDirection, int nAreaIndex, int nFloorNumber,
 	}
 
 	free(pFloor);
+}
+
+void interactTile(int nAreaIndex, int nFloorNumber, int nRows, int nColumns,
+				  Player* pPlayer) {
+	int *pFloor = generateArea(nAreaIndex, nFloorNumber, nRows, nColumns);
+
+	int nTileType = *(pFloor + (pPlayer->sPlayerAreaDetails.nRowLocation * nColumns) +
+					pPlayer->sPlayerAreaDetails.nColumnLocation);
+
+	switch (nTileType) {
+		case TILE_EMPTY:
+		case TILE_PLAYER:
+		case TILE_DOOR_UP:
+		case TILE_DOOR_DOWN:
+			break;
+
+		case TILE_SPAWN:
+			interactTileSpawn(nAreaIndex, pPlayer);
+			break;
+
+		case TILE_BOSS:
+		case TILE_FAST_TRAVEL:
+		case TILE_CREDITS:
+			break;
+	}
+
+	free(pFloor);
+}
+
+void interactTileSpawn(int nAreaIndex, Player* pPlayer) {
+	int nSpawnRate = randomNumberBetween(100, 1);
+
+	if (nSpawnRate > 100 - ENEMY_YIELD) {
+		printf("BATTLE ENEMY\n");
+	}
+
+	else {
+		printf("YOU RECEIVE RUNES\n");
+	}
+	pressEnter();
 }
