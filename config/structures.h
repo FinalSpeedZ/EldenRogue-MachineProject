@@ -3,6 +3,12 @@
 
 #include "string_definitions.h"
 
+struct areadetailsTag {
+	int nRowLocation;
+	int nColumnLocation;
+};
+typedef struct areadetailsTag AreaDetails;
+
 struct statsTag {
 	int nHealth;
 	int nEndurance;
@@ -20,6 +26,7 @@ struct playerTag {
 	int nRunes;
 	int nShards;
 	Statistics sPlayerStats;
+	AreaDetails sPlayerAreaDetails;
 };
 typedef struct playerTag Player;
 

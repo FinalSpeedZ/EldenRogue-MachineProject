@@ -38,8 +38,7 @@ void processFastTravelInput(int nInput, Player* pPlayer) {
 		case VOLCANO_MANOR:
 		case LEYNDELL_ROYAL_CAPITAL:
 		case THE_ELDEN_THRONE:
-			printf("Opened Fast Travel\n");
-			Sleep(500);
+			openAreaScreens(pPlayer);
 	}
 
 }

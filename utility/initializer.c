@@ -7,6 +7,7 @@ Player initializePlayer() {
 	initializeJobClassStats(&sPlayer);
 	resetRunes(&sPlayer.nRunes);
 	initializeShards(&sPlayer.nShards);
+	initializeAreaDetails(&sPlayer.sPlayerAreaDetails);
 
 	return sPlayer;
 }
@@ -25,9 +26,14 @@ void initializeJobClassStats(Player* pPlayer) {
 }
 
 void resetRunes(int* pRunes) {
-	*pRunes = 1000;
+	*pRunes = 0;
 }
 
 void initializeShards(int* pShards) {
 	*pShards = 0;
+}
+
+void initializeAreaDetails(AreaDetails* pPlayerAreaDetails) {
+	pPlayerAreaDetails->nRowLocation = 0;
+	pPlayerAreaDetails->nRowLocation = 0;
 }

@@ -27,3 +27,8 @@ void printOneBoxedStats(char strLabel[], int nValue) {
 	printMultiple("─", strlen(strLabel) + 5 + nValueDigits);
 	printf("┘\n\n");
 }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                            ROUNDTABLE INVENTORY                         *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

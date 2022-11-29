@@ -6,5 +6,6 @@ Player initializePlayer();
 void initializeJobClassStats(Player* pPlayer);
 void resetRunes(int* pRunes);
 void initializeShards(int* pShards);
+void initializeAreaDetails(AreaDetails* pPlayerAreaDetails);
 
 #endif
