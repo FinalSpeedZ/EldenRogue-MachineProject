@@ -1,5 +1,5 @@
 #ifndef AREA_SCREENS_H 
-#define AREA_SCREEN_H
+#define AREA_SCREENS_H
 
 #define UP    1
 #define DOWN  2

@@ -30,4 +30,14 @@ struct playerTag {
 };
 typedef struct playerTag Player;
 
+struct doorTag{
+	int nFloorNumber;
+	int nRowLocation;
+	int nColumnLocation;
+
+	struct nodeTag* pNext;
+	struct nodeTag* pPrev;
+};
+typedef struct doorTag Door;
+
 #endif
