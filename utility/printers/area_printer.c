@@ -1,6 +1,6 @@
 #include "area_printer.h"
 
-#include "../../screens/areas_screens/area_boards.h"
+#include "../area_utility/area_boards.h"
 #include "../../screens/roundtable_hold_screens/fast_travel.h"
 
 void printAreaMap(int nAreaIndex, int nFloorNumber, int nRows, int nColumns, AreaDetails* pPlayerAreaDetails) {

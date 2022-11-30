@@ -14,7 +14,7 @@ void doorsStormveilCastle(int nNumberOfDoors) {
 	Door* StormveilCastle[nNumberOfDoors / 2]; 
 	int nArrayIndex;
 
-	for (nArrayIndex = 0; nArrayIndex < (nNumberOfDoors / 2)) {
+	for (nArrayIndex = 0; nArrayIndex < (nNumberOfDoors / 2); nArrayIndex++) {
 		StormveilCastle[nArrayIndex] = NULL;
 	}
 

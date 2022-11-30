@@ -7,6 +7,10 @@
 #include "utility/printers/printer.c"
 #include "utility/printers/roundtable_printer.c"
 #include "utility/printers/area_printer.c"
+
+#include "utility/area_utility/area_boards.c"
+#include "utility/area_utility/area_doors.c"
+
 #include "utility/scanner.c"
 #include "utility/initializer.c"
 #include "utility/randomizer.c"
@@ -20,7 +24,6 @@
 #include "screens/roundtable_hold_screens/fast_travel.c"
 #include "screens/roundtable_hold_screens/level_up.c"
 
-#include "screens/areas_screens/area_boards.c"
 #include "screens/areas_screens/area_screens.c"
 
 int main() {
