@@ -154,9 +154,9 @@ int* generateRedmaneCastle(int nFloorNumber, int nRows, int nColumns) {
 	int nRowCounter;
 	int nColumnCounter;
 
-	int aRedManeCastleFloor1[][7] = {{0, 0, 0, 0, 0, 0, 0},
-									 {6, 0, 0, 4, 0, 0, 2},
-									 {0, 0, 0, 0, 0, 0, 0}};	
+	int aRedManeCastleFloor1[][5] = {{0, 0, 0, 0, 0},
+									 {6, 0, 4, 0, 2},
+									 {0, 0, 0, 0, 0}};	
 
 	int aRedManeCastleFloor2[][7] = {{0, 4, 0, 4, 0, 4, 0},
                                      {3, 0, 0, 0, 0, 0, 2},
@@ -440,7 +440,7 @@ int* generateLeyndellRoyalCapital(int nFloorNumber, int nRows, int nColumns) {
 									     {0, 3, 0, 4, 0, 0, 0, 3, 0, 0, 0, 4, 0, 3, 0}};
 
 	int aLeyndellCapitalFloor11[][13] = {{4, 0, 0, 4, 0, 0, 0, 0, 8, 8, 8, 8, 8},
-										 {0, 0, 0, 3, 0, 0, 2, 0, 8, 8, 8, 8, 8},
+										 {0, 0, 0, 4, 0, 0, 2, 0, 8, 8, 8, 8, 8},
 										 {4, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
 										 {0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
 										 {4, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},

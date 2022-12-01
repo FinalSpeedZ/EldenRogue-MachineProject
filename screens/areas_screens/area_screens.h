@@ -24,6 +24,6 @@ void interactTile(int nAreaIndex, int* pFloorNumber, int nRows, int nColumns,
 void interactTileSpawn(int nAreaIndex, Player* pPlayer);
 
 
-void interactTileDoorUp(int nAreaIndex, int *pFloorNumber, AreaDetails* pPlayerAreaDetails);
+void interactTileDoor(int nAreaIndex, int *pFloorNumber, AreaDetails* pPlayerAreaDetails);
 
 #endif

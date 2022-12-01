@@ -70,7 +70,7 @@ void determineAreaRowsColumns(int nAreaIndex, int nFloorNumber, int* pRows, int*
 					*pColumns = 6;
 					break;
 				case 5:
-					*pRows = 9; 
+					*pRows = 8; 
 					*pColumns = 7;
 					break;
 			}
@@ -80,7 +80,7 @@ void determineAreaRowsColumns(int nAreaIndex, int nFloorNumber, int* pRows, int*
 			switch (nFloorNumber){
 				case 1:
 					*pRows = 3; 
-					*pColumns = 7;
+					*pColumns = 5;
 					break;
 				case 2:
 					*pRows = 3; 
@@ -320,10 +320,8 @@ void interactTile(int nAreaIndex, int* pFloorNumber, int nRows, int nColumns,
 		case TILE_PLAYER:
 
 		case TILE_DOOR_UP:
-			interactTileDoorUp(nAreaIndex, pFloorNumber, &pPlayer->sPlayerAreaDetails);
-			break;
-
 		case TILE_DOOR_DOWN:
+			interactTileDoor(nAreaIndex, pFloorNumber, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case TILE_SPAWN:
@@ -352,26 +350,32 @@ void interactTileSpawn(int nAreaIndex, Player* pPlayer) {
 	pressEnter();
 }
 
-void interactTileDoorUp(int nAreaIndex, int *pFloorNumber, AreaDetails* pPlayerAreaDetails) {
-	//loadDoors(nAreaIndex);
+void interactTileDoor(int nAreaIndex, int *pFloorNumber, AreaDetails* pPlayerAreaDetails) {
+	int nNumberOfDoors = determineNumberOfDoors(nAreaIndex);
 
-	Door* pAreaDoors[5]; 
+	Door* pAreaDoors[nNumberOfDoors / 2]; 
+	Door* pInteractedDoor;
+
 	int nArrayIndex;
-	int nMatch = 0;
 
-	for (nArrayIndex = 0; nArrayIndex < 5; nArrayIndex++) {
+	for (nArrayIndex = 0; nArrayIndex < nNumberOfDoors / 2; nArrayIndex++) {
 		pAreaDoors[nArrayIndex] = NULL;
 	} 
 
-	doorsStormveilCastle(pAreaDoors);
+	loadDoors(nAreaIndex, pAreaDoors);
 
-	for (nArrayIndex = 0; nArrayIndex < 5 && !nMatch; nArrayIndex++) {
-		if (doorMatch(pAreaDoors[nArrayIndex]->nFloorNumber, *pFloorNumber)) {
-			pPlayerAreaDetails->nRowLocation = pAreaDoors[nArrayIndex]->pNext->nRowLocation;
-			pPlayerAreaDetails->nColumnLocation = pAreaDoors[nArrayIndex]->pNext->nColumnLocation;
-			*pFloorNumber = pAreaDoors[nArrayIndex]->pNext->nFloorNumber;
-			nMatch = 1;
-		}
-	} 
-}
+	pInteractedDoor = findDoor(pAreaDoors, nNumberOfDoors, pPlayerAreaDetails, pFloorNumber);
+
+	if (pInteractedDoor->pPrev == NULL) {
+		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pNext->nRowLocation;
+		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pNext->nColumnLocation;
+		*pFloorNumber = pInteractedDoor->pNext->nFloorNumber;
+	}
+	else {
+		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pPrev->nRowLocation;
+		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pPrev->nColumnLocation;
+		*pFloorNumber = pInteractedDoor->pPrev->nFloorNumber;
+	}
+} 
+
 
