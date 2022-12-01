@@ -318,7 +318,8 @@ void interactTile(int nAreaIndex, int* pFloorNumber, int nRows, int nColumns,
 	switch (nTileType) {
 		case TILE_EMPTY:
 		case TILE_PLAYER:
-
+			break;
+			
 		case TILE_DOOR_UP:
 		case TILE_DOOR_DOWN:
 			interactTileDoor(nAreaIndex, pFloorNumber, &pPlayer->sPlayerAreaDetails);
