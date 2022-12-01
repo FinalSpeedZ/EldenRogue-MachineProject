@@ -177,11 +177,11 @@ void printAreaName(int nAreaIndex) {
 			break;
 
 		case LEYNDELL_ROYAL_CAPITAL:
-			printMiddleText("VOLCANO MANOR", "", "");
+			printMiddleText("LEYNDELL ROYAL CAPITAL", "", "");
 			break;
 
 		case THE_ELDEN_THRONE:
-			printMiddleText("VOLCANO MANOR", "", "");
+			printMiddleText("THE ELDEN THRONE", "", "");
 			break;
 	}
 }
