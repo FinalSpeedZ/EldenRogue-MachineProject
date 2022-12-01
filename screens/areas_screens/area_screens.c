@@ -20,6 +20,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 		printMultiple("─", SCREEN_WIDTH);
 		printf("\n\n");
 
+		determineAreaRowsColumns(nAreaIndex, nFloorNumber, &nRows, &nColumns);
 		printAreaMap(nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
 
@@ -27,7 +28,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 		printInputDivider();
 
 		getCharAreaInput(&cInput, aPlayerCommands, 12);
-		processAreaScreenInput(cInput, nAreaIndex, nFloorNumber, nRows, nColumns, pPlayer);
+		processAreaScreenInput(cInput, nAreaIndex, &nFloorNumber, nRows, nColumns, pPlayer);
 	} while (cInput != 'Q' && cInput != 'q');
 }
 
@@ -242,32 +243,32 @@ void findPlayerSpawn(int nAreaIndex, int nFloorNumber, int nRows, int nColumns,
 	free(pFloor);
 }
 
-void processAreaScreenInput(char cInput, int nAreaIndex, int nFloorNumber, 
+void processAreaScreenInput(char cInput, int nAreaIndex, int* pFloorNumber, 
 							int nRows, int nColumns, Player* pPlayer) {
 	switch(cInput) {
 		case 'W':
 		case 'w':
-			movePlayer(UP, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
+			movePlayer(UP, nAreaIndex, *pFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'A':
 		case 'a':
-			movePlayer(LEFT, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
+			movePlayer(LEFT, nAreaIndex, *pFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'S':
 		case 's':
-			movePlayer(DOWN, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
+			movePlayer(DOWN, nAreaIndex, *pFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'D':
 		case 'd':
-			movePlayer(RIGHT, nAreaIndex, nFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
+			movePlayer(RIGHT, nAreaIndex, *pFloorNumber, nRows, nColumns, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case 'E':
 		case 'e':
-			interactTile(nAreaIndex, nFloorNumber, nRows, nColumns, pPlayer);
+			interactTile(nAreaIndex, pFloorNumber, nRows, nColumns, pPlayer);
 	}
 }
 
@@ -307,9 +308,9 @@ void movePlayer(int nDirection, int nAreaIndex, int nFloorNumber,
 	free(pFloor);
 }
 
-void interactTile(int nAreaIndex, int nFloorNumber, int nRows, int nColumns,
+void interactTile(int nAreaIndex, int* pFloorNumber, int nRows, int nColumns,
 				  Player* pPlayer) {
-	int *pFloor = generateArea(nAreaIndex, nFloorNumber, nRows, nColumns);
+	int *pFloor = generateArea(nAreaIndex, *pFloorNumber, nRows, nColumns);
 
 	int nTileType = *(pFloor + (pPlayer->sPlayerAreaDetails.nRowLocation * nColumns) +
 					pPlayer->sPlayerAreaDetails.nColumnLocation);
@@ -317,7 +318,11 @@ void interactTile(int nAreaIndex, int nFloorNumber, int nRows, int nColumns,
 	switch (nTileType) {
 		case TILE_EMPTY:
 		case TILE_PLAYER:
+
 		case TILE_DOOR_UP:
+			interactTileDoorUp(nAreaIndex, pFloorNumber, &pPlayer->sPlayerAreaDetails);
+			break;
+
 		case TILE_DOOR_DOWN:
 			break;
 
@@ -346,3 +351,27 @@ void interactTileSpawn(int nAreaIndex, Player* pPlayer) {
 	}
 	pressEnter();
 }
+
+void interactTileDoorUp(int nAreaIndex, int *pFloorNumber, AreaDetails* pPlayerAreaDetails) {
+	//loadDoors(nAreaIndex);
+
+	Door* pAreaDoors[5]; 
+	int nArrayIndex;
+	int nMatch = 0;
+
+	for (nArrayIndex = 0; nArrayIndex < 5; nArrayIndex++) {
+		pAreaDoors[nArrayIndex] = NULL;
+	} 
+
+	doorsStormveilCastle(pAreaDoors);
+
+	for (nArrayIndex = 0; nArrayIndex < 5 && !nMatch; nArrayIndex++) {
+		if (doorMatch(pAreaDoors[nArrayIndex]->nFloorNumber, *pFloorNumber)) {
+			pPlayerAreaDetails->nRowLocation = pAreaDoors[nArrayIndex]->pNext->nRowLocation;
+			pPlayerAreaDetails->nColumnLocation = pAreaDoors[nArrayIndex]->pNext->nColumnLocation;
+			*pFloorNumber = pAreaDoors[nArrayIndex]->pNext->nFloorNumber;
+			nMatch = 1;
+		}
+	} 
+}
+

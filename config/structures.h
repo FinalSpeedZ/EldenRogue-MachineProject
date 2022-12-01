@@ -35,8 +35,8 @@ struct doorTag{
 	int nRowLocation;
 	int nColumnLocation;
 
-	struct nodeTag* pNext;
-	struct nodeTag* pPrev;
+	struct doorTag* pNext;
+	struct doorTag* pPrev;
 };
 typedef struct doorTag Door;
 

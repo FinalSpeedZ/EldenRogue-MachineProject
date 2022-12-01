@@ -1,4 +1,4 @@
-Door* createDoorLocation(int nFloorNumber, int nRowLocation, int nColumnLocation) {
+Door* createDoor(int nFloorNumber, int nRowLocation, int nColumnLocation) {
 	Door* pDoor = malloc(sizeof(Door));
 
 	pDoor->nFloorNumber = nFloorNumber;
@@ -10,14 +10,45 @@ Door* createDoorLocation(int nFloorNumber, int nRowLocation, int nColumnLocation
 	return pDoor;
 }
 
-void doorsStormveilCastle(int nNumberOfDoors) {
-	Door* StormveilCastle[nNumberOfDoors / 2]; 
-	int nArrayIndex;
+void addDoor(Door** pAreaDoorHead, int nArrayIndex, int nFloorNumber, int nRowLocation, int nColumnLocation) {
+	Door* pLastDoor = *(pAreaDoorHead + nArrayIndex);
+	Door* pNewDoor = createDoor(nFloorNumber, nRowLocation, nColumnLocation);
 
-	for (nArrayIndex = 0; nArrayIndex < (nNumberOfDoors / 2); nArrayIndex++) {
-		StormveilCastle[nArrayIndex] = NULL;
+	if (*(pAreaDoorHead + nArrayIndex) == NULL) {
+		*(pAreaDoorHead + nArrayIndex) = pNewDoor;
 	}
 
-	StormveilCastle[0] = createDoorLocation(1, 0, 1);
+	else {
+		while (pLastDoor->pNext != NULL) {
+			pLastDoor = pLastDoor->pNext;
+		}
+		pLastDoor->pNext = pNewDoor;
+		pNewDoor->pPrev = pLastDoor;
+	}
+}
 
+
+void doorsStormveilCastle(Door** pAreaDoorArray) {
+
+	addDoor(pAreaDoorArray, 0, 1, 0, 1);
+	addDoor(pAreaDoorArray, 0, 2, 6, 3);
+
+	addDoor(pAreaDoorArray, 1, 2, 0, 3);
+	addDoor(pAreaDoorArray, 1, 3, 6, 2);
+}
+
+
+
+
+
+
+
+int doorMatch(int nDoorFloor, int nPlayerFloor) {
+	int nMatch = 0;
+
+	if (nPlayerFloor == nDoorFloor) {
+		nMatch = 1;
+	}
+
+	return nMatch;
 }
