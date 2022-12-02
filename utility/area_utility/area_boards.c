@@ -618,7 +618,7 @@ int* generateEldenThrone(int nFloorNumber, int nRows, int nColumns) {
 									{4, 0, 4}, 
 									{0, 0, 0}, 
 									{4, 0, 4}, 
-									{0, 6, 0}};	
+									{0, 3, 0}};	
 
 	switch(nFloorNumber) {
 		case 1:
