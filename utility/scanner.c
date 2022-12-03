@@ -23,7 +23,7 @@ char* getStringInput(char strInputTag[]) {
 	printf("\n");
 	printInputTag(strInputTag); 
 
-	while ((nReadCharacter = getchar()) != '\n' && nReadCharacter != EOF) {
+	while ((nReadCharacter = getchar()) != '\n') {
 		pUnknownLength[nIndex++] = nReadCharacter;
 		pUnknownLength = realloc(pUnknownLength, nIndex + 1);
 	}

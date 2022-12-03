@@ -23,13 +23,13 @@ void printAreaMap(int nAreaIndex, int nFloorNumber, int nRows, int nColumns, Are
 		printf("\n");
 
 		printMultiple(" ", nPadding);
-		for(nColumnCounter = 0; nColumnCounter< nColumns; nColumnCounter++) {
+		for(nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
 			printTileParts(*(pFloor + (nRowCounter * nColumns) + nColumnCounter), MIDDLE);
 		}
 		printf("\n");
 
 		printMultiple(" ", nPadding);
-		for(nColumnCounter = 0; nColumnCounter< nColumns; nColumnCounter++) {
+		for(nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
 			printTileParts(*(pFloor + (nRowCounter * nColumns) + nColumnCounter), BOTTOM);
 		}
 		printf("\n");
