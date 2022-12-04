@@ -17,8 +17,7 @@ void findPlayerSpawn(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer);
 
 void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
-void interactTile(int nAreaIndex, int* pFloorNumber, int nRows, int nColumns,
-				  Player* pPlayer);
+void interactTile(AreaFloor* pAreaFloor, Player* pPlayer);
 void interactTileSpawn(int nAreaIndex, Player* pPlayer);
 
 
