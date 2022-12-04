@@ -21,6 +21,7 @@
 #define ENEMY_YIELD    75
 #define TREASURE_YEILD 25
 
+#define LEVEL_MAX  50
 #define MAX_FLOORS 15
 
 #endif

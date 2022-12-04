@@ -1,8 +1,6 @@
 #ifndef LEVEL_UP_H
 #define LEVEL_UP_H
 
-#define LEVEL_MAX 50
-
 #define HEALTH       1
 #define ENDURANCE    2
 #define DEXTERITY    3

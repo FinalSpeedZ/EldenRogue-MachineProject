@@ -1,13 +1,6 @@
 #ifndef JOB_CLASS_CREATION_H
 #define JOB_CLASS_CREATION_H
 
-#define VAGABOND   1
-#define SAMURAI    2
-#define WARRIOR    3
-#define HERO       4
-#define ASTROLOGER 5
-#define PROPHET    6
-
 void openJobClassSelection(Player* pPlayer);
 void processJobSelectionInput(int nInput, Player* pPlayer);
 
