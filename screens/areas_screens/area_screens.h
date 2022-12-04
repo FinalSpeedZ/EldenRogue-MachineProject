@@ -11,14 +11,12 @@
 
 void openAreaScreen(int nAreaIndex, Player* pPlayer);
 
-void determineAreaRowsColumns(int nAreaIndex, int nFloorNumber, int* pRows, int* pColumns);
-void findPlayerSpawn(int nAreaIndex, int nFloorNumber, int nRows, int nColumns, AreaDetails* pPlayerAreaDetails);
+void determineAreaRowsColumns(AreaFloor* pAreaFloor);
+void findPlayerSpawn(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 
-void processAreaScreenInput(char cInput, int nAreaIndex, int* pFloorNumber, 
-							int nRows, int nColumns, Player* pPlayer);
+void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer);
 
-void movePlayer(int nDirection, int nAreaIndex, int nFloorNumber, 
-				int nRows, int nColumns, AreaDetails* pPlayerAreaDetails);
+void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 void interactTile(int nAreaIndex, int* pFloorNumber, int nRows, int nColumns,
 				  Player* pPlayer);
 void interactTileSpawn(int nAreaIndex, Player* pPlayer);

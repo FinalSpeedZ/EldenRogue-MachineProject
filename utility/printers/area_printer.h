@@ -5,7 +5,7 @@
 #define MIDDLE 1
 #define BOTTOM 2
 
-void printAreaMap(int nAreaIndex, int nFloorNumber, int nRows, int nColumns, AreaDetails* pPlayerAreaDetails);
+void printAreaMap(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 
 void printTileParts(int nTileType, int nTilePosition);
 

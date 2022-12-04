@@ -30,7 +30,7 @@ struct playerTag {
 };
 typedef struct playerTag Player;
 
-struct doorTag{
+struct doorTag {
 	int nFloorNumber;
 	int nRowLocation;
 	int nColumnLocation;
@@ -39,5 +39,16 @@ struct doorTag{
 	struct doorTag* pPrev;
 };
 typedef struct doorTag Door;
+
+
+struct floorTag {
+	int nAreaIndex;
+	int nFloorNumber;
+
+	int nRows;
+	int nColumns;
+	int* pFloorBoard;
+};
+typedef struct floorTag AreaFloor;
 
 #endif

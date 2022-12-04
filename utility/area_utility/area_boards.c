@@ -1,7 +1,7 @@
 #include "area_boards.h"
 
-int* generateStromveilCastle(int nFloorNumber, int nRows, int nColumns) {
-	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
+int* generateStromveilCastle(AreaFloor sAreaFloor) {
+	int *pFloor = malloc(sizeof(int) * sAreaFloor.nRows * sAreaFloor.nColumns);
 
 	int nRowCounter;
 	int nColumnCounter;
@@ -31,27 +31,27 @@ int* generateStromveilCastle(int nFloorNumber, int nRows, int nColumns) {
 						  		 {0, 0, 3, 0, 0}};
 
 
-	switch(nFloorNumber) {
+	switch(sAreaFloor.nFloorNumber) {
 		case 1:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aStormveilFloor1[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aStormveilFloor1[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 2:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aStormveilFloor2[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aStormveilFloor2[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 3:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aStormveilFloor3[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aStormveilFloor3[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
@@ -60,8 +60,8 @@ int* generateStromveilCastle(int nFloorNumber, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateRayaLucaria(int nFloorNumber, int nRows, int nColumns) {
-	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
+int* generateRayaLucaria(AreaFloor sAreaFloor) {
+	int *pFloor = malloc(sizeof(int) * sAreaFloor.nRows * sAreaFloor.nColumns);
 
 	int nRowCounter;
 	int nColumnCounter;
@@ -103,43 +103,43 @@ int* generateRayaLucaria(int nFloorNumber, int nRows, int nColumns) {
 								   {0, 4, 0, 0, 0, 4, 0},
 								   {0, 0, 0, 3, 0, 0, 0}};
 
-	switch(nFloorNumber) {
+	switch(sAreaFloor.nFloorNumber) {
 		case 1:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRayaLucariaFloor1[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRayaLucariaFloor1[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 2:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRayaLucariaFloor2[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRayaLucariaFloor2[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 3:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRayaLucariaFloor3[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRayaLucariaFloor3[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 4:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRayaLucariaFloor4[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRayaLucariaFloor4[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 5:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRayaLucariaFloor5[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRayaLucariaFloor5[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
@@ -148,8 +148,8 @@ int* generateRayaLucaria(int nFloorNumber, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateRedmaneCastle(int nFloorNumber, int nRows, int nColumns) {
-	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
+int* generateRedmaneCastle(AreaFloor sAreaFloor) {
+	int *pFloor = malloc(sizeof(int) * sAreaFloor.nRows * sAreaFloor.nColumns);
 
 	int nRowCounter;
 	int nColumnCounter;
@@ -194,60 +194,60 @@ int* generateRedmaneCastle(int nFloorNumber, int nRows, int nColumns) {
 									 {0, 4, 0, 0, 0, 4, 0},
 									 {0, 0, 0, 0, 0, 0, 0}};
 
-    switch(nFloorNumber) {
+    switch(sAreaFloor.nFloorNumber) {
 		case 1:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRedManeCastleFloor1[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRedManeCastleFloor1[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 2:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRedManeCastleFloor2[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRedManeCastleFloor2[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 
 		case 3:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRedManeCastleFloor3[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRedManeCastleFloor3[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 4:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRedManeCastleFloor4[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRedManeCastleFloor4[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 5:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRedManeCastleFloor5[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRedManeCastleFloor5[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 6:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRedManeCastleFloor6[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRedManeCastleFloor6[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 7:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aRedManeCastleFloor7[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aRedManeCastleFloor7[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
@@ -256,8 +256,8 @@ int* generateRedmaneCastle(int nFloorNumber, int nRows, int nColumns) {
     return pFloor;
 }
 
-int* generateVolcanoManor(int nFloorNumber, int nRows, int nColumns) {
-	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
+int* generateVolcanoManor(AreaFloor sAreaFloor) {
+	int *pFloor = malloc(sizeof(int) * sAreaFloor.nRows * sAreaFloor.nColumns);
 
 	int nRowCounter;
 	int nColumnCounter;
@@ -311,59 +311,59 @@ int* generateVolcanoManor(int nFloorNumber, int nRows, int nColumns) {
 									{0, 0, 0, 0, 0},
 									{0, 0, 3, 0, 0}}; 
 
-    switch(nFloorNumber) {
+    switch(sAreaFloor.nFloorNumber) {
 		case 1:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aVolcanoManorFloor1[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aVolcanoManorFloor1[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 2:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aVolcanoManorFloor2[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aVolcanoManorFloor2[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 3:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aVolcanoManorFloor3[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aVolcanoManorFloor3[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 4:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aVolcanoManorFloor4[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aVolcanoManorFloor4[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 5:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aVolcanoManorFloor5[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aVolcanoManorFloor5[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 6:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aVolcanoManorFloor6[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aVolcanoManorFloor6[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 7:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aVolcanoManorFloor7[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aVolcanoManorFloor7[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
@@ -372,8 +372,8 @@ int* generateVolcanoManor(int nFloorNumber, int nRows, int nColumns) {
     return pFloor;
 }
 
-int* generateLeyndellRoyalCapital(int nFloorNumber, int nRows, int nColumns) {
-	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
+int* generateLeyndellRoyalCapital(AreaFloor sAreaFloor) {
+	int *pFloor = malloc(sizeof(int) * sAreaFloor.nRows * sAreaFloor.nColumns);
 
 	int nRowCounter;
 	int nColumnCounter;
@@ -469,115 +469,115 @@ int* generateLeyndellRoyalCapital(int nFloorNumber, int nRows, int nColumns) {
 										{4, 0, 0, 0, 4}, 
 										{8, 0, 6, 0, 8}}; 	
 
-	switch(nFloorNumber) {
+	switch(sAreaFloor.nFloorNumber) {
 		case 1:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor1[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor1[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 2:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor2[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor2[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 3:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor3[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor3[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 4:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor4[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor4[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 5:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor5[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor5[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 6:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor6[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor6[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 7:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor7[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor7[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 8:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor8[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor8[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 9:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor9[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor9[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 10:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor10[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor10[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 11:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor11[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor11[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 12:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor12[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor12[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 13:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor13[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor13[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 14:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aLeyndellCapitalFloor14[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aLeyndellCapitalFloor14[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
@@ -586,8 +586,8 @@ int* generateLeyndellRoyalCapital(int nFloorNumber, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateEldenThrone(int nFloorNumber, int nRows, int nColumns) {
-	int *pFloor = malloc(sizeof(int) * nRows * nColumns);
+int* generateEldenThrone(AreaFloor sAreaFloor) {
+	int *pFloor = malloc(sizeof(int) * sAreaFloor.nRows * sAreaFloor.nColumns);
 
 	int nRowCounter;
 	int nColumnCounter;
@@ -620,27 +620,27 @@ int* generateEldenThrone(int nFloorNumber, int nRows, int nColumns) {
 									{4, 0, 4}, 
 									{0, 3, 0}};	
 
-	switch(nFloorNumber) {
+	switch(sAreaFloor.nFloorNumber) {
 		case 1:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aEldenThroneFloor1[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aEldenThroneFloor1[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 2:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aEldenThroneFloor2[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aEldenThroneFloor2[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
 
 		case 3:
-			for (nRowCounter = 0; nRowCounter < nRows; nRowCounter++) {
-				for (nColumnCounter = 0; nColumnCounter < nColumns; nColumnCounter++) {
-					*(pFloor + (nRowCounter * nColumns) + nColumnCounter) = aEldenThroneFloor3[nRowCounter][nColumnCounter];
+			for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+				for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+					*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter) = aEldenThroneFloor3[nRowCounter][nColumnCounter];
 				}
 			}
 			break;
@@ -649,32 +649,32 @@ int* generateEldenThrone(int nFloorNumber, int nRows, int nColumns) {
 	return pFloor;
 }
 
-int* generateArea(int nAreaIndex, int nFloorNumber, int nRows, int nColumns) {
+int* generateArea(AreaFloor sAreaFloor) {
 	int* pFloor;
 
-	switch(nAreaIndex) {
+	switch(sAreaFloor.nAreaIndex) {
 			case STORMVEIL_CASTLE:
-				pFloor = generateStromveilCastle(nFloorNumber, nRows, nColumns);
+				pFloor = generateStromveilCastle(sAreaFloor);
 				break;
 
 			case RAYA_LUCARIA_ACADEMY:
-				pFloor =  generateRayaLucaria(nFloorNumber, nRows, nColumns);
+				pFloor =  generateRayaLucaria(sAreaFloor);
 				break;
 
 			case REDMANE_CASTLE:
-				pFloor = generateRedmaneCastle(nFloorNumber, nRows, nColumns);
+				pFloor = generateRedmaneCastle(sAreaFloor);
 				break;
 
 			case VOLCANO_MANOR:
-				pFloor = generateVolcanoManor(nFloorNumber, nRows, nColumns);
+				pFloor = generateVolcanoManor(sAreaFloor);
 				break;
 
 			case LEYNDELL_ROYAL_CAPITAL:
-				pFloor = generateLeyndellRoyalCapital(nFloorNumber, nRows, nColumns);
+				pFloor = generateLeyndellRoyalCapital(sAreaFloor);
 				break;
 
 			case THE_ELDEN_THRONE:
-				pFloor = generateEldenThrone(nFloorNumber, nRows, nColumns);
+				pFloor = generateEldenThrone(sAreaFloor);
 	}
 
 	return pFloor;
