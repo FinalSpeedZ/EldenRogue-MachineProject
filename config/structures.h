@@ -2,6 +2,7 @@
 #define STRUCTURES_H
 
 #include "string_definitions.h"
+#include "constant_definitions.h"
 
 struct areadetailsTag {
 	int nRowLocation;
@@ -47,7 +48,7 @@ struct floorTag {
 
 	int nRows;
 	int nColumns;
-	int* pFloorBoard;
+	int* pFloorBoard[15]; //make constant definition MAX_FLOORS 15
 };
 typedef struct floorTag AreaFloor;
 

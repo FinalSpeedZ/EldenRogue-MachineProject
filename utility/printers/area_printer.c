@@ -11,7 +11,7 @@ int* makeMapCopy(AreaFloor sAreaFloor) {
 	for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
 		for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
 			*(pFloorBoardCopy + nRowCounter * sAreaFloor.nColumns + nColumnCounter) = 
-			*(sAreaFloor.pFloorBoard + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter);
+			*(sAreaFloor.pFloorBoard[sAreaFloor.nFloorNumber] + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter);
 		}
 	}
 
