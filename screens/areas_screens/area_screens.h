@@ -20,7 +20,6 @@ void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDe
 void interactTile(AreaFloor* pAreaFloor, Player* pPlayer);
 void interactTileSpawn(int nAreaIndex, Player* pPlayer);
 
-
-void interactTileDoor(int nAreaIndex, int *pFloorNumber, AreaDetails* pPlayerAreaDetails);
+void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails);
 
 #endif

@@ -3,39 +3,55 @@
 #include "../area_utility/area_boards.h"
 #include "../../screens/roundtable_hold_screens/fast_travel.h"
 
+int* makeMapCopy(AreaFloor sAreaFloor) {
+	int* pFloorBoardCopy = malloc(sizeof(int) * sAreaFloor.nRows * sAreaFloor.nColumns);
+	int nRowCounter;
+	int nColumnCounter;
+
+	for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
+		for (nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
+			*(pFloorBoardCopy + nRowCounter * sAreaFloor.nColumns + nColumnCounter) = 
+			*(sAreaFloor.pFloorBoard + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter);
+		}
+	}
+
+	return pFloorBoardCopy;
+}
+
+
 void printAreaMap(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails) {
 	int nRowCounter;
 	int nColumnCounter;
 
 	int nPadding = SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + ((SCREEN_WIDTH	- 6 * sAreaFloor.nColumns) / 2);
 
-	int* pFloor = generateArea(sAreaFloor);
+	int* pFloorBoardCopy = makeMapCopy(sAreaFloor);
 
-	*(pFloor + (pPlayerAreaDetails->nRowLocation * sAreaFloor.nColumns) + 
+	*(pFloorBoardCopy + (pPlayerAreaDetails->nRowLocation * sAreaFloor.nColumns) + 
 		pPlayerAreaDetails->nColumnLocation) = TILE_PLAYER;
 
 	for (nRowCounter = 0; nRowCounter < sAreaFloor.nRows; nRowCounter++) {
 
 		printMultiple(" ", nPadding);
 		for(nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
-			printTileParts(*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter), TOP);
+			printTileParts(*(pFloorBoardCopy + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter), TOP);
 		}
 		printf("\n");
 
 		printMultiple(" ", nPadding);
 		for(nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
-			printTileParts(*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter), MIDDLE);
+			printTileParts(*(pFloorBoardCopy + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter), MIDDLE);
 		}
 		printf("\n");
 
 		printMultiple(" ", nPadding);
 		for(nColumnCounter = 0; nColumnCounter < sAreaFloor.nColumns; nColumnCounter++) {
-			printTileParts(*(pFloor + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter), BOTTOM);
+			printTileParts(*(pFloorBoardCopy + (nRowCounter * sAreaFloor.nColumns) + nColumnCounter), BOTTOM);
 		}
 		printf("\n");
 	}
 
-	free(pFloor);
+	free(pFloorBoardCopy);
 }
 
 void printTileParts(int nTileType, int nTilePosition) {

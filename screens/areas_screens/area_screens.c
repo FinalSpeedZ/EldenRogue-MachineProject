@@ -6,10 +6,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 						      'w', 'a', 's', 'd', 'e', 'q'};
 	AreaFloor sAreaFloor;
 	sAreaFloor.nFloorNumber = 1;
-	sAreaFloor.nRows = 0;
-	sAreaFloor.nColumns = 0;
 	sAreaFloor.nAreaIndex = nAreaIndex;
-	sAreaFloor.pFloorBoard = NULL; 
 
 	determineAreaRowsColumns(&sAreaFloor);
 	sAreaFloor.pFloorBoard = generateArea(sAreaFloor);
@@ -23,9 +20,9 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 		printAreaName(nAreaIndex);
 		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
 		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
 
 		determineAreaRowsColumns(&sAreaFloor);
+		printf("%d %d, %d\n\n", sAreaFloor.nFloorNumber, sAreaFloor.nRows, sAreaFloor.nColumns);
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
 
@@ -318,15 +315,12 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer) {
 
 	switch (nTileType) {
 		case TILE_EMPTY:
-			pressEnter();
-			break;
-
 		case TILE_PLAYER:
 			break;
 			
 		case TILE_DOOR_UP:
 		case TILE_DOOR_DOWN:
-			// interactTileDoor(nAreaIndex, pFloorNumber, &pPlayer->sPlayerAreaDetails);
+			interactTileDoor(pAreaFloor, &pPlayer->sPlayerAreaDetails);
 			break;
 
 		case TILE_SPAWN:
@@ -355,32 +349,32 @@ void interactTileSpawn(int nAreaIndex, Player* pPlayer) {
 	pressEnter();
 }
 
-// void interactTileDoor(int nAreaIndex, int *pFloorNumber, AreaDetails* pPlayerAreaDetails) {
-// 	int nNumberOfDoors = determineNumberOfDoors(nAreaIndex);
+void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails) {
+	int nNumberOfDoors = determineNumberOfDoors(pAreaFloor->nAreaIndex);
 
-// 	Door* pAreaDoors[nNumberOfDoors / 2]; 
-// 	Door* pInteractedDoor;
+	Door* pAreaDoors[nNumberOfDoors / 2]; 
+	Door* pInteractedDoor;
 
-// 	int nArrayIndex;
+	int nArrayIndex;
 
-// 	for (nArrayIndex = 0; nArrayIndex < nNumberOfDoors / 2; nArrayIndex++) {
-// 		pAreaDoors[nArrayIndex] = NULL;
-// 	} 
+	for (nArrayIndex = 0; nArrayIndex < nNumberOfDoors / 2; nArrayIndex++) {
+		pAreaDoors[nArrayIndex] = NULL;
+	} 
 
-// 	loadDoors(nAreaIndex, pAreaDoors);
+	loadDoors(pAreaFloor->nAreaIndex, pAreaDoors);
 
-// 	pInteractedDoor = findDoor(pAreaDoors, nNumberOfDoors, pPlayerAreaDetails, pFloorNumber);
+	pInteractedDoor = findDoor(pAreaDoors, nNumberOfDoors, pPlayerAreaDetails, &pAreaFloor->nFloorNumber);
 
-// 	if (pInteractedDoor->pPrev == NULL) {
-// 		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pNext->nRowLocation;
-// 		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pNext->nColumnLocation;
-// 		*pFloorNumber = pInteractedDoor->pNext->nFloorNumber;
-// 	}
-// 	else {
-// 		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pPrev->nRowLocation;
-// 		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pPrev->nColumnLocation;
-// 		*pFloorNumber = pInteractedDoor->pPrev->nFloorNumber;
-// 	}
-// } 
+	if (pInteractedDoor->pPrev == NULL) {
+		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pNext->nRowLocation;
+		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pNext->nColumnLocation;
+		pAreaFloor->nFloorNumber = pInteractedDoor->pNext->nFloorNumber;
+	}
+	else {
+		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pPrev->nRowLocation;
+		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pPrev->nColumnLocation;
+		pAreaFloor->nFloorNumber = pInteractedDoor->pPrev->nFloorNumber;
+	}
+} 
 
 

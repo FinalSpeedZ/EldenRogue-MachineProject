@@ -5,6 +5,8 @@
 #define MIDDLE 1
 #define BOTTOM 2
 
+int* makeMapCopy(AreaFloor sAreaFloor);
+
 void printAreaMap(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 
 void printTileParts(int nTileType, int nTilePosition);
