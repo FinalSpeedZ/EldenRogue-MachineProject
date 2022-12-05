@@ -48,7 +48,8 @@ struct floorTag {
 
 	int nRows;
 	int nColumns;
-	int* pFloorBoard[15]; //make constant definition MAX_FLOORS 15
+
+	int** pFloorBoard;
 };
 typedef struct floorTag AreaFloor;
 

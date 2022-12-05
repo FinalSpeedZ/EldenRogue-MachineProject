@@ -4,17 +4,25 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 	char cInput = 'Q'; // initialize to random char in valid commands 
 	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E', 'Q',
 						      'w', 'a', 's', 'd', 'e', 'q'};
+
+	int nLeaveArea = 0;
+
+	int nNumberOfFloors = determineNumberOfFloors(nAreaIndex);
+	int* pAreaBoard[nNumberOfFloors];
+	int nArrayIndex;
+
+	for (nArrayIndex = 0; nArrayIndex < nNumberOfFloors; nArrayIndex++) {
+		pAreaBoard[nArrayIndex] = NULL;
+	}
+
+
 	AreaFloor sAreaFloor;
 	sAreaFloor.nFloorNumber = 1;
 	sAreaFloor.nAreaIndex = nAreaIndex;
-	int nArrayIndex;
-
-	for (nArrayIndex = 0; nArrayIndex < MAX_FLOORS; nArrayIndex++) {
-		sAreaFloor.pFloorBoard[nArrayIndex] = NULL;
-	} 
+	sAreaFloor.pFloorBoard = pAreaBoard;
 
 	determineAreaRowsColumns(&sAreaFloor);
-	sAreaFloor.pFloorBoard[sAreaFloor.nFloorNumber] = generateArea(sAreaFloor);
+	sAreaFloor.pFloorBoard[sAreaFloor.nFloorNumber - 1] = generateArea(sAreaFloor);
 	findPlayerSpawn(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 
 	do {
@@ -34,9 +42,45 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 		printInputDivider();
 
 		getCharAreaInput(&cInput, aPlayerCommands, 12);
-		processAreaScreenInput(cInput, &sAreaFloor, pPlayer);
-	} while (cInput != 'Q' && cInput != 'q');
+		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea);
+	} while (cInput != 'Q' && cInput != 'q' && !nLeaveArea);
 
+	for (nArrayIndex = 0; nArrayIndex < nNumberOfFloors; nArrayIndex++) {
+		if (pAreaBoard[nArrayIndex] != NULL) {
+			free (sAreaFloor.pFloorBoard[nArrayIndex]);
+		}
+	}
+}
+
+int determineNumberOfFloors(int nAreaIndex) {
+	int nNumberOfFloors = 0;
+
+	switch(nAreaIndex) {
+		case STORMVEIL_CASTLE:
+			nNumberOfFloors = 3;
+			break;
+
+		case RAYA_LUCARIA_ACADEMY:
+			nNumberOfFloors = 5;
+			break;
+
+		case REDMANE_CASTLE:
+			nNumberOfFloors = 7;
+			break;
+
+		case VOLCANO_MANOR:
+			nNumberOfFloors = 7;
+			break;
+
+		case LEYNDELL_ROYAL_CAPITAL:
+			nNumberOfFloors = 14;
+			break;
+
+		case THE_ELDEN_THRONE:
+			nNumberOfFloors = 3;
+	}
+
+	return nNumberOfFloors;
 }
 
 void determineAreaRowsColumns(AreaFloor* pAreaFloor) {
@@ -249,7 +293,7 @@ void findPlayerSpawn(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails) {
 	free(pFloor);
 }
 
-void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer) {
+void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea) {
 	switch(cInput) {
 		case 'W':
 		case 'w':
@@ -273,7 +317,7 @@ void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer)
 
 		case 'E':
 		case 'e':
-			interactTile(pAreaFloor, pPlayer);
+			interactTile(pAreaFloor, pPlayer, pLeaveArea);
 	}
 }
 
@@ -312,8 +356,8 @@ void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDe
 	free(pFloor);
 }
 
-void interactTile(AreaFloor* pAreaFloor, Player* pPlayer) {
-	int nTileType = *(pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
+void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
+	int nTileType = *(pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
 					pPlayer->sPlayerAreaDetails.nColumnLocation);
 
 	switch (nTileType) {
@@ -328,7 +372,7 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer) {
 
 		case TILE_SPAWN:
 			interactTileSpawn(pAreaFloor->nAreaIndex, pPlayer);
-			*(pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
+			*(pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
 			pPlayer->sPlayerAreaDetails.nColumnLocation) = TILE_EMPTY;
 			break;
 
@@ -373,16 +417,16 @@ void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails) {
 		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pNext->nColumnLocation;
 		pAreaFloor->nFloorNumber = pInteractedDoor->pNext->nFloorNumber;
 		determineAreaRowsColumns(pAreaFloor);
-
-		if (pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber] == NULL) {
-			pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber] = generateArea(*pAreaFloor);
-		}
 	}
 	else {
 		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pPrev->nRowLocation;
 		pPlayerAreaDetails->nColumnLocation = pInteractedDoor->pPrev->nColumnLocation;
 		pAreaFloor->nFloorNumber = pInteractedDoor->pPrev->nFloorNumber;
 		determineAreaRowsColumns(pAreaFloor);
+	}
+
+	if (pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber - 1] == NULL) {
+		pAreaFloor->pFloorBoard[pAreaFloor->nFloorNumber - 1] = generateArea(*pAreaFloor);
 	}
 } 
 
