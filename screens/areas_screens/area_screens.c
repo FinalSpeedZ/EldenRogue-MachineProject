@@ -1,9 +1,9 @@
 #include "area_screens.h"
 
 void openAreaScreen(int nAreaIndex, Player* pPlayer) {
-	char cInput = 'Q'; // initialize to random char in valid commands 
-	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E', 'Q',
-						      'w', 'a', 's', 'd', 'e', 'q'};
+	char cInput = 'A'; // initialize to random char in valid commands 
+	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E',
+						      'w', 'a', 's', 'd', 'e'};
 
 	int nLeaveArea = 0;
 
@@ -43,12 +43,40 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 
 		getCharAreaInput(&cInput, aPlayerCommands, 12);
 		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea);
-	} while (cInput != 'Q' && cInput != 'q' && !nLeaveArea);
+	} while (!nLeaveArea);
 
 	for (nArrayIndex = 0; nArrayIndex < nNumberOfFloors; nArrayIndex++) {
 		if (pAreaBoard[nArrayIndex] != NULL) {
 			free (sAreaFloor.pFloorBoard[nArrayIndex]);
 		}
+	}
+}
+
+void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea) {
+	switch(cInput) {
+		case 'W':
+		case 'w':
+			movePlayer(UP, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			break;
+
+		case 'A':
+		case 'a':
+			movePlayer(LEFT, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			break;
+
+		case 'S':
+		case 's':
+			movePlayer(DOWN, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			break;
+
+		case 'D':
+		case 'd':
+			movePlayer(RIGHT, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			break;
+
+		case 'E':
+		case 'e':
+			interactTile(pAreaFloor, pPlayer, pLeaveArea);
 	}
 }
 
@@ -293,34 +321,6 @@ void findPlayerSpawn(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails) {
 	free(pFloor);
 }
 
-void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea) {
-	switch(cInput) {
-		case 'W':
-		case 'w':
-			movePlayer(UP, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
-			break;
-
-		case 'A':
-		case 'a':
-			movePlayer(LEFT, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
-			break;
-
-		case 'S':
-		case 's':
-			movePlayer(DOWN, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
-			break;
-
-		case 'D':
-		case 'd':
-			movePlayer(RIGHT, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
-			break;
-
-		case 'E':
-		case 'e':
-			interactTile(pAreaFloor, pPlayer, pLeaveArea);
-	}
-}
-
 void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails) {
 	int *pFloor = generateArea(sAreaFloor);
 
@@ -377,9 +377,16 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 			break;
 
 		case TILE_BOSS:
+			break;
+
 		case TILE_FAST_TRAVEL:
 		case TILE_CREDITS:
-			break;
+			if (pAreaFloor->nFloorNumber != 1 && checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
+				*pLeaveArea = 1;
+			}
+			else {
+				*pLeaveArea = 1;	
+			}
 	}
 }
 
@@ -430,4 +437,33 @@ void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails) {
 	}
 } 
 
+int checkFastTravelStatus(int nAreaIndex, UnlockedAreas* pPlayerUnlockedAreas) {
+	int nUnlocked = 0;
 
+	switch (nAreaIndex) {
+		case STORMVEIL_CASTLE:
+			nUnlocked = pPlayerUnlockedAreas->nStormveilFastTravel;
+			break;
+
+		case RAYA_LUCARIA_ACADEMY:
+			nUnlocked = pPlayerUnlockedAreas->nRayaLucariaFastTravel;
+			break;
+
+		case REDMANE_CASTLE:
+			nUnlocked = pPlayerUnlockedAreas->nRedmaneFastTravel;
+			break;
+
+		case VOLCANO_MANOR:
+			nUnlocked = pPlayerUnlockedAreas->nVolcanoFastTravel;
+			break;
+
+		case LEYNDELL_ROYAL_CAPITAL:
+			nUnlocked = pPlayerUnlockedAreas->nLeyndellFastTravel;
+			break;
+
+		case THE_ELDEN_THRONE:
+			nUnlocked = pPlayerUnlockedAreas->nEldenThroneCredits;
+	}
+
+	return nUnlocked;
+}

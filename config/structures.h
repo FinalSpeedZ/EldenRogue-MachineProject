@@ -20,6 +20,16 @@ struct statsTag {
 };
 typedef struct statsTag Statistics;
 
+struct unlockedTag {
+	int nStormveilFastTravel;
+	int nRayaLucariaFastTravel;
+	int nRedmaneFastTravel;
+	int nVolcanoFastTravel;
+	int nLeyndellFastTravel;
+	int nEldenThroneCredits;
+}; 
+typedef struct unlockedTag UnlockedAreas;
+
 struct playerTag {
 	StringPlayerName strPlayerName;
 	StringJobClass strPlayerJobClass;  
@@ -28,6 +38,7 @@ struct playerTag {
 	int nShards;
 	Statistics sPlayerStats;
 	AreaDetails sPlayerAreaDetails;
+	UnlockedAreas sPlayerUnlockedAreas;
 };
 typedef struct playerTag Player;
 

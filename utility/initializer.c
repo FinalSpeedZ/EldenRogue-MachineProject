@@ -8,6 +8,7 @@ Player initializePlayer() {
 	resetRunes(&sPlayer.nRunes);
 	initializeShards(&sPlayer.nShards);
 	initializeAreaDetails(&sPlayer.sPlayerAreaDetails);
+	initializeUnlockedAreas(&sPlayer.sPlayerUnlockedAreas);
 
 	return sPlayer;
 }
@@ -36,4 +37,13 @@ void initializeShards(int* pShards) {
 void initializeAreaDetails(AreaDetails* pPlayerAreaDetails) {
 	pPlayerAreaDetails->nRowLocation = 1;
 	pPlayerAreaDetails->nColumnLocation = 1;
+}
+
+void initializeUnlockedAreas(UnlockedAreas* pPlayerUnlockedAreas) {
+	pPlayerUnlockedAreas->nStormveilFastTravel = 0;
+	pPlayerUnlockedAreas->nRayaLucariaFastTravel = 0;
+	pPlayerUnlockedAreas->nRedmaneFastTravel = 0;
+	pPlayerUnlockedAreas->nVolcanoFastTravel = 0;
+	pPlayerUnlockedAreas->nLeyndellFastTravel = 0;
+	pPlayerUnlockedAreas->nEldenThroneCredits = 0;
 }
