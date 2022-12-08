@@ -26,7 +26,7 @@ void openFastTravel(Player* pPlayer) {
 
 		getIntInput(&nInput, 0, 6);
 		processFastTravelInput(nInput, pPlayer);	
-	} while (nInput != 0);
+	} while (nInput < 0 || nInput > 6);
 }
 
 void processFastTravelInput(int nInput, Player* pPlayer) {

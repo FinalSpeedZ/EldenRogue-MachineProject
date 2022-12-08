@@ -23,7 +23,7 @@ void printMiddleSubHeader(char strText[]) {
 void printMiddleText(char strText[], char strDesignLeft[], char strDesignRight[]) {
 	int nOffset = (SCREEN_WIDTH - strlen(strText) - 4) / 2;
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
-	printf("%s %s %s\n\n", strDesignLeft, strText, strDesignRight);
+	printf("%s %s %s\n", strDesignLeft, strText, strDesignRight);
 }
 
 void printInputDivider() {

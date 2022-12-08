@@ -52,7 +52,6 @@ struct doorTag {
 };
 typedef struct doorTag Door;
 
-
 struct floorTag {
 	int nAreaIndex;
 	int nFloorNumber;
@@ -61,6 +60,7 @@ struct floorTag {
 	int nColumns;
 
 	int** pFloorBoard;
+	Door** pAreaDoorArray;
 };
 typedef struct floorTag AreaFloor;
 

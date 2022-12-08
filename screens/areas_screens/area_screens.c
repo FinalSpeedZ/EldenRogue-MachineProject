@@ -8,21 +8,28 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 	int nLeaveArea = 0;
 
 	int nNumberOfFloors = determineNumberOfFloors(nAreaIndex);
+	int nNumberOfDoors = determineNumberOfDoors(nAreaIndex);
 	int* pAreaBoard[nNumberOfFloors];
+	Door* pAreaDoors[nNumberOfDoors / 2];
 	int nArrayIndex;
 
 	for (nArrayIndex = 0; nArrayIndex < nNumberOfFloors; nArrayIndex++) {
 		pAreaBoard[nArrayIndex] = NULL;
 	}
 
+	for (nArrayIndex = 0; nArrayIndex < nNumberOfDoors / 2; nArrayIndex++) {
+		pAreaDoors[nArrayIndex] = NULL;
+	} 
 
 	AreaFloor sAreaFloor;
 	sAreaFloor.nFloorNumber = 1;
 	sAreaFloor.nAreaIndex = nAreaIndex;
 	sAreaFloor.pFloorBoard = pAreaBoard;
+	sAreaFloor.pAreaDoorArray = pAreaDoors;
 
 	determineAreaRowsColumns(&sAreaFloor);
 	sAreaFloor.pFloorBoard[sAreaFloor.nFloorNumber - 1] = generateArea(sAreaFloor);
+	loadDoors(sAreaFloor.nAreaIndex, sAreaFloor.pAreaDoorArray);
 	findPlayerSpawn(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 
 	do {
@@ -33,7 +40,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 		printAreaName(nAreaIndex);
 		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
 		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printf("%p\n\n", sAreaFloor.pFloorBoard[sAreaFloor.nFloorNumber - 1]);
 
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
@@ -45,9 +52,16 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea);
 	} while (!nLeaveArea);
 
-	for (nArrayIndex = 0; nArrayIndex < nNumberOfFloors; nArrayIndex++) {
-		if (pAreaBoard[nArrayIndex] != NULL) {
+	for (nArrayIndex = nNumberOfFloors - 1; nArrayIndex >= 0; nArrayIndex--) {
+		if (sAreaFloor.pFloorBoard[nArrayIndex] != NULL) {
 			free (sAreaFloor.pFloorBoard[nArrayIndex]);
+		}
+	}
+
+	for (nArrayIndex = nNumberOfDoors / 2 - 1; nArrayIndex >= 0; nArrayIndex--) {
+		if (sAreaFloor.pAreaDoorArray[nArrayIndex] != NULL) {
+			free (sAreaFloor.pAreaDoorArray[nArrayIndex]->pNext);
+			free (sAreaFloor.pAreaDoorArray[nArrayIndex]);
 		}
 	}
 }
@@ -383,9 +397,11 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 		case TILE_CREDITS:
 			if (pAreaFloor->nFloorNumber != 1 && checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
 				*pLeaveArea = 1;
+				openFastTravel(pPlayer);
 			}
-			else {
+			else if (pAreaFloor->nFloorNumber == 1) {
 				*pLeaveArea = 1;	
+				openFastTravel(pPlayer);
 			}
 	}
 }
@@ -404,20 +420,11 @@ void interactTileSpawn(int nAreaIndex, Player* pPlayer) {
 }
 
 void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails) {
-	int nNumberOfDoors = determineNumberOfDoors(pAreaFloor->nAreaIndex);
-
-	Door* pAreaDoors[nNumberOfDoors / 2]; 
 	Door* pInteractedDoor;
 
-	int nArrayIndex;
+	int nNumberOfDoors = determineNumberOfDoors(pAreaFloor->nAreaIndex);
 
-	for (nArrayIndex = 0; nArrayIndex < nNumberOfDoors / 2; nArrayIndex++) {
-		pAreaDoors[nArrayIndex] = NULL;
-	} 
-
-	loadDoors(pAreaFloor->nAreaIndex, pAreaDoors);
-
-	pInteractedDoor = findDoor(pAreaDoors, nNumberOfDoors, pPlayerAreaDetails, &pAreaFloor->nFloorNumber);
+	pInteractedDoor = findDoor(pAreaFloor->pAreaDoorArray, nNumberOfDoors, pPlayerAreaDetails, &pAreaFloor->nFloorNumber);
 
 	if (pInteractedDoor->pPrev == NULL) {
 		pPlayerAreaDetails->nRowLocation = pInteractedDoor->pNext->nRowLocation;

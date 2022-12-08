@@ -8,12 +8,7 @@ void openTitleScreen(Player sPlayer) {
 	do {
 		system("cls");
 		
-		// change to printHeader (ascii header)
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("ELDEN ROGUE", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printTitleScreenHeader();
 
 		printTwoOptions(1, OPTION_START, 2, OPTION_CONTINUE);
 		printCenterOption(0, OPTION_EXIT);

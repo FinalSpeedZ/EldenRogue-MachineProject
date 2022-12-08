@@ -6,7 +6,7 @@ void pressEnter() {
 }
 
 void getIntInput(int *pInput, int nMin, int nMax) {
-	if (*pInput < nMin || *pInput > nMax){
+	if (*pInput < nMin || *pInput > nMax) {
 		printInvalidInputMsg("ENTER THE NUMBER OF YOUR SELECTION");
 	}
 
