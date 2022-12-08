@@ -35,12 +35,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 	do {
 		system("cls");
 
-		// change to printHeader (ascii header)
-		printMultiple("\n", SCREEN_PADDING_TOP);
 		printAreaName(nAreaIndex);
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("%p\n\n", sAreaFloor.pFloorBoard[sAreaFloor.nFloorNumber - 1]);
 
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");

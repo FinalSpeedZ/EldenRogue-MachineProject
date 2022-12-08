@@ -8,12 +8,7 @@ void openFastTravel(Player* pPlayer) {
 	do {
 		system("cls");
 
-		// change to printHeader (ascii header)
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("FAST TRAVEL", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printFastTravelHeader();
 
 		//fix UI of this
 		printTwoLongOptions(STORMVEIL_CASTLE, "STORMVEIL CASTLE", RAYA_LUCARIA_ACADEMY, "RAYA LUCARIA ACADEMY");

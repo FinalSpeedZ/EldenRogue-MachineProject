@@ -177,27 +177,27 @@ void printTileParts(int nTileType, int nTilePosition) {
 void printAreaName(int nAreaIndex) {
 	switch (nAreaIndex) {
 		case STORMVEIL_CASTLE:
-			printMiddleText("STORMVEIL CASTLE", "", "");
+			printStormveilCastleHeader();
 			break;
 
 		case RAYA_LUCARIA_ACADEMY:
-			printMiddleText("RAYA LUCARIA ACADEMY", "", "");
+			printRayaLucariaHeader();
 			break;
 
 		case REDMANE_CASTLE:
-			printMiddleText("REDMANE CASTLE", "", "");
+			printRedmaneCastleHeader();
 			break;
 
 		case VOLCANO_MANOR:
-			printMiddleText("VOLCANO MANOR", "", "");
+			printVolcanoManorHeader();
 			break;
 
 		case LEYNDELL_ROYAL_CAPITAL:
-			printMiddleText("LEYNDELL ROYAL CAPITAL", "", "");
+			printLeyndellRoyalCapitalHeader();
 			break;
 
 		case THE_ELDEN_THRONE:
-			printMiddleText("THE ELDEN THRONE", "", "");
+			printTheEldenThrone();
 			break;
 	}
 }

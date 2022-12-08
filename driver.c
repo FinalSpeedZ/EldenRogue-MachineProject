@@ -6,8 +6,8 @@
 
 #include "utility/printers/printer.c"
 #include "utility/printers/roundtable_printer.c"
+#include "utility/printers/screen_headers.c"
 #include "utility/printers/area_printer.c"
-#include "utility/printers/sceen_headers.c"
 
 #include "utility/area_utility/area_boards.c"
 #include "utility/area_utility/area_doors.c"

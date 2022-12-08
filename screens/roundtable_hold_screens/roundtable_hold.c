@@ -8,12 +8,7 @@ void openRoundTableHold(Player sPlayer) {
 	do {
 		system("cls");
 
-		// change to printHeader (ascii header)
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("ROUNDTABLE HOLD", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printRoundtableHoldHeader();
 
 		//fix UI of this
 		printOneBoxedStats("RUNES", sPlayer.nRunes);

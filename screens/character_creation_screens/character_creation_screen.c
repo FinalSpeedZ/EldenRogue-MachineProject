@@ -9,12 +9,7 @@ void openCharacterCreationScreen(Player sPlayer) {
 	do {
 		system("cls");
 
-		// change to printHeader (ascii header)
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("CHARACTER CREATION", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printCharacterCreationHeader();
 
 		printFieldedOption(1, "NAME");
 		printf("%s\n", sPlayer.strPlayerName);
