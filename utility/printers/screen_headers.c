@@ -53,6 +53,21 @@ void printFastTravelHeader() {
 	printf("\n\n");	
 }
 
+void printLevelUpHeader() {
+	printMultiple("\n", SCREEN_PADDING_TOP);
+	printMiddleText("   __  _                _                __    ", "", "");
+	printMiddleText("  / / | |              | |               \\ \\   ", "", "");
+	printMiddleText(" / /  | | _____   _____| |  _   _ _ __    \\ \\  ", "", "");
+	printMiddleText("< <   | |/ _ \\ \\ / / _ \\ | | | | | '_ \\    > > ", "", "");
+	printMiddleText(" \\ \\  | |  __/\\ V /  __/ | | |_| | |_) |  / /  ", "", "");
+	printMiddleText("  \\_\\ |_|\\___| \\_/ \\___|_|  \\__,_| .__/  /_/   ", "", "");
+	printMiddleText("                                 | |           ", "", "");
+	printMiddleText("                                 |_|           ", "", "\n");			
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
+	printMultiple("─", SCREEN_WIDTH);
+	printf("\n\n");	
+}
+
 void printStormveilCastleHeader() {
 	printMultiple("\n", SCREEN_PADDING_TOP);
 	printMiddleText(" _____ _                                _ _   _____           _   _      ", "", "");

@@ -36,6 +36,7 @@ struct playerTag {
 	int nLevel;
 	int nRunes;
 	int nShards;
+	int nPotions;
 	Statistics sPlayerStats;
 	AreaDetails sPlayerAreaDetails;
 	UnlockedAreas sPlayerUnlockedAreas;

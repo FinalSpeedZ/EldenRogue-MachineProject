@@ -6,16 +6,20 @@
 
 #include "utility/colors.c"
 #include "utility/printers/printer.c"
+#include "utility/sprites/sprites.c"
+#include "utility/randomizer.c"
+
 #include "utility/printers/roundtable_printer.c"
 #include "utility/printers/screen_headers.c"
 #include "utility/printers/area_printer.c"
+#include "utility/printers/area_nav_printer.c"
 
 #include "utility/area_utility/area_boards.c"
 #include "utility/area_utility/area_doors.c"
+#include "utility/area_utility/area_screen_helper.c"
 
 #include "utility/scanner.c"
 #include "utility/initializer.c"
-#include "utility/randomizer.c"
 
 #include "screens/title_screen.c"
 
@@ -34,6 +38,7 @@ int main() {
 	
 	resetColors();
 	srand(time(NULL));	
+
 	openTitleScreen(sPlayer);
 	return 0;
 }

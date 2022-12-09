@@ -18,7 +18,6 @@ int* makeMapCopy(AreaFloor sAreaFloor) {
 	return pFloorBoardCopy;
 }
 
-
 void printAreaMap(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails) {
 	int nRowCounter;
 	int nColumnCounter;
@@ -263,3 +262,8 @@ void printAreaName(int nAreaIndex) {
 			break;
 	}
 }
+
+
+
+
+

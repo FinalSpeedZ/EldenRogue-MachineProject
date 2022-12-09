@@ -11,10 +11,6 @@
 
 void openAreaScreen(int nAreaIndex, Player* pPlayer);
 
-int determineNumberOfFloors(int nAreaIndex);
-void determineAreaRowsColumns(AreaFloor* pAreaFloor);
-void findPlayerSpawn(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
-
 void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea);
 
 void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
@@ -22,10 +18,7 @@ void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDe
 void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea);
 
 void interactTileSpawn(int nAreaIndex, Player* pPlayer);
-int receiveRunes(int nAreaIndex);
 
 void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails);
-
-int checkFastTravelStatus(int nAreaIndex, UnlockedAreas* pPlayerUnlockedAreas);
 
 #endif

@@ -48,15 +48,17 @@ void getNameInput(StringPlayerName strPlayerName) {
 	strncpy(strPlayerName, pTempPlayerName + nStart, PLAYER_NAME_LENGTH);
 
 	free(pTempPlayerName);
+
+	strPlayerName[PLAYER_NAME_LENGTH] = '\0';
 }
 
-void getCharAreaInput(char* cInput, char aValidCharInputs[], int nLength) {
-	if (!hasCharMatch(*cInput, aValidCharInputs, nLength)) {
+void getCharAreaInput(char* pInput, char aValidCharInputs[], int nLength) {
+	if (!hasCharMatch(*pInput, aValidCharInputs, nLength)) {
 		printInvalidInputMsg("ENTER THE CHARACTER OF YOUR SELECTION");
 	}
 
 	printInputTag(STD_INPUT_TAG);
-	scanf("%c", cInput);
+	scanf("%c", pInput);
 	while ((getchar()) != '\n'); // to clear input buffer
 }
 

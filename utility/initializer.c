@@ -6,6 +6,7 @@ void initializePlayer(Player* pPlayer) {
 	initializeJobClassStats(pPlayer);
 	resetRunes(&pPlayer->nRunes);
 	initializeShards(&pPlayer->nShards);
+	resetPotions(&pPlayer->nPotions);
 	initializeAreaDetails(&pPlayer->sPlayerAreaDetails);
 	initializeUnlockedAreas(&pPlayer->sPlayerUnlockedAreas);
 }
@@ -24,11 +25,15 @@ void initializeJobClassStats(Player* pPlayer) {
 }
 
 void resetRunes(int* pRunes) {
-	*pRunes = 100;
+	*pRunes = 0;
 }
 
 void initializeShards(int* pShards) {
 	*pShards = 0;
+}
+
+void resetPotions(int* pPotions) {
+	*pPotions = 8;
 }
 
 void initializeAreaDetails(AreaDetails* pPlayerAreaDetails) {

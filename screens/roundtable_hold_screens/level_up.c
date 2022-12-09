@@ -6,12 +6,7 @@ void openLevelUp(Player* pPlayer) {
 	do {
 		system("cls");
 
-		// change to printHeader (ascii header)
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("LEVEL UP", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printLevelUpHeader();
 
 		//fix UI of this
 		printOneBoxedStats("RUNES", pPlayer->nRunes);

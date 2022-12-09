@@ -183,7 +183,7 @@ void printMiddleStats(char strLabel[], int nValue) {
 
 void printTwoStats(char strLabel1[], int nValue1, 
 	               char strLabel2[], int nValue2) {
-	printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING + HEADER_PADDING_LEFT - 1);
+	printMultiple(" ", SCREEN_PADDING_LEFT + CENTER_OPTION_PADDING - 10);
 	
 	printf("%s: ", strLabel1);
 	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strLabel1) + 1) - 3);

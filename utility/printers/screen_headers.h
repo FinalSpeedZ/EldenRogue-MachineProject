@@ -5,6 +5,7 @@ void printTitleScreenHeader();
 void printCharacterCreationHeader();
 void printRoundtableHoldHeader();
 void printFastTravelHeader();
+void printLevelUpHeader();
 
 void printStormveilCastleHeader();
 void printRayaLucariaHeader();
