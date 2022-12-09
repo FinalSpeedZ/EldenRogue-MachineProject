@@ -5,11 +5,13 @@
 #define TILE_PLAYER      1
 #define TILE_DOOR_UP     2
 #define TILE_DOOR_DOWN   3
-#define TILE_SPAWN       4
-#define TILE_BOSS        5
-#define TILE_FAST_TRAVEL 6
-#define TILE_CREDITS     7
-#define TILE_INVALID     8
+#define TILE_DOOR_LEFT   4
+#define TILE_DOOR_RIGHT  5
+#define TILE_SPAWN       6
+#define TILE_BOSS        7
+#define TILE_FAST_TRAVEL 8
+#define TILE_CREDITS     9
+#define TILE_INVALID     10
 
 int* generateStromveilCastle(AreaFloor sAreaFloor);
 int* generateRayaLucaria(AreaFloor sAreaFloor);

@@ -1,16 +1,13 @@
 #include "initializer.h"
 
-Player initializePlayer() {
-	Player sPlayer;
+void initializePlayer(Player* pPlayer) {
 
-	strcpy(sPlayer.strPlayerName, "");
-	initializeJobClassStats(&sPlayer);
-	resetRunes(&sPlayer.nRunes);
-	initializeShards(&sPlayer.nShards);
-	initializeAreaDetails(&sPlayer.sPlayerAreaDetails);
-	initializeUnlockedAreas(&sPlayer.sPlayerUnlockedAreas);
-
-	return sPlayer;
+	strcpy(pPlayer->strPlayerName, "");
+	initializeJobClassStats(pPlayer);
+	resetRunes(&pPlayer->nRunes);
+	initializeShards(&pPlayer->nShards);
+	initializeAreaDetails(&pPlayer->sPlayerAreaDetails);
+	initializeUnlockedAreas(&pPlayer->sPlayerUnlockedAreas);
 }
 
 void initializeJobClassStats(Player* pPlayer) {
@@ -27,7 +24,7 @@ void initializeJobClassStats(Player* pPlayer) {
 }
 
 void resetRunes(int* pRunes) {
-	*pRunes = 0;
+	*pRunes = 100;
 }
 
 void initializeShards(int* pShards) {
@@ -40,10 +37,10 @@ void initializeAreaDetails(AreaDetails* pPlayerAreaDetails) {
 }
 
 void initializeUnlockedAreas(UnlockedAreas* pPlayerUnlockedAreas) {
-	pPlayerUnlockedAreas->nStormveilFastTravel = 0;
-	pPlayerUnlockedAreas->nRayaLucariaFastTravel = 0;
-	pPlayerUnlockedAreas->nRedmaneFastTravel = 0;
-	pPlayerUnlockedAreas->nVolcanoFastTravel = 0;
-	pPlayerUnlockedAreas->nLeyndellFastTravel = 0;
-	pPlayerUnlockedAreas->nEldenThroneCredits = 0;
+	pPlayerUnlockedAreas->nStormveilFastTravel = 1;
+	pPlayerUnlockedAreas->nRayaLucariaFastTravel = 1;
+	pPlayerUnlockedAreas->nRedmaneFastTravel = 1;
+	pPlayerUnlockedAreas->nVolcanoFastTravel = 1;
+	pPlayerUnlockedAreas->nLeyndellFastTravel = 1;
+	pPlayerUnlockedAreas->nEldenThroneCredits = 1;
 }

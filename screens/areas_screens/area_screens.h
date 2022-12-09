@@ -20,7 +20,10 @@ void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer,
 void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 
 void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea);
+
 void interactTileSpawn(int nAreaIndex, Player* pPlayer);
+int receiveRunes(int nAreaIndex);
+
 void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails);
 
 int checkFastTravelStatus(int nAreaIndex, UnlockedAreas* pPlayerUnlockedAreas);

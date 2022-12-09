@@ -1,7 +1,7 @@
 #ifndef INITIALIZER_H
 #define INITIALIZER_H
 
-Player initializePlayer();
+void initializePlayer(Player* pPlayer);
 
 void initializeJobClassStats(Player* pPlayer);
 void resetRunes(int* pRunes);

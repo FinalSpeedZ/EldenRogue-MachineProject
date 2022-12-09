@@ -58,39 +58,58 @@ void printTileParts(int nTileType, int nTilePosition) {
 	switch (nTilePosition) {
 		case TOP:
 			switch (nTileType) {
-				case TILE_EMPTY: 
+				case TILE_EMPTY:
+					colorText(COLOR_TILE_EMPTY); 
 					printf("┌───┐ ");
 					break;
 
 				case TILE_PLAYER: 
+					colorText(COLOR_TILE_PLAYER); 
 					printf("╔═══╗ ");
 					break;
 
 				case TILE_DOOR_UP: 
+					colorText(COLOR_TILE_DOOR_UP); 
 					printf("┌───┐ ");
 					break;
 
 				case TILE_DOOR_DOWN: 
+					colorText(COLOR_TILE_DOOR_DOWN); 
+					printf("┌───┐ ");
+					break;
+
+				case TILE_DOOR_LEFT: 
+					colorText(COLOR_TILE_DOOR_LEFT); 
+					printf("┌───┐ ");
+					break;
+
+				case TILE_DOOR_RIGHT: 
+					colorText(COLOR_TILE_DOOR_RIGHT); 
 					printf("┌───┐ ");
 					break;
 
 				case TILE_SPAWN: 
+					colorText(COLOR_TILE_SPAWN); 
 					printf("┌───┐ ");
 					break;
 
 				case TILE_BOSS: 
-					printf("┌───┐ ");
+					colorText(COLOR_TILE_BOSS); 
+					printf("╔───╗ ");
 					break;
 
-				case TILE_FAST_TRAVEL: 
+				case TILE_FAST_TRAVEL:
+					colorText(COLOR_TILE_FAST_TRAVEL);  
 					printf("┌───┐ ");
 					break;
 
 				case TILE_CREDITS: 
+					colorText(COLOR_TILE_CREDITS); 
 					printf("┌───┐ ");
 					break;
 
-				case TILE_INVALID: 
+				case TILE_INVALID:
+					colorText(COLOR_TILE_INVALID);  
 					printf("┌┬┬┬┐ ");
 					break;
 			}
@@ -99,35 +118,57 @@ void printTileParts(int nTileType, int nTilePosition) {
 		case MIDDLE: 
 			switch (nTileType) {
 				case TILE_EMPTY: 
+					colorText(COLOR_TILE_EMPTY); 
 					printf("│   │ ");
 					break;
 
 				case TILE_PLAYER: 
+					colorText(COLOR_TILE_PLAYER); 
 					printf("║ ■ ║ ");
 					break;
 
 				case TILE_DOOR_UP: 
+					colorText(COLOR_TILE_DOOR_UP); 
+					printf("│ ↑ │ ");
+					break; 
+
 				case TILE_DOOR_DOWN: 
-					printf("│ D │ ");
+					colorText(COLOR_TILE_DOOR_DOWN); 
+					printf("│ ↓ │ ");
+					break;
+
+				case TILE_DOOR_LEFT:
+					colorText(COLOR_TILE_DOOR_LEFT); 
+					printf("│ ← │ ");
+					break;
+
+				case TILE_DOOR_RIGHT:
+					colorText(COLOR_TILE_DOOR_RIGHT); 
+					printf("│ → │ ");
 					break;
 
 				case TILE_SPAWN: 
+					colorText(COLOR_TILE_SPAWN); 
 					printf("│ ? │ ");
 					break;
 
 				case TILE_BOSS: 
-					printf("│ B │ ");
+					colorText(COLOR_TILE_BOSS); 
+					printf("│ ‼ │ ");
 					break;
 
 				case TILE_FAST_TRAVEL: 
-					printf("│ F │ ");
+					colorText(COLOR_TILE_FAST_TRAVEL); 
+					printf("│ ♦ │ ");
 					break;
 
 				case TILE_CREDITS: 
-					printf("│   │ ");
+					colorText(COLOR_TILE_CREDITS); 
+					printf("│ C │ ");
 					break;
 
 				case TILE_INVALID: 
+					colorText(COLOR_TILE_INVALID); 
 					printf("│││││ ");
 					break;
 			}
@@ -136,41 +177,62 @@ void printTileParts(int nTileType, int nTilePosition) {
 		case BOTTOM: 	
 			switch (nTileType) {
 				case TILE_EMPTY: 
+					colorText(COLOR_TILE_EMPTY); 
 					printf("└───┘ ");
 					break;
 
 				case TILE_PLAYER: 
+					colorText(COLOR_TILE_PLAYER); 
 					printf("╚═══╝ ");
 					break;
 
 				case TILE_DOOR_UP: 
+					colorText(COLOR_TILE_DOOR_UP); 
 					printf("└───┘ ");
 					break;
 
 				case TILE_DOOR_DOWN: 
+					colorText(COLOR_TILE_DOOR_DOWN); 
+					printf("└───┘ ");
+					break;
+
+				case TILE_DOOR_LEFT: 
+					colorText(COLOR_TILE_DOOR_LEFT); 
+					printf("└───┘ ");
+					break;
+
+				case TILE_DOOR_RIGHT: 
+					colorText(COLOR_TILE_DOOR_RIGHT); 
 					printf("└───┘ ");
 					break;
 
 				case TILE_SPAWN: 
+					colorText(COLOR_TILE_SPAWN); 
 					printf("└───┘ ");
 					break;
 
 				case TILE_BOSS: 
-					printf("└───┘ ");
+					colorText(COLOR_TILE_BOSS); 
+					printf("╚───╝ ");
 					break;
 
 				case TILE_FAST_TRAVEL: 
+					colorText(COLOR_TILE_FAST_TRAVEL); 
 					printf("└───┘ ");
 					break;
 
 				case TILE_CREDITS: 
+					colorText(COLOR_TILE_CREDITS); 
 					printf("└───┘ ");
 					break;
 
 				case TILE_INVALID: 
+					colorText(COLOR_TILE_INVALID); 
 					printf("└┴┴┴┘ ");
 					break;
 			}		
+
+			resetColors();
 	}
 }
 

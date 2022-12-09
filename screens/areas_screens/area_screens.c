@@ -37,6 +37,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 
 		printAreaName(nAreaIndex);
 
+		printOneBoxedStats("RUNES", pPlayer->nRunes);
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
 
@@ -376,6 +377,8 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 			
 		case TILE_DOOR_UP:
 		case TILE_DOOR_DOWN:
+		case TILE_DOOR_LEFT:
+		case TILE_DOOR_RIGHT:
 			interactTileDoor(pAreaFloor, &pPlayer->sPlayerAreaDetails);
 			break;
 
@@ -403,16 +406,28 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 
 void interactTileSpawn(int nAreaIndex, Player* pPlayer) {
 	int nSpawnRate = randomNumberBetween(100, 1);
+	int nRunesGained = 0;
 
 	if (nSpawnRate > 100 - ENEMY_YIELD) {
 		printf("BATTLE ENEMY\n");
 	}
 
 	else {
-		printf("YOU RECEIVE RUNES\n");
+		nRunesGained = receiveRunes(nAreaIndex);
+		printf("YOU FOUND %d RUNES\n", nRunesGained);
+		pPlayer->nRunes = pPlayer->nRunes + nRunesGained;
 	}
 	pressEnter();
 }
+
+int receiveRunes(int nAreaIndex) {
+	int nRunesGained = 0;
+
+	nRunesGained = nAreaIndex * randomNumberBetween(150, 50);
+
+	return nRunesGained;
+}
+
 
 void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails) {
 	Door* pInteractedDoor;

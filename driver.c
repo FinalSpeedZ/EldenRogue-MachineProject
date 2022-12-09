@@ -4,6 +4,7 @@
 #include "time.h"
 #include "Windows.h"
 
+#include "utility/colors.c"
 #include "utility/printers/printer.c"
 #include "utility/printers/roundtable_printer.c"
 #include "utility/printers/screen_headers.c"
@@ -28,8 +29,10 @@
 #include "screens/areas_screens/area_screens.c"
 
 int main() {
-	Player sPlayer = initializePlayer(); 
+	Player sPlayer;
+	initializePlayer(&sPlayer); 
 	
+	resetColors();
 	srand(time(NULL));	
 	openTitleScreen(sPlayer);
 	return 0;

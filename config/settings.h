@@ -15,7 +15,6 @@
 #define TWO_LONG_OPTION_PADDING 15
 #define CENTER_OPTION_PADDING   41
 
-#define FALSE	0
-#define TRUE	1
+#define ENABLE_COLORS  1
 
 #endif
