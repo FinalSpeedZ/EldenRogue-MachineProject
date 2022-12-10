@@ -1,10 +1,9 @@
 #include "area_screens.h"
 
-void openAreaScreen(int nAreaIndex, Player* pPlayer) {
+void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	char cInput = 'A'; // initialize to random char in valid commands 
 	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E',
 						      'w', 'a', 's', 'd', 'e'};
-
 	int nLeaveArea = 0;
 
 	int nNumberOfFloors = determineNumberOfFloors(nAreaIndex);
@@ -22,7 +21,7 @@ void openAreaScreen(int nAreaIndex, Player* pPlayer) {
 	} 
 
 	AreaFloor sAreaFloor;
-	sAreaFloor.nFloorNumber = 1;
+	sAreaFloor.nFloorNumber = nFloorNumber;
 	sAreaFloor.nAreaIndex = nAreaIndex;
 	sAreaFloor.pFloorBoard = pAreaBoard;
 	sAreaFloor.pAreaDoorArray = pAreaDoors;

@@ -10,5 +10,6 @@
 
 void openFastTravel(Player* pPlayer);
 void processFastTravelInput(int nInput, Player* pPlayer);
+void openFastTravelToFloor(int nAreaIndex, Player* pPlayer);
 
 #endif 

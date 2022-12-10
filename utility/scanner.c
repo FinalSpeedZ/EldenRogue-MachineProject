@@ -34,13 +34,22 @@ char* getStringInput(char strInputTag[]) {
 
 void getNameInput(StringPlayerName strPlayerName) {
 	char* pTempPlayerName = getStringInput(NAME_INPUT_TAG);
+	int nLength = strlen(pTempPlayerName);
 	int nStart = 0;
+	int nIndex = 0;
 
 	while (pTempPlayerName[nStart] == ' ') {
 		nStart++;
+		nLength--;
 	}
 
-	if (strlen(pTempPlayerName) > PLAYER_NAME_LENGTH) {
+	for (nIndex = PLAYER_NAME_LENGTH; nIndex < strlen(pTempPlayerName); nIndex++) {
+		if (pTempPlayerName[nIndex] == ' ') {
+			nLength--;
+		}
+	}
+
+	if (nLength > PLAYER_NAME_LENGTH) {
 		printMessage(SYSTEM_MESSAGE, "YOUR CHOSEN NAME IS TOO LONG");	
 		pressEnter();
 	}

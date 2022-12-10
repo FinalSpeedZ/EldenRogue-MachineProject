@@ -9,7 +9,7 @@
 #define ENEMY_YIELD    75
 #define TREASURE_YEILD 25
 
-void openAreaScreen(int nAreaIndex, Player* pPlayer);
+void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer);
 
 void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea);
 
