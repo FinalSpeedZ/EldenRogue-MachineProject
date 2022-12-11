@@ -11,7 +11,6 @@ void openFastTravel(Player* pPlayer) {
 
 		printFastTravelHeader();
 
-		//fix UI of this
 		printTwoLongOptions(STORMVEIL_CASTLE, "STORMVEIL CASTLE", RAYA_LUCARIA_ACADEMY, "RAYA LUCARIA ACADEMY");
 		printTwoLongOptions(REDMANE_CASTLE, "REDMANE CASTLE", VOLCANO_MANOR, "VOLCANO MANOR");
 		printTwoLongOptions(LEYNDELL_ROYAL_CAPITAL, "LEYNDELL ROYAL CAPITAL", THE_ELDEN_THRONE, "THE ELDEN THRONE");

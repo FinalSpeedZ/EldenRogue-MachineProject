@@ -7,19 +7,20 @@
 #include "utility/colors.c"
 #include "utility/printers/printer.c"
 #include "utility/sprites/sprites.c"
+#include "utility/scanner.c"
+#include "utility/initializer.c"
 #include "utility/randomizer.c"
 
 #include "utility/printers/roundtable_printer.c"
 #include "utility/printers/screen_headers.c"
 #include "utility/printers/area_printer.c"
+#include "utility/printers/battle_printer.c"
 #include "utility/printers/area_nav_printer.c"
 
 #include "utility/area_utility/area_boards.c"
 #include "utility/area_utility/area_doors.c"
 #include "utility/area_utility/area_screen_helper.c"
-
-#include "utility/scanner.c"
-#include "utility/initializer.c"
+#include "utility/area_utility/battle_screen_helper.c"
 
 #include "screens/title_screen.c"
 
@@ -31,6 +32,7 @@
 #include "screens/roundtable_hold_screens/level_up.c"
 
 #include "screens/areas_screens/area_screens.c"
+#include "screens/areas_screens/battle.c"
 
 int main() {
 	Player sPlayer;

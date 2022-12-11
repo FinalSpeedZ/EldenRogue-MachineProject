@@ -23,4 +23,6 @@
 
 #define LEVEL_MAX  50
 
+#define DEFAULT_POTION_COUNT 8
+
 #endif

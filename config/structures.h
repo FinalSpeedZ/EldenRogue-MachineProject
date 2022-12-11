@@ -7,6 +7,9 @@
 struct areadetailsTag {
 	int nRowLocation;
 	int nColumnLocation;
+
+	int nCurrentHealth;
+	int nMaxHealth;
 };
 typedef struct areadetailsTag AreaDetails;
 
@@ -33,15 +36,38 @@ typedef struct unlockedTag UnlockedAreas;
 struct playerTag {
 	StringPlayerName strPlayerName;
 	StringJobClass strPlayerJobClass;  
+
 	int nLevel;
 	int nRunes;
 	int nShards;
 	int nPotions;
+	
 	Statistics sPlayerStats;
 	AreaDetails sPlayerAreaDetails;
 	UnlockedAreas sPlayerUnlockedAreas;
 };
 typedef struct playerTag Player;
+
+struct enemyTag {
+	char* pEnemyName;
+	int nEnemyType;
+
+	int nHealthUpper;
+	int nHealthLower;
+	int nBaseHealth;
+	int nFinalHealth;
+	int nCurrentHealth;
+
+	int nAttackUpper;
+	int nAttackLower;
+	int nBaseAttack;
+	int nFinalAttack;
+
+	float fPhysicalDef;
+	float fSorceryDef;
+	float fIncantationDef;
+};
+typedef struct enemyTag Enemy;
 
 struct doorTag {
 	int nFloorNumber;

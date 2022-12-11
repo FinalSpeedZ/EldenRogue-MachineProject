@@ -28,6 +28,7 @@ void printMiddleText(char strText[], char strDesignLeft[], char strDesignRight[]
 
 void printInputDivider() {
 	printMultiple(" ", SCREEN_PADDING_LEFT + INPUT_PADDING);
+	printMultiple(" ", 3);
 	printMultiple("─", INPUT_DESIGN);
 	printMultiple("═", INPUT_DESIGN);
 	printf("╣   ");
@@ -76,7 +77,7 @@ void printTwoOptions(int nNumberOption1, char strText1[],
 	printMultiple("─", OPTIONS_TEXT_LENGTH);
 	printf("┐"); 
 
-	printMultiple(" ", TWO_OPTION_PADDING );
+	printMultiple(" ", TWO_OPTION_PADDING - 9);
 
 	printf("┌");
 	printMultiple("─", OPTIONS_TEXT_LENGTH); 
@@ -88,7 +89,7 @@ void printTwoOptions(int nNumberOption1, char strText1[],
 	printMultiple(" ", OPTIONS_TEXT_LENGTH - (strlen(strText1) + 5));
 	printf("│");
 
-	printMultiple(" ", TWO_OPTION_PADDING);
+	printMultiple(" ", TWO_OPTION_PADDING - 9);
 
 	printf("│ ");
 	printf("[%d] %s", nNumberOption2, strText2);
@@ -100,7 +101,7 @@ void printTwoOptions(int nNumberOption1, char strText1[],
 	printMultiple("─", OPTIONS_TEXT_LENGTH);
 	printf("┘");
 
-	printMultiple(" ", TWO_OPTION_PADDING);
+	printMultiple(" ", TWO_OPTION_PADDING - 9);
 
 	printf("└");
 	printMultiple("─", OPTIONS_TEXT_LENGTH);
@@ -114,7 +115,7 @@ void printTwoLongOptions(int nNumberOption1, char strText1[],
 	printMultiple("─", OPTIONS_LONG_TEXT_LENGTH);
 	printf("┐"); 
 
-	printMultiple(" ", TWO_LONG_OPTION_PADDING );
+	printMultiple(" ", TWO_LONG_OPTION_PADDING - 6);
 
 	printf("┌");
 	printMultiple("─",OPTIONS_LONG_TEXT_LENGTH); 
@@ -126,7 +127,7 @@ void printTwoLongOptions(int nNumberOption1, char strText1[],
 	printMultiple(" ", OPTIONS_LONG_TEXT_LENGTH - (strlen(strText1) + 5));
 	printf("│");
 
-	printMultiple(" ", TWO_LONG_OPTION_PADDING);
+	printMultiple(" ", TWO_LONG_OPTION_PADDING - 6);
 
 	printf("│ ");
 	printf("[%d] %s", nNumberOption2, strText2);
@@ -138,7 +139,7 @@ void printTwoLongOptions(int nNumberOption1, char strText1[],
 	printMultiple("─", OPTIONS_LONG_TEXT_LENGTH);
 	printf("┘");
 
-	printMultiple(" ", TWO_LONG_OPTION_PADDING);
+	printMultiple(" ", TWO_LONG_OPTION_PADDING - 6);
 
 	printf("└");
 	printMultiple("─", OPTIONS_LONG_TEXT_LENGTH);

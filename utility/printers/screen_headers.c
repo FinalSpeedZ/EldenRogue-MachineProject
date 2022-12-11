@@ -68,6 +68,19 @@ void printLevelUpHeader() {
 	printf("\n\n");	
 }
 
+void printBattleHeader() {
+	printMultiple("\n", SCREEN_PADDING_TOP);
+	printMiddleText("   __  _           _   _   _       __    ", "", "");
+	printMiddleText("  / / | |         | | | | | |      \\ \\   ", "", "");
+	printMiddleText(" / /  | |__   __ _| |_| |_| | ___   \\ \\   ", "", "");
+	printMiddleText("< <   | '_ \\ / _` | __| __| |/ _ \\   > > ", "", "");
+	printMiddleText(" \\ \\  | |_) | (_| | |_| |_| |  __/  / /  ", "", "");
+	printMiddleText("  \\_\\ |_.__/ \\__,_|\\__|\\__|_|\\___| /_/   ", "", "\n");		;
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
+	printMultiple("─", SCREEN_WIDTH);
+	printf("\n");		
+}
+
 void printStormveilCastleHeader() {
 	printMultiple("\n", SCREEN_PADDING_TOP);
 	printMiddleText(" _____ _                                _ _   _____           _   _      ", "", "");
@@ -149,3 +162,4 @@ void printTheEldenThrone() {
 	printMultiple("─", SCREEN_WIDTH);
 	printf("\n\n");		
 }
+

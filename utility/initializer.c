@@ -9,6 +9,7 @@ void initializePlayer(Player* pPlayer) {
 	resetPotions(&pPlayer->nPotions);
 	initializeAreaDetails(&pPlayer->sPlayerAreaDetails);
 	initializeUnlockedAreas(&pPlayer->sPlayerUnlockedAreas);
+	initializePlayerHealth(&pPlayer->sPlayerAreaDetails);
 }
 
 void initializeJobClassStats(Player* pPlayer) {
@@ -48,4 +49,9 @@ void initializeUnlockedAreas(UnlockedAreas* pPlayerUnlockedAreas) {
 	pPlayerUnlockedAreas->nVolcanoFastTravel = 0;
 	pPlayerUnlockedAreas->nLeyndellFastTravel = 0;
 	pPlayerUnlockedAreas->nEldenThroneCredits = 0;
+}
+
+void initializePlayerHealth(AreaDetails* pPlayerAreaDetails) {
+	pPlayerAreaDetails->nCurrentHealth = 1000;
+	pPlayerAreaDetails->nMaxHealth = 1000;
 }

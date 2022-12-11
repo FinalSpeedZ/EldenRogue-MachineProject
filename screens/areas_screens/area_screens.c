@@ -1,5 +1,7 @@
 #include "area_screens.h"
 
+#include "battle.h"
+
 void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	char cInput = 'A'; // initialize to random char in valid commands 
 	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E',
@@ -39,11 +41,11 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
 
-		printAreaNav(pPlayer);
+		printAreaNav(*pPlayer);
 		printFooter();
 		printInputDivider();
 
-		getCharAreaInput(&cInput, aPlayerCommands, 12);
+		getCharAreaInput(&cInput, aPlayerCommands, 10);
 		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea);
 	} while (!nLeaveArea);
 
@@ -130,7 +132,6 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 
 	switch (nTileType) {
 		case TILE_EMPTY:
-			printf("HMMM...\n");
 			break;
 			
 		case TILE_DOOR_UP:
@@ -167,15 +168,15 @@ void interactTileSpawn(int nAreaIndex, Player* pPlayer) {
 	int nRunesGained = 0;
 
 	if (nSpawnRate > 100 - ENEMY_YIELD) {
-		printf("BATTLE ENEMY\n");
+		openBattleScreen(nAreaIndex, pPlayer);
 	}
 
 	else {
 		nRunesGained = receiveRunes(nAreaIndex);
 		printf("YOU FOUND %d RUNES\n", nRunesGained);
 		pPlayer->nRunes = pPlayer->nRunes + nRunesGained;
+		pressEnter();
 	}
-	pressEnter();
 }
 
 void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails) {

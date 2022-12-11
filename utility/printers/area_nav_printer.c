@@ -1,15 +1,15 @@
 #include "area_nav_printer.h"
 
-void printAreaNav(Player* pPlayer) {
+void printAreaNav(Player sPlayer) {
 	int nLine;
 	int nOffset = (SCREEN_WIDTH - NAV_WIDTH) / 2;
 
 	for (nLine = 0; nLine < NAV_HEIGHT; nLine++) {
-		printAreaNavLine(nLine, nOffset, pPlayer);
+		printAreaNavLine(nLine, nOffset, sPlayer);
 	}
 }
 
-void printAreaNavLine(int nLine, int nOffset, Player* pPlayer) {
+void printAreaNavLine(int nLine, int nOffset, Player sPlayer) {
 	switch (nLine) {
 		case 0:
 			printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
@@ -22,7 +22,7 @@ void printAreaNavLine(int nLine, int nOffset, Player* pPlayer) {
 			break;
 
 		case 2:
-			printNameAndJobClass(nLine, pPlayer, nOffset);
+			printNameAndJobClass(nLine, sPlayer, nOffset);
 			break;
 
 		case 3:
@@ -35,7 +35,7 @@ void printAreaNavLine(int nLine, int nOffset, Player* pPlayer) {
 		case 10:
 		case 11:
 		case 12:
-			printAreaNavUI(nLine, pPlayer, nOffset);
+			printAreaNavUI(nLine, sPlayer, nOffset);
 			break;
 
 		case 13:
@@ -56,7 +56,7 @@ void printAreaNavEnd(int nLine, int nOffset) {
 		printf("╚");
 	}
 
-	printMultiple("═", 17);
+	printMultiple("═", SPRITE_WIDTH + 2);
 
 	if (nLine == 1) {
 		printf("╦");
@@ -86,38 +86,22 @@ void printAreaNavEnd(int nLine, int nOffset) {
 	printf("\n");
 }
 
-void printTopBottomSpriteBorders(int nLine) {
-	switch (nLine) {
-		case 2:
-			printf("│█");
-			printMultiple("▀", 15);
-			printf("█│ ");
-			break;
-
-		case 12:
-			printf("│█");
-			printMultiple("▄", 15);
-			printf("█│");
-			break;			
-	}
-}
-
-void printNameAndJobClass(int nLine, Player* pPlayer, int nOffset) {
+void printNameAndJobClass(int nLine, Player sPlayer, int nOffset) {
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
 	printf(" ");
 	printTopBottomSpriteBorders(nLine);
 
-	printf("%s", pPlayer->strPlayerName);
-	printMultiple(" ", 27 - strlen(pPlayer->strPlayerName));
+	printf("%s", sPlayer.strPlayerName);
+	printMultiple(" ", 27 - strlen(sPlayer.strPlayerName));
 	printf("│ ");
-	printf("%s", pPlayer->strPlayerJobClass);
-	printMultiple(" ", 18 - strlen(pPlayer->strPlayerJobClass));
+	printf("%s", sPlayer.strPlayerJobClass);
+	printMultiple(" ", 18 - strlen(sPlayer.strPlayerJobClass));
 	printf("│");
 	printf("\n");
 }
 
-void printAreaNavUI(int nLine, Player* pPlayer, int nOffset) {
-	printSpritePerLine(nLine, nOffset);
+void printAreaNavUI(int nLine, Player sPlayer, int nOffset) {
+	printPlayerSpritePerLineNav(nLine, nOffset);
 
 	if (nLine == 12) {
 		printTopBottomSpriteBorders(nLine);
@@ -125,10 +109,10 @@ void printAreaNavUI(int nLine, Player* pPlayer, int nOffset) {
 
 	printNavOptionsPerLine(nLine);
 
-	printPlayerStats(nLine, pPlayer);
+	printPlayerStats(nLine, sPlayer);
 }
 
-void printSpritePerLine(int nLine, int nOffset) {
+void printPlayerSpritePerLineNav(int nLine, int nOffset) {
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
 	printf(" ");
 
@@ -136,7 +120,7 @@ void printSpritePerLine(int nLine, int nOffset) {
 		printf("│█");
 	}
 
-	printSprite(nLine - 2);
+	printPlayerSprite(nLine - 2);
 
 	if (nLine == 3) {
 		printf("█├");
@@ -230,17 +214,17 @@ void printNavOptionsPerLine(int nLine) {
 	}
 }
 
-void printPlayerStats(int nLine, Player* pPlayer) {
+void printPlayerStats(int nLine, Player sPlayer) {
 	switch (nLine - 3) {
 		case 0:
 			printMultiple("─", 19);
-			printf("│");
+			printf("┤");
 			break;
 
 		case 1:
 			printMultiple(" ", 1);
 			printf("LEVEL: ");
-			printf("%-10d", pPlayer->nLevel);
+			printf("%-10d", sPlayer.nLevel);
 			printMultiple(" ", 1);
 			printf("│");
 			break;	
@@ -255,8 +239,8 @@ void printPlayerStats(int nLine, Player* pPlayer) {
 		case 3:
 			printMultiple(" ", 1);
 			printf("RUNES: ");
-			if (pPlayer->nRunes < 999999999) {
-				printf("%-9d ", pPlayer->nRunes);
+			if (sPlayer.nRunes < 999999999) {
+				printf("%-9d ", sPlayer.nRunes);
 			}
 			else {
 				printf("999999999+");
@@ -273,9 +257,8 @@ void printPlayerStats(int nLine, Player* pPlayer) {
 			break;	
 
 		case 6:
-			printMultiple(" ", 1);
-			printMultiple("█", 10);	
-			printMultiple(" ", 8);	
+			printPlayerHealthBar(sPlayer.sPlayerAreaDetails, 15);
+			printMultiple(" ", 2);	
 			printf("│");
 			break;	
 
@@ -287,29 +270,13 @@ void printPlayerStats(int nLine, Player* pPlayer) {
 			break;
 
 		case 9:
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 1);
-			printMultiple("█", 1);
-			printMultiple(" ", 3);
+			printPlayerPotions(sPlayer.nPotions); 
+			printMultiple(" ", 2);
 			printf("│");
 			break;
 	}
 	printf("\n");
 }
-
 
 
 /*
