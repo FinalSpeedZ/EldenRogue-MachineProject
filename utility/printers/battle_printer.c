@@ -2,27 +2,28 @@
 
 #include "../area_utility/battle_screen_helper.h"
 
-void printBattleDisplay(Player sPlayer, Enemy sEnemy, int nEnemyTurn) {
+void printBattleDisplay(Player sPlayer, Enemy sEnemy, int nEnemyTurn, int nBoss) {
 	int nLine;
 	int nOffset = (SCREEN_WIDTH - HEALTH_WIDTH - SPRITE_WIDTH) / 2;
 
 	for (nLine = 0; nLine <= SPRITE_HEIGHT + 4; nLine++) {
-		printEnemyBattleDisplayLine(nLine, nOffset + 15, sEnemy);
+		printEnemyBattleDisplayLine(nLine, nOffset + 15, sEnemy, nBoss);
 	}
 
 	for (nLine = 0; nLine <= SPRITE_HEIGHT + 4; nLine++) {
 		printPlayerBattleDisplayLine(nLine, nOffset - 20, sPlayer, sEnemy.nFinalAttack);
 	}
 
-	if (nEnemyTurn == 0) {
-		printf("\n");
+	printf("\n");
+
+	if (nEnemyTurn == 0 && sPlayer.sPlayerAreaDetails.nCurrentHealth != 0) {
 		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
 		printMultiple("─", HEALTH_WIDTH + SPRITE_WIDTH);
 		printf("\n");
 	}
 }
 
-void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy) {
+void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy, int nBoss) {
 	switch (nLine) {
 		case 1:
 			printEnemyBattleEnd(nLine, nOffset);
@@ -39,7 +40,7 @@ void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy) {
 		case 10:
 		case 11:
 		case 12:
-			printEnemyBattleUI(nLine, nOffset, sEnemy);
+			printEnemyBattleUI(nLine, nOffset, sEnemy, nBoss);
 			break;
 
 		case 13:
@@ -71,7 +72,7 @@ void printEnemyBattleEnd(int nLine, int nOffset) {
 	}
 }
 
-void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy) {
+void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy, int nBoss) {
 	if (nLine == 2) {
 		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset + HEALTH_WIDTH);
 		printTopBottomSpriteBorders(nLine);
@@ -82,7 +83,7 @@ void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy) {
 	}
 
 	if (nLine == 7) {
-		printEnemyHealthBar(nOffset, sEnemy);
+		printEnemyHealthBar(nOffset, sEnemy, nBoss);
 	}
 
 	if (nLine == 8) {
@@ -121,7 +122,7 @@ void printEnemySpritePerLineBattle(int nLine, int nOffset) {
 	}
 }
 
-void printEnemyHealthBar(int nOffset, Enemy sEnemy) {
+void printEnemyHealthBar(int nOffset, Enemy sEnemy, int nBoss) {
 	int nBars = HEALTH_WIDTH;
 	int nDamagedBars = 0;
 
@@ -131,24 +132,37 @@ void printEnemyHealthBar(int nOffset, Enemy sEnemy) {
 
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset - 1);
 
-	for (nDamagedBars = 0; nDamagedBars < nNumberOfDamageBars; nDamagedBars++) {
-		printf("░");
+
+	if (sEnemy.nCurrentHealth != 0) {
+		for (nDamagedBars = 0; nDamagedBars < nNumberOfDamageBars; nDamagedBars++) {
+			printf("░");
+		}
+
+		for (nBars = nDamagedBars; nBars < HEALTH_WIDTH; nBars++) {
+			if (sEnemy.nCurrentHealth >= sEnemy.nFinalHealth * 0.66) {
+				printf("█");
+			}
+
+			else if (sEnemy.nCurrentHealth <= sEnemy.nFinalHealth * 0.66 && 
+					 sEnemy.nCurrentHealth >= sEnemy.nFinalHealth * 0.33) {
+				printf("█");
+			}
+
+			else {
+				printf("█");
+			}
+		}
 	}
 
-	for (nBars = nDamagedBars; nBars < HEALTH_WIDTH; nBars++) {
-		if (sEnemy.nCurrentHealth >= sEnemy.nFinalHealth * 0.66) {
-			printf("█");
+	else {
+		if (nBoss == 0) {
+			printf("%50s", "ENEMY FELLED");
 		}
-
-		else if (sEnemy.nCurrentHealth <= sEnemy.nFinalHealth * 0.66 && 
-				 sEnemy.nCurrentHealth >= sEnemy.nFinalHealth * 0.33) {
-			printf("█");
-		}
-
 		else {
-			printf("█");
+			printf("%50s", "GREAT ENEMY FELLED");
 		}
 	}
+
 	printf(" ");
 }
 
@@ -236,7 +250,7 @@ void printPlayerBattleUI(int nLine, int nOffset, Player sPlayer, int nIncomingDa
 	}
 
 	if (nLine == 3) {
-		printIncomingDamage(nIncomingDamage);
+		printIncomingDamage(nIncomingDamage, sPlayer);
 	}
 
 	if (nLine == 5) {
@@ -268,9 +282,11 @@ void printPlayerNameJob(Player sPlayer) {
 	printf(" %s | %s", sPlayer.strPlayerName, sPlayer.strPlayerJobClass);	
 }
 
-void printIncomingDamage(int nIncomingDamage) {
-	printf(" INCOMING DAMAGE: ");
-	printf("%d", nIncomingDamage);
+void printIncomingDamage(int nIncomingDamage, Player sPlayer) {
+	if (sPlayer.sPlayerAreaDetails.nCurrentHealth != 0) {
+		printf(" INCOMING DAMAGE: ");
+		printf("%d", nIncomingDamage);
+	}
 }
 
 void printPlayerSpritePerLineBattle(int nLine) {
@@ -294,24 +310,32 @@ void printPlayerHealthBar(AreaDetails sPlayerAreaDetails, int nHealthBars) {
 	int nUndamagedBars = sPlayerAreaDetails.nCurrentHealth / fHealthPerBar;
 
 	printf(" ");
-	for (nBars = 0; nBars < nUndamagedBars; nBars++) {
-		if (sPlayerAreaDetails.nCurrentHealth >= sPlayerAreaDetails.nMaxHealth * 0.66) {
-			printf("█");
+
+	if (sPlayerAreaDetails.nCurrentHealth != 0) {
+		for (nBars = 0; nBars < nUndamagedBars; nBars++) {
+			if (sPlayerAreaDetails.nCurrentHealth >= sPlayerAreaDetails.nMaxHealth * 0.66) {
+				printf("█");
+			}
+
+			else if (sPlayerAreaDetails.nCurrentHealth <= sPlayerAreaDetails.nMaxHealth * 0.66 && 
+					 sPlayerAreaDetails.nCurrentHealth >= sPlayerAreaDetails.nMaxHealth * 0.33) {
+				printf("█");
+			}
+
+			else {
+				printf("█");
+			}
 		}
 
-		else if (sPlayerAreaDetails.nCurrentHealth <= sPlayerAreaDetails.nMaxHealth * 0.66 && 
-				 sPlayerAreaDetails.nCurrentHealth >= sPlayerAreaDetails.nMaxHealth * 0.33) {
-			printf("█");
-		}
-
-		else {
-			printf("█");
+		for (nDamagedBars = nBars; nDamagedBars < nHealthBars; nDamagedBars++) {
+			printf("░");
 		}
 	}
 
-	for (nDamagedBars = nBars; nDamagedBars < nHealthBars; nDamagedBars++) {
-		printf("░");
+	else {
+		printf("YOU DIED");
 	}
+
 	printf(" ");
 }
 
@@ -334,4 +358,22 @@ void printPlayerPotions(int nPotions) {
 	for (nUsedPotions = 0; nUsedPotions + nPotionCount <= DEFAULT_POTION_COUNT; nUsedPotions++) {
 		printf("░ ");
 	}
+}
+
+void printRunesLost() {
+	int nLine;
+	int nOffset = (SCREEN_WIDTH - SPRITE_WIDTH) / 2;
+
+	printf("\n");
+	for (nLine = 1; nLine <= SPRITE_HEIGHT - 1; nLine++) {
+		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
+		printLoseSprite(nLine);
+		printf("\n");
+	}
+
+	nOffset = (SCREEN_WIDTH - strlen("YOU LOST ALL YOUR RUNES! ") - 4) / 2;
+	printf("\n");
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
+
+	printf("║ YOU LOST ALL YOUR RUNES! ║\n\n");	
 }

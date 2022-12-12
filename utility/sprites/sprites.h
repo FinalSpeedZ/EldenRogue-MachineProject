@@ -9,4 +9,6 @@ void printEnemySprite(int nSpriteLine);
 
 void printTopBottomSpriteBorders(int nLine);
 
+void printRunes(int nLine);
+
 #endif

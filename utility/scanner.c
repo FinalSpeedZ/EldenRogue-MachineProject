@@ -56,6 +56,7 @@ void getNameInput(StringPlayerName strPlayerName) {
 
 	strncpy(strPlayerName, pTempPlayerName + nStart, PLAYER_NAME_LENGTH);
 
+	strPlayerName = strupr(strPlayerName);
 	free(pTempPlayerName);
 
 	strPlayerName[PLAYER_NAME_LENGTH] = '\0';

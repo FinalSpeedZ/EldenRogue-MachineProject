@@ -8,5 +8,6 @@ void findPlayerSpawn(AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 int receiveRunes(int nAreaIndex);
 
 int checkFastTravelStatus(int nAreaIndex, UnlockedAreas* pPlayerUnlockedAreas);
+void openNewFastTravel(int nAreaIndex, Player* pPlayer);
 
 #endif

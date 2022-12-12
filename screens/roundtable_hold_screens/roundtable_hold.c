@@ -10,14 +10,13 @@ void openRoundTableHold(Player sPlayer) {
 
 		printRoundtableHoldHeader();
 
-		//fix UI of this
 		printOneBoxedStats("RUNES", sPlayer.nRunes);
 		printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
 		printf("NAME: %s | %s\n", sPlayer.strPlayerName, sPlayer.strPlayerJobClass);
 		printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
 		printf("LEVEL: %d\n", sPlayer.nLevel);
 		printMultiple(" ", SCREEN_PADDING_LEFT + TWO_OPTION_PADDING);
-		printf("SHARDS: %d\n\n", sPlayer.nShards);
+		printShards(sPlayer.nShards);
 
 		printTwoOptions(1, "FAST TRAVEL", 2, "LEVEL UP");
 		printTwoOptions(3, "INVENTORY", 4, "SHOP");

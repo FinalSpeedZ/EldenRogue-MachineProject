@@ -251,8 +251,14 @@ void printPlayerStats(int nLine, Player sPlayer) {
 
 		case 5:
 			printMultiple(" ", 1);
-			printf("HEALTH");
-			printMultiple(" ", 12);
+			printf("HEALTH: ");
+			if (sPlayer.sPlayerAreaDetails.nCurrentHealth < 99999999) {
+				printf("%-8d ", sPlayer.sPlayerAreaDetails.nCurrentHealth);
+			}
+			else {
+				printf("99999999+");
+			}
+			printMultiple(" ", 1);
 			printf("│");
 			break;	
 

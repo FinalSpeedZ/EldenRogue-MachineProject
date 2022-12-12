@@ -279,3 +279,49 @@ int checkFastTravelStatus(int nAreaIndex, UnlockedAreas* pPlayerUnlockedAreas) {
 
 	return nUnlocked;
 }
+
+void openNewFastTravel(int nAreaIndex, Player* pPlayer) {
+	int nUnlocked = checkFastTravelStatus(nAreaIndex, &pPlayer->sPlayerUnlockedAreas);
+
+	switch (nAreaIndex) {
+		case STORMVEIL_CASTLE:
+			if (!nUnlocked) {
+				pPlayer->sPlayerUnlockedAreas.nStormveilFastTravel = 1;
+			}
+			break;
+
+		case RAYA_LUCARIA_ACADEMY:
+			if (!nUnlocked) {
+				pPlayer->sPlayerUnlockedAreas.nRayaLucariaFastTravel = 1;
+			}
+			break;
+
+		case REDMANE_CASTLE:
+			if (!nUnlocked) {
+				pPlayer->sPlayerUnlockedAreas.nRedmaneFastTravel = 1;
+			}
+			break;
+
+		case VOLCANO_MANOR:
+			if (!nUnlocked) {
+				pPlayer->sPlayerUnlockedAreas.nVolcanoFastTravel = 1;
+			}
+			break;
+
+		case LEYNDELL_ROYAL_CAPITAL:
+			if (!nUnlocked) {
+				pPlayer->sPlayerUnlockedAreas.nLeyndellFastTravel = 1;
+			}			
+			break;
+
+		case THE_ELDEN_THRONE:
+			if (!nUnlocked) {
+				pPlayer->sPlayerUnlockedAreas.nEldenThroneCredits = 1;
+			}	
+			break;	
+	}
+
+	pPlayer->nShards = pPlayer->sPlayerUnlockedAreas.nStormveilFastTravel + pPlayer->sPlayerUnlockedAreas.nRayaLucariaFastTravel +
+	 				   pPlayer->sPlayerUnlockedAreas.nRedmaneFastTravel + pPlayer->sPlayerUnlockedAreas.nVolcanoFastTravel +
+	 				   pPlayer->sPlayerUnlockedAreas.nLeyndellFastTravel + pPlayer->sPlayerUnlockedAreas.nEldenThroneCredits;
+}

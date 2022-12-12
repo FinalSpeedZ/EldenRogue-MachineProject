@@ -86,7 +86,7 @@ struct floorTag {
 	int nRows;
 	int nColumns;
 
-	int** pFloorBoard;
+	int** pFloorBoardArray;
 	Door** pAreaDoorArray;
 };
 typedef struct floorTag AreaFloor;

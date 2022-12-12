@@ -28,7 +28,18 @@ void printOneBoxedStats(char strLabel[], int nValue) {
 	printf("┘\n\n");
 }
 
+void printShards(int nShards) {
+	int nPrintShard; 
+	int nMissingShard;
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                            ROUNDTABLE INVENTORY                         *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	printf("SHARDS: ");
+	for (nPrintShard = 0; nPrintShard < nShards; nPrintShard++) {
+		printf("█ ");
+	}
+
+	for (nMissingShard = nPrintShard; nMissingShard < 6; nMissingShard++) {
+		printf("░ ");
+	}
+
+	printf("\n");
+}

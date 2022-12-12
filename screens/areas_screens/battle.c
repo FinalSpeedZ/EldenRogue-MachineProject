@@ -1,26 +1,23 @@
 #include "battle.h"
 
-void openBattleScreen(int nAreaIndex, Player* pPlayer) {
+int openBattleScreen(int nAreaIndex, Player* pPlayer, Enemy* pEnemy, int nBoss) {
 	int nMoveType = 1;
 	int nAttackType = 0;
 	int nShowAttackTypes = 0;
 	int nBattleFinished = 0;
 	int nEnemyTurn = 0;
-
-	Enemy sEnemy;
-
-	getEnemyStats(nAreaIndex, &sEnemy);	
+	int nSuccessfulDodge = 0;
 
 	do {
-		checkGameOver(*pPlayer, sEnemy, &nBattleFinished);
+		checkBattleOver(*pPlayer, *pEnemy, &nBattleFinished);
 
 		system("cls");
 
 		printBattleHeader();
 
-		printBattleDisplay(*pPlayer, sEnemy, nEnemyTurn);
+		printBattleDisplay(*pPlayer, *pEnemy, nEnemyTurn, nBoss);
 
-		if (!nEnemyTurn) {
+		if (!nEnemyTurn && !nBattleFinished) {
 			if (!nShowAttackTypes) {
 				printTwoOptions(1, "ATTACK", 2, "DODGE");
 				printCenterOption(3, "DRINK POTION");
@@ -33,9 +30,9 @@ void openBattleScreen(int nAreaIndex, Player* pPlayer) {
 		}
 
 		printFooter();
-		printInputDivider();
 
-		if (!nEnemyTurn) {
+		if (!nEnemyTurn && !nBattleFinished) {
+			printInputDivider();
 			if (!nShowAttackTypes) {
 				getIntInput(&nMoveType, 1, 3);
 			}
@@ -44,21 +41,39 @@ void openBattleScreen(int nAreaIndex, Player* pPlayer) {
 			}
 		}
 
-		processBattleScreenInput(nAreaIndex, nMoveType, nAttackType, pPlayer, &sEnemy, 
-				 				 &nEnemyTurn, nBattleFinished, &nShowAttackTypes);
+		if (!nBattleFinished) {
+			processBattleScreenInput(nAreaIndex, nMoveType, nAttackType, pPlayer, pEnemy, 
+				 					 &nEnemyTurn, nBattleFinished, &nShowAttackTypes, &nSuccessfulDodge);
+		}
+
 	} while (!nBattleFinished);
 
-	pressEnter();
+	Sleep(3000);
+
+	if (nBattleFinished == 1) { 
+		openLostScreen(pPlayer);
+		return 0;
+	}
+
+	else {
+		openWinScreen(pPlayer, *pEnemy, nBoss);
+		return 1;
+	}
 }
 
 void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Player* pPlayer, Enemy* pEnemy, 
-							  int* pEnemyTurn, int nBattleFinished, int* pShowAttackTypes) {
-	int nSuccessfulDodge = 0;
+							  int* pEnemyTurn, int nBattleFinished, int* pShowAttackTypes, int* pSuccessfulDodge) {
 
 	if (*pEnemyTurn) {
-		enemyAttack(pPlayer, *pEnemy);
+		if (*pSuccessfulDodge == 0) {
+			enemyAttack(pPlayer, *pEnemy);
+		}
+		else {
+			printMessage("PROMPT", "YOU DODGED THE ENEMY'S ATTACK");
+			pressEnter();
+		}
 		getIncomingDmg(nAreaIndex, pEnemy);
-		Sleep(500);
+		Sleep(2000);
 		*pShowAttackTypes = 0;	
 		*pEnemyTurn = 0;	
 	}
@@ -70,7 +85,7 @@ void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Pl
 				break;
 
 			case 2:
-				nSuccessfulDodge = useDodge(*pPlayer);
+				*pSuccessfulDodge = useDodge(*pPlayer);
 				*pEnemyTurn = 1;
 				pressEnter();
 				break;
@@ -109,5 +124,35 @@ void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Pl
 	}
 }
 
+void openWinScreen(Player* pPlayer, Enemy sEnemy, int nBoss) {
+	int nRunesGained = computeGainedRunes(sEnemy, nBoss);
 
+	system("cls");
+
+	printBattleHeader();
+
+	printRunesGained(*pPlayer, nRunesGained);
+
+	pPlayer->nRunes += nRunesGained;
+
+	printFooter();
+	printInputDivider();
+
+	pressEnter();
+}
+
+void openLostScreen(Player *pPlayer) {
+	system("cls");
+
+	printBattleHeader();
+
+	printRunesLost();
+
+	resetRunes(&pPlayer->nRunes);
+
+	printFooter();
+	printInputDivider();
+
+	pressEnter();	
+}
 

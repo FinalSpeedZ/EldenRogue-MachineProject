@@ -7,6 +7,8 @@ void openFastTravel(Player* pPlayer) {
 	int nInput = 0;
 	
 	do {
+		initializePlayerHealth(&pPlayer->sPlayerAreaDetails);
+
 		system("cls");
 
 		printFastTravelHeader();
