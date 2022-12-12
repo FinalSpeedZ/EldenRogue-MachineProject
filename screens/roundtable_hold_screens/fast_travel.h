@@ -9,7 +9,7 @@
 #define THE_ELDEN_THRONE       6
 
 void openFastTravel(Player* pPlayer);
-void processFastTravelInput(int nInput, Player* pPlayer);
+void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTravel);
 void openFastTravelToFloor(int nAreaIndex, Player* pPlayer);
 
 #endif 
