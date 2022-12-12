@@ -101,7 +101,7 @@ void loadVagabondStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nHealth       = 15;
 	pPlayer->sPlayerStats.nEndurance    = 11;
 	pPlayer->sPlayerStats.nDexterity    = 13;
-	pPlayer->sPlayerStats.nStrength     = 1000;
+	pPlayer->sPlayerStats.nStrength     = 14;
 	pPlayer->sPlayerStats.nIntelligence = 9;
 	pPlayer->sPlayerStats.nFaith        = 9;
 }
