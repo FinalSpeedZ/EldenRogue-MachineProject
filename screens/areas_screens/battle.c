@@ -63,17 +63,18 @@ int openBattleScreen(int nAreaIndex, Player* pPlayer, Enemy* pEnemy, int nBoss) 
 
 void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Player* pPlayer, Enemy* pEnemy, 
 							  int* pEnemyTurn, int nBattleFinished, int* pShowAttackTypes, int* pSuccessfulDodge) {
+	int nHealthGained;
 
 	if (*pEnemyTurn) {
 		if (*pSuccessfulDodge == 0) {
 			enemyAttack(pPlayer, *pEnemy);
+			printBattleDmgPrompter(pEnemy->pEnemyName, pEnemy->nFinalAttack);
 		}
 		else {
 			printMessage("PROMPT", "YOU DODGED THE ENEMY'S ATTACK");
-			pressEnter();
 		}
 		getIncomingDmg(nAreaIndex, pEnemy);
-		Sleep(2000);
+		pressEnter();
 		*pShowAttackTypes = 0;	
 		*pEnemyTurn = 0;	
 	}
@@ -91,7 +92,14 @@ void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Pl
 				break;
 
 			case 3:
-				drinkPotion(pPlayer);
+				nHealthGained = healthToBeAdded(pPlayer);
+				drinkPotion(pPlayer, nHealthGained);
+				if (nHealthGained != 0) {
+					printBattleHealPrompter(nHealthGained);
+				}
+				else {
+					printMessage("PROMPT", "YOU ARE FULLY HEALED");
+				}
 				pressEnter();
 				break;
 		}
@@ -105,18 +113,21 @@ void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Pl
 
 			case 1:
 				usePhysicalAttack(*pPlayer, pEnemy);
+				printBattleDmgPrompter("YOU", getPlayerPhysicalDmg(*pPlayer, *pEnemy));
 				*pEnemyTurn = 1;
 				pressEnter();
 				break;
 
 			case 2:
 				useSorceryAttack(*pPlayer, pEnemy);
+				printBattleDmgPrompter("YOU", getPlayerSorceryDmg(*pPlayer, *pEnemy));
 				*pEnemyTurn = 1;
 				pressEnter();
 				break;
 
 			case 3:
 				useIncantationAttack(*pPlayer, pEnemy);
+				printBattleDmgPrompter("YOU", getPlayerIncantationDmg(*pPlayer, *pEnemy));
 				*pEnemyTurn = 1;
 				pressEnter();
 				break;			

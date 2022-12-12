@@ -347,23 +347,27 @@ int useDodge(Player sPlayer) {
 	return nSuccess;
 }
 
-void drinkPotion(Player* pPlayer) {
+int healthToBeAdded(Player* pPlayer) {
 	float fHealingRate = randomNumberBetween(50, 25) / (float) 100;
 
-	int nAddHealth = fHealingRate * pPlayer->sPlayerAreaDetails.nMaxHealth;
+	int nAddHealth = fHealingRate * pPlayer->sPlayerAreaDetails.nMaxHealth; 
 
-
-	if (pPlayer->nPotions > 0) {
-		if (pPlayer->sPlayerAreaDetails.nCurrentHealth < pPlayer->sPlayerAreaDetails.nMaxHealth) {
-			pPlayer->sPlayerAreaDetails.nCurrentHealth += nAddHealth;
-
-			if (pPlayer->sPlayerAreaDetails.nCurrentHealth > pPlayer->sPlayerAreaDetails.nMaxHealth) {
-				pPlayer->sPlayerAreaDetails.nCurrentHealth = pPlayer->sPlayerAreaDetails.nMaxHealth;
-			}
-
-			pPlayer->nPotions--;
-		}	
+	if (pPlayer->sPlayerAreaDetails.nCurrentHealth + nAddHealth > pPlayer->sPlayerAreaDetails.nMaxHealth) {
+		nAddHealth = pPlayer->sPlayerAreaDetails.nMaxHealth - pPlayer->sPlayerAreaDetails.nCurrentHealth;
 	}
+
+	return nAddHealth;
+}
+
+void drinkPotion(Player* pPlayer, int nHealthGained) {
+	int nAddHealth = nHealthGained;
+
+	if (pPlayer->nPotions > 0 && nAddHealth != 0) {
+		
+		pPlayer->sPlayerAreaDetails.nCurrentHealth += nAddHealth;
+
+		pPlayer->nPotions--;
+	}	
 }
 
 void enemyAttack(Player* pPlayer, Enemy sEnemy) {

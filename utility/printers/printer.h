@@ -21,6 +21,8 @@ void printFooter();
 
 void printMessage(char strMessageType[], char strMessage[]);
 void printInvalidInputMsg(char strErrorMessage[]);
+void printBattleDmgPrompter(char strWhoDealtDammage[], int nDamageDealt);
+void printBattleHealPrompter(int nHealthHealed);
 
 void printTwoOptions(int nNumberOption1, char strText1[], 
 		 		     int nNumberOption2, char strText2[]);

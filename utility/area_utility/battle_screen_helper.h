@@ -29,7 +29,8 @@ void useIncantationAttack(Player sPlayer, Enemy* pEnemy);
 float getDodgeRate(Player sPlayer);
 int useDodge(Player sPlayer);
 
-void drinkPotion(Player* pPlayer);
+int healthToBeAdded(Player* pPlayer);
+void drinkPotion(Player* pPlayer, int nHealthGained);
 
 void enemyAttack(Player* pPlayer, Enemy sEnemy);
 void getIncomingDmg(int nAreaIndex, Enemy* pEnemy);

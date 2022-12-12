@@ -66,6 +66,18 @@ void printInvalidInputMsg(char strErrorMessage[]) {
 	printf("%s\n\n", strErrorMessage);
 }
 
+void printBattleDmgPrompter(char strWhoDealtDammage[], int nDamageDealt) {
+	printf("\n");
+	printMultiple(" ", SCREEN_PADDING_LEFT);
+	printf("[PROMPT]: %s DEALT %d DAMAGE\n", strWhoDealtDammage, nDamageDealt);
+}
+
+void printBattleHealPrompter(int nHealthHealed) {
+	printf("\n");
+	printMultiple(" ", SCREEN_PADDING_LEFT);
+	printf("[PROMPT]: YOU GAINED %d HEALTH\n", nHealthHealed);	
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                            OPTIONS PRINTERS                             *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

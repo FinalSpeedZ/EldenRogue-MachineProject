@@ -9,6 +9,7 @@ void openFastTravel(Player* pPlayer) {
 	
 	do {
 		initializePlayerHealth(&pPlayer->sPlayerAreaDetails);
+		resetPotions(&pPlayer->nPotions);
 
 		system("cls");
 
