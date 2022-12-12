@@ -15,7 +15,8 @@
 #include "utility/printers/screen_headers.c"
 #include "utility/printers/area_printer.c"
 #include "utility/printers/battle_printer.c"
-#include "utility/printers/area_nav_printer.c"
+#include "utility/printers/dialogue_printer.c"
+#include "utility/printers/player_details_box.c"
 
 #include "utility/area_utility/area_boards.c"
 #include "utility/area_utility/area_doors.c"

@@ -7,6 +7,7 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E',
 						      'w', 'a', 's', 'd', 'e'};
 	int nLeaveArea = 0;
+	int nDialogue;
 
 	int nNumberOfFloors = determineNumberOfFloors(nAreaIndex);
 	int nNumberOfDoors = determineNumberOfDoors(nAreaIndex);
@@ -41,7 +42,7 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
 
-		printAreaNav(*pPlayer);
+		printAreaNav(*pPlayer, 1);
 		printFooter();
 		printInputDivider();
 
