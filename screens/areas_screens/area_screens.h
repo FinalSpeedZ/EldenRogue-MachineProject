@@ -11,13 +11,14 @@
 
 void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer);
 
-void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea);
+void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, 
+						    int* pPrompt, int* pTileSpawnType);
 
 void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDetails);
 
-void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea);
+void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea, int *pPrompt, int* pTileSpawnType);
 
-void interactTileSpawn(int nAreaIndex, Player* pPlayer, int* pLeaveArea);
+void interactTileSpawn(AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, int* pPrompt, int* pTileSpawnType);
 
 void interactTileDoor(AreaFloor* pAreaFloor, AreaDetails* pPlayerAreaDetails);
 

@@ -1,19 +1,18 @@
 #include "player_details_box.h"
 
-void printAreaNav(Player sPlayer, int nDialogue) {
+
+void printAreaNav(Player sPlayer, int nPrompt) {
 	int nLine;
 	int nOffset = (SCREEN_WIDTH - NAV_WIDTH) / 2;
 
 	for (nLine = 0; nLine < NAV_HEIGHT; nLine++) {
-		printAreaNavLine(nLine, nOffset, sPlayer, nDialogue);
+		printAreaNavLine(nLine, nOffset, sPlayer, nPrompt);
 	}
 }
 
-void printAreaNavLine(int nLine, int nOffset, Player sPlayer, int nDialogue) {
+void printAreaNavLine(int nLine, int nOffset, Player sPlayer, int nPrompt) {
 	switch (nLine) {
 		case 0:
-			printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
-			printMultiple("─", NAV_WIDTH);
 			printf("\n");
 			break;
 
@@ -35,7 +34,7 @@ void printAreaNavLine(int nLine, int nOffset, Player sPlayer, int nDialogue) {
 		case 10:
 		case 11:
 		case 12:
-			printAreaNavUI(nLine, sPlayer, nOffset, nDialogue);
+			printAreaNavUI(nLine, sPlayer, nOffset, nPrompt);
 			break;
 
 		case 13:
@@ -100,15 +99,15 @@ void printNameAndJobClass(int nLine, Player sPlayer, int nOffset) {
 	printf("\n");
 }
 
-void printAreaNavUI(int nLine, Player sPlayer, int nOffset, int nDialogue) {
+void printAreaNavUI(int nLine, Player sPlayer, int nOffset, int nPrompt) {
 	printPlayerSpritePerLineNav(nLine, nOffset);
 
 	if (nLine == 12) {
 		printTopBottomSpriteBorders(nLine);
 	}
 
-	if (nDialogue) {
-		printDialoguePerLine(nLine);
+	if (nPrompt) {
+		printTileDialoguePerLine(nLine, nPrompt);
 	}
 	else {
 		printNavOptionsPerLine(nLine);
@@ -289,7 +288,7 @@ void printPlayerStats(int nLine, Player sPlayer) {
 	printf("\n");
 }
 
-void printDialoguePerLine(int nLine) {
+void printTileDialoguePerLine(int nLine, int nPrompt) {
 	StringFullDialogue strFullDialogue;
 	switch (nLine - 3) {
 		case 0:
@@ -298,8 +297,20 @@ void printDialoguePerLine(int nLine) {
 			break;
 
 		default:
-			loadDialogueEmptyTile(strFullDialogue); 
-      		printDialogueLineText(nLine - 4, strFullDialogue);
+			switch (nPrompt) {
+				case EMPTY_TILE_PROMPT:
+					loadDialogueEmptyTile(strFullDialogue); 
+					break;
+
+				case TREASURE_TILE_PROMPT:
+					loadDialogueTreasureTile(strFullDialogue);
+					break;
+
+				case ENEMY_TILE_PROMPT:
+					loadDialogueEnemyTile(strFullDialogue);
+					break;
+			}
+      		printTileDialogueLineText(nLine - 4, strFullDialogue);
 
      			printf("│");
 	}

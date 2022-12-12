@@ -18,11 +18,36 @@
 #define LEYNDELL_ROYAL_CAPITAL 5
 #define THE_ELDEN_THRONE       6
 
+#define TILE_EMPTY       0
+#define TILE_PLAYER      1
+#define TILE_DOOR_UP     2
+#define TILE_DOOR_DOWN   3
+#define TILE_DOOR_LEFT   4
+#define TILE_DOOR_RIGHT  5
+#define TILE_SPAWN       6
+#define TILE_BOSS        7
+#define TILE_FAST_TRAVEL 8
+#define TILE_CREDITS     9
+#define TILE_INVALID     10
+
+#define TREASURE_SPAWN    1
+#define ENEMY_SPAWN       2
+#define NO_SPAWN_YET      3
+
 #define ENEMY_YIELD    75
-#define TREASURE_YEILD 25
+#define TREASURE_YIELD 25
 
 #define LEVEL_MAX  50
 
 #define DEFAULT_POTION_COUNT 8
+
+#define NO_PROMPT             0
+#define EMPTY_TILE_PROMPT     1
+#define TREASURE_TILE_PROMPT  2
+#define ENEMY_TILE_PROMPT     3
+#define BOSS_TILE_PROMPT      4
+#define LOCKED_TILE_PROMPT    5
+
+
 
 #endif

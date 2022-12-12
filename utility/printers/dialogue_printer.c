@@ -3,7 +3,7 @@
 void loadDialogueEmptyTile(StringFullDialogue strFullDialogue) {
 	int nLength;
 
-	char strDialogue1[] = "I am Karen of the Elite Four. You're a challenger? How amusing. I love Dark-type";
+	char strDialogue1[] = "Hmmm... This seems to be an empty tile. Let's keep going!";
 
 	strcpy(strFullDialogue, strDialogue1);
 
@@ -12,7 +12,31 @@ void loadDialogueEmptyTile(StringFullDialogue strFullDialogue) {
 	}
 }
 
-void printDialogueLineText(int nDialogueLine, StringFullDialogue strFullDialogue) {
+void loadDialogueTreasureTile(StringFullDialogue strFullDialogue) {
+	int nLength;
+
+	char strDialogue1[] = "Oh look there! Somebody left a treasure for us to find!";
+
+	strcpy(strFullDialogue, strDialogue1);
+
+	for (nLength = strlen(strFullDialogue); nLength < DIALOGUE_MAX_LENGTH; nLength++) {
+		strcat(strFullDialogue, " ");
+	}
+}
+
+void loadDialogueEnemyTile(StringFullDialogue strFullDialogue) {
+	int nLength;
+
+	char strDialogue1[] = "Oops... I think we were spotted by something or should I say someone...";
+
+	strcpy(strFullDialogue, strDialogue1);
+
+	for (nLength = strlen(strFullDialogue); nLength < DIALOGUE_MAX_LENGTH; nLength++) {
+		strcat(strFullDialogue, " ");
+	}
+}
+
+void printTileDialogueLineText(int nDialogueLine, StringFullDialogue strFullDialogue) {
 	char strSingleLine[DIALOGUE_PAGE_LINE_MAX_LENGTH + 1];
 
 	int nLength;

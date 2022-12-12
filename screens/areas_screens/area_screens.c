@@ -7,7 +7,9 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E',
 						      'w', 'a', 's', 'd', 'e'};
 	int nLeaveArea = 0;
-	int nDialogue;
+
+	int nPrompt = NO_PROMPT;
+	int nTileSpawnType = NO_SPAWN_YET;
 
 	int nNumberOfFloors = determineNumberOfFloors(nAreaIndex);
 	int nNumberOfDoors = determineNumberOfDoors(nAreaIndex);
@@ -42,12 +44,14 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
 
-		printAreaNav(*pPlayer, 1);
+		printAreaNav(*pPlayer, nPrompt);
 		printFooter();
-		printInputDivider();
 
-		getCharAreaInput(&cInput, aPlayerCommands, 10);
-		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea);
+		if (nPrompt == NO_PROMPT || nPrompt == EMPTY_TILE_PROMPT || nPrompt == LOCKED_TILE_PROMPT) {
+			printInputDivider();
+			getCharAreaInput(&cInput, aPlayerCommands, 10);
+		}
+		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea, &nPrompt, &nTileSpawnType);
 	} while (!nLeaveArea);
 
 	for (nArrayIndex = nNumberOfFloors - 1; nArrayIndex >= 0; nArrayIndex--) {
@@ -64,31 +68,37 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	}
 }
 
-void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea) {
+void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, 
+						    int* pPrompt, int* pTileSpawnType) {
 	switch(cInput) {
 		case 'W':
 		case 'w':
 			movePlayer(UP, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			*pPrompt = NO_PROMPT;
 			break;
 
 		case 'A':
 		case 'a':
 			movePlayer(LEFT, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			*pPrompt = NO_PROMPT;
 			break;
 
 		case 'S':
 		case 's':
 			movePlayer(DOWN, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			*pPrompt = NO_PROMPT;
 			break;
 
 		case 'D':
 		case 'd':
 			movePlayer(RIGHT, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			*pPrompt = NO_PROMPT;
 			break;
 
 		case 'E':
 		case 'e':
-			interactTile(pAreaFloor, pPlayer, pLeaveArea);
+			interactTile(pAreaFloor, pPlayer, pLeaveArea, pPrompt, pTileSpawnType);
+			break;
 	}
 }
 
@@ -127,15 +137,15 @@ void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDe
 	free(pFloor);
 }
 
-void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
+void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea, int *pPrompt, int* pTileSpawnType) {
 	int nTileType = *(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
 					pPlayer->sPlayerAreaDetails.nColumnLocation);
 	int nResult;
-
 	Enemy sEnemy;
 
 	switch (nTileType) {
 		case TILE_EMPTY:
+			*pPrompt = 1;
 			break;
 			
 		case TILE_DOOR_UP:
@@ -146,9 +156,7 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 			break;
 
 		case TILE_SPAWN:
-			interactTileSpawn(pAreaFloor->nAreaIndex, pPlayer, pLeaveArea);
-			*(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
-			pPlayer->sPlayerAreaDetails.nColumnLocation) = TILE_EMPTY;
+			interactTileSpawn(pAreaFloor, pPlayer, pLeaveArea, pPrompt, pTileSpawnType);
 			break;
 
 		case TILE_BOSS:
@@ -175,7 +183,6 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 
 			break;
 
-
 		case TILE_FAST_TRAVEL:
 		case TILE_CREDITS:
 			if (pAreaFloor->nFloorNumber != 1 && checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
@@ -189,24 +196,54 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea) {
 	}
 }
 
-void interactTileSpawn(int nAreaIndex, Player* pPlayer, int* pLeaveArea) {
-	int nSpawnRate = randomNumberBetween(100, 1);
+void interactTileSpawn(AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, int* pPrompt, int* pTileSpawnType) {
+	int nSpawnRate;
 	int nRunesGained = 0;
 	int nResult;
 	Enemy sEnemy;
 
-	if (nSpawnRate > 100 - ENEMY_YIELD) {
-		openEnemySpawn(nAreaIndex, pPlayer, &sEnemy, NORMAL_BATTLE, 0);
-		nResult = openBattleScreen(nAreaIndex, pPlayer, &sEnemy, NORMAL_BATTLE);
+	if (*pTileSpawnType == NO_SPAWN_YET) {
+		nSpawnRate = randomNumberBetween(100, 1);
+		printf("%d\n", nSpawnRate);
+		pressEnter();
+	}
+
+	if (*pTileSpawnType == ENEMY_SPAWN) {
+		pressEnter();
+		openEnemySpawn(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, NORMAL_BATTLE, 0);
+		nResult = openBattleScreen(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, NORMAL_BATTLE);
 		if (nResult == 0) {
 			*pLeaveArea = 1;
 		}
+
+		*pPrompt = EMPTY_TILE_PROMPT;
+		*(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
+		pPlayer->sPlayerAreaDetails.nColumnLocation) = TILE_EMPTY;
+		*pTileSpawnType = NO_SPAWN_YET;
 	}
 
-	else {
-		nRunesGained = receiveRunes(nAreaIndex);
- 		openTreasureSpawn(nAreaIndex, *pPlayer, nRunesGained);
+	if (*pTileSpawnType == TREASURE_SPAWN) {
+		pressEnter();
+		nRunesGained = receiveRunes(pAreaFloor->nAreaIndex);
+ 		openTreasureSpawn(pAreaFloor->nAreaIndex, *pPlayer, nRunesGained);
  		pPlayer->nRunes += nRunesGained;
+
+ 		*pPrompt = EMPTY_TILE_PROMPT;
+ 		*(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
+		pPlayer->sPlayerAreaDetails.nColumnLocation) = TILE_EMPTY;
+		*pTileSpawnType = NO_SPAWN_YET;	
+	}
+	
+	// nSpawnRate <= 75; 1 - 75					
+	if ((nSpawnRate <= ENEMY_YIELD) && (*pPrompt == NO_PROMPT)) {
+		*pPrompt = ENEMY_TILE_PROMPT;
+		*pTileSpawnType = ENEMY_SPAWN;
+	}			
+	
+	// nSpawnRate <= 75; 76 - 100						 	
+	else if ((nSpawnRate > 100 - TREASURE_YIELD) && (*pPrompt == NO_PROMPT)) {
+		*pPrompt = TREASURE_TILE_PROMPT;
+		*pTileSpawnType = TREASURE_SPAWN;
 	}
 }
 
