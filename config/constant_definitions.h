@@ -11,6 +11,13 @@
 #define ASTROLOGER 5
 #define PROPHET    6
 
+#define FAST_TRAVEL   1
+#define LEVEL_UP      2
+#define INVENTORY     3
+#define SHOP          4
+#define SAVE          5
+#define QUIT_GAME     0
+
 #define STORMVEIL_CASTLE       1
 #define RAYA_LUCARIA_ACADEMY   2
 #define REDMANE_CASTLE         3
@@ -41,13 +48,18 @@
 
 #define DEFAULT_POTION_COUNT 8
 
-#define NO_PROMPT                0
-#define EMPTY_TILE_PROMPT        1
-#define TREASURE_TILE_PROMPT     2
-#define ENEMY_TILE_PROMPT        3
-#define BOSS_TILE_PROMPT         4
-#define LOCKED_TILE_PROMPT       5
-#define NEW_UNLOCKED_TILE_PROMPT 6
+#define NO_PROMPT                      0
+#define EMPTY_TILE_PROMPT              1
+#define TREASURE_TILE_PROMPT           2
+#define ENEMY_TILE_PROMPT              3
+#define BOSS_TILE_PROMPT               4
+#define LOCKED_TILE_PROMPT             5
+#define NEW_UNLOCKED_TILE_PROMPT       6
+#define FINISHED_ELDEN_THRONE_PROMPT   7
+
+#define RH_FAST_TRAVEL_PROMPT          8
+#define RH_FAST_TRAVEL_LOCKED_PROMPT   9
+
 
 
 

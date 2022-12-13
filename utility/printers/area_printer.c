@@ -323,17 +323,17 @@ void printBattlingAgainst(int nAreaIndex, Enemy* pEnemy, int nBoss, int nEldenTh
 
 	printf("\n");
 
-	for (nLine = 0; nLine < SPRITE_HEIGHT; nLine++) {
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);		
-		printEnemySprite(nLine + 1);
-		printf("\n");
-	}
-
 	if (nBoss == 0) {
 		setEnemyStats(nAreaIndex, pEnemy);
 	}
 	else {
 		setBossStats(nAreaIndex, pEnemy, nEldenThroneBossNum);
+	}
+
+	for (nLine = 0; nLine < SPRITE_HEIGHT; nLine++) {
+		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);		
+		printEnemySprite(nLine + 1, nAreaIndex, *pEnemy);
+		printf("\n");
 	}
 
 	nLength = strlen(pEnemy->pEnemyName);
@@ -355,8 +355,3 @@ void printBattlingAgainst(int nAreaIndex, Enemy* pEnemy, int nBoss, int nEldenTh
 	printMultiple("─", strlen("BATTLING ") + nLength - 3);	
 	printf("\n\n");
 }
-
-
-
-
-

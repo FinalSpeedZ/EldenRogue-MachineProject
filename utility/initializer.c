@@ -26,7 +26,7 @@ void initializeJobClassStats(Player* pPlayer) {
 }
 
 void resetRunes(int* pRunes) {
-	*pRunes = 0;
+	*pRunes = 1000;
 }
 
 void initializeShards(Player* pPlayer) {
@@ -36,7 +36,7 @@ void initializeShards(Player* pPlayer) {
 }
 
 void resetPotions(int* pPotions) {
-	*pPotions = 8;
+	*pPotions = DEFAULT_POTION_COUNT;
 }
 
 void initializeAreaDetails(AreaDetails* pPlayerAreaDetails) {
@@ -54,6 +54,6 @@ void initializeUnlockedAreas(UnlockedAreas* pPlayerUnlockedAreas) {
 }
 
 void initializePlayerHealth(AreaDetails* pPlayerAreaDetails) {
-	pPlayerAreaDetails->nCurrentHealth = 1000;
-	pPlayerAreaDetails->nMaxHealth = 1000;
+	pPlayerAreaDetails->nCurrentHealth = 30;
+	pPlayerAreaDetails->nMaxHealth = 30;
 }

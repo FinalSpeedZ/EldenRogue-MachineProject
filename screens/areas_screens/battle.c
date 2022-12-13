@@ -15,7 +15,7 @@ int openBattleScreen(int nAreaIndex, Player* pPlayer, Enemy* pEnemy, int nBoss) 
 
 		printBattleHeader();
 
-		printBattleDisplay(*pPlayer, *pEnemy, nEnemyTurn, nBoss);
+		printBattleDisplay(*pPlayer, *pEnemy, nAreaIndex, nEnemyTurn, nBoss);
 
 		if (!nEnemyTurn && !nBattleFinished) {
 			if (!nShowAttackTypes) {

@@ -1,51 +1,6 @@
 #include "player_details_box.h"
 
-
-void printAreaNav(Player sPlayer, int nPrompt) {
-	int nLine;
-	int nOffset = (SCREEN_WIDTH - NAV_WIDTH) / 2;
-	int nDialogueNum = randomNumberBetween(5, 1);
-
-	for (nLine = 0; nLine < NAV_HEIGHT; nLine++) {
-		printAreaNavLine(nLine, nOffset, sPlayer, nPrompt, nDialogueNum);
-	}
-}
-
-void printAreaNavLine(int nLine, int nOffset, Player sPlayer, int nPrompt, int nDialogueNum) {
-	switch (nLine) {
-		case 0:
-			printf("\n");
-			break;
-
-		case 1:
-			printAreaNavEnd(nLine, nOffset);
-			break;
-
-		case 2:
-			printNameAndJobClass(nLine, sPlayer, nOffset);
-			break;
-
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-		case 10:
-		case 11:
-		case 12:
-			printAreaNavUI(nLine, sPlayer, nOffset, nPrompt, nDialogueNum);
-			break;
-
-		case 13:
-			printAreaNavEnd(nLine, nOffset);
-			printf("\n");
-			break;
-	}
-}
-
-void printAreaNavEnd(int nLine, int nOffset) {
+void printNavEnd(int nLine, int nOffset) {
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
 	printf(" ");
 
@@ -86,6 +41,189 @@ void printAreaNavEnd(int nLine, int nOffset) {
 	printf("\n");
 }
 
+void printRoundtableNav(Player sPlayer, int nPrompt) {
+	int nLine;
+	int nOffset = (SCREEN_WIDTH - NAV_WIDTH) / 2;
+	int nDialogueNum = randomNumberBetween(5, 1);
+
+	for (nLine = 0; nLine < NAV_HEIGHT; nLine++) {
+		printRoundtableNavLine(nLine, nOffset, sPlayer, nPrompt, nDialogueNum);
+	}
+}
+
+void printRoundtableNavLine(int nLine, int nOffset, Player sPlayer, int nPrompt, int nDialogueNum) {
+	switch (nLine) {
+		case 0:
+			printf("\n");
+			break;
+
+		case 1:
+			printNavEnd(nLine, nOffset);
+			break;
+
+		case 2:
+			printNameAndJobClass(nLine, sPlayer, nOffset);
+			break;
+
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			printRoundtableNavUI(nLine, sPlayer, nOffset, nPrompt, nDialogueNum);
+			break;
+
+		case 13:
+			printNavEnd(nLine, nOffset);
+			printf("\n");
+			break;
+	}
+}	
+
+void printRoundtableNavUI(int nLine, Player sPlayer, int nOffset, int nPrompt, int nDialogueNum) {
+	printPlayerSpritePerLineNav(nLine, nOffset);
+
+	if (nLine == 12) {
+		printTopBottomSpriteBorders(nLine);
+	}
+
+	if (nPrompt) {
+		printDialoguePerLine(nLine, nPrompt, nDialogueNum);
+	}
+	else {
+		printRoundtablePlayerStatsPerLine(nLine, sPlayer);
+	}
+
+	printPlayerStats(nLine, sPlayer);	
+}
+
+void printRoundtablePlayerStatsPerLine(int nLine, Player sPlayer) {
+	int nPrintShard; 
+	int nMissingShard;
+
+	switch (nLine - 3) {
+		case 0:
+			printMultiple("─", 28);
+			printf("┼");
+			break;
+
+		case 1:
+			printf(" SHARDS: ");
+			for (nPrintShard = 0; nPrintShard < sPlayer.nShards; nPrintShard++) {
+				printf("█ ");
+			}
+
+			for (nMissingShard = nPrintShard; nMissingShard < 6; nMissingShard++) {
+				printf("░ ");
+			}
+			printMultiple(" ", 7);
+			printf("│");
+			break;
+
+		case 2:
+			printMultiple(" ", 28);
+			printf("│");
+			break;
+
+		case 3:
+			printf(" PLAYER STATS:");
+			printMultiple(" ", 14);
+			printf("│");
+			break;
+
+		case 4:
+			printf(" HEALTH LEVEL: ");
+			printf("%-2d", sPlayer.sPlayerStats.nHealth);
+			printMultiple(" ", 28 - strlen(" HEALTH LEVEL: ") - 2);
+			printf("│");
+			break;	
+			
+		case 5:
+			printf(" ENDURANCE LEVEL: ");
+			printf("%-2d", sPlayer.sPlayerStats.nEndurance);
+			printMultiple(" ", 28 - strlen(" ENDURANCE LEVEL: ") - 2);
+			printf("│");
+			break;	
+
+		case 6:
+			printf(" DEXTERITY LEVEL: ");
+			printf("%-2d", sPlayer.sPlayerStats.nDexterity);
+			printMultiple(" ", 28 - strlen(" DEXTERITY LEVEL: ") - 2);
+			printf("│");
+			break;									
+
+		case 7:
+			printf(" STRENGTH LEVEL: ");
+			printf("%-2d", sPlayer.sPlayerStats.nStrength);
+			printMultiple(" ", 28 - strlen(" STRENGTH LEVEL: ") - 2);
+			printf("│");
+			break;	
+
+		case 8:
+			printf(" INTELLIGENCE LEVEL: ");
+			printf("%-2d", sPlayer.sPlayerStats.nIntelligence);
+			printMultiple(" ", 28 - strlen(" INTELLIGENCE LEVEL: ") - 2);
+			printf("│");
+			break;	
+
+		case 9:
+			printf(" FAITH LEVEL: ");
+			printf("%-2d", sPlayer.sPlayerStats.nFaith);
+			printMultiple(" ", 28 - strlen(" FAITH LEVEL: ") - 2);
+			printf("│");
+			break;				
+	}	
+}
+
+void printAreaNav(Player sPlayer, int nPrompt) {
+	int nLine;
+	int nOffset = (SCREEN_WIDTH - NAV_WIDTH) / 2;
+	int nDialogueNum = randomNumberBetween(5, 1);
+
+	for (nLine = 0; nLine < NAV_HEIGHT; nLine++) {
+		printAreaNavLine(nLine, nOffset, sPlayer, nPrompt, nDialogueNum);
+	}
+}
+
+void printAreaNavLine(int nLine, int nOffset, Player sPlayer, int nPrompt, int nDialogueNum) {
+	switch (nLine) {
+		case 0:
+			printf("\n");
+			break;
+
+		case 1:
+			printNavEnd(nLine, nOffset);
+			break;
+
+		case 2:
+			printNameAndJobClass(nLine, sPlayer, nOffset);
+			break;
+
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			printAreaNavUI(nLine, sPlayer, nOffset, nPrompt, nDialogueNum);
+			break;
+
+		case 13:
+			printNavEnd(nLine, nOffset);
+			printf("\n");
+			break;
+	}
+}
+
 void printNameAndJobClass(int nLine, Player sPlayer, int nOffset) {
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
 	printf(" ");
@@ -108,7 +246,7 @@ void printAreaNavUI(int nLine, Player sPlayer, int nOffset, int nPrompt, int nDi
 	}
 
 	if (nPrompt) {
-		printTileDialoguePerLine(nLine, nPrompt, nDialogueNum);
+		printDialoguePerLine(nLine, nPrompt, nDialogueNum);
 	}
 	else {
 		printNavOptionsPerLine(nLine);
@@ -289,7 +427,7 @@ void printPlayerStats(int nLine, Player sPlayer) {
 	printf("\n");
 }
 
-void printTileDialoguePerLine(int nLine, int nPrompt, int nDialogueNum) {
+void printDialoguePerLine(int nLine, int nPrompt, int nDialogueNum) {
 	StringFullDialogue strFullDialogue;
 
 	switch (nLine - 3) {
@@ -322,8 +460,21 @@ void printTileDialoguePerLine(int nLine, int nPrompt, int nDialogueNum) {
 
 			case LOCKED_TILE_PROMPT:
 				loadDialogueLockedTile(strFullDialogue, nDialogueNum);
+				break;
+
+			case FINISHED_ELDEN_THRONE_PROMPT:
+				loadDialogueFinishedEldenThrone(strFullDialogue, nDialogueNum);
+				break;
+
+			case RH_FAST_TRAVEL_PROMPT:
+				loadDialogueFastTravel(strFullDialogue, nDialogueNum);
+				break;
+
+			case RH_FAST_TRAVEL_LOCKED_PROMPT:
+				loadDialogueFastTravelLocked(strFullDialogue, nDialogueNum);
+				break;				
 	}
-      		printTileDialogueLineText(nLine - 4, strFullDialogue);
+      		printDialogueLineText(nLine - 4, strFullDialogue);
 
      			printf("│");
 	}

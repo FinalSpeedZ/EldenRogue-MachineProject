@@ -165,7 +165,7 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea,
 
 		case TILE_BOSS:
 			if (*pBBattleFinished) {
-				if (*pPrompt == NEW_UNLOCKED_TILE_PROMPT) {
+				if (*pPrompt == NEW_UNLOCKED_TILE_PROMPT || *pPrompt == FINISHED_ELDEN_THRONE_PROMPT) {
 					pressEnter();
 					*pPrompt = EMPTY_TILE_PROMPT;
 					*(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
@@ -204,7 +204,12 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea,
 					else {
 						*pBBattleFinished = 1;
 						if (!checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
-							*pPrompt = NEW_UNLOCKED_TILE_PROMPT;
+							if (pAreaFloor->nAreaIndex != THE_ELDEN_THRONE) {
+								*pPrompt = NEW_UNLOCKED_TILE_PROMPT;
+							}
+							else {
+								*pPrompt = FINISHED_ELDEN_THRONE_PROMPT;
+							}
 							openNewFastTravel(pAreaFloor->nAreaIndex, pPlayer);
 						}
 						else {
@@ -220,14 +225,16 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea,
 		case TILE_FAST_TRAVEL:
 			if (pAreaFloor->nFloorNumber != 1 && checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
 				*pLeaveArea = 1;
-				openFastTravel(pPlayer);
+				*pPrompt = RH_FAST_TRAVEL_PROMPT;
+				openFastTravel(pPlayer, pPrompt);
 			}
-			else if (!checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
+			else if (pAreaFloor->nFloorNumber != 1 && !checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
 				*pPrompt = LOCKED_TILE_PROMPT;
 			}
 			else if (pAreaFloor->nFloorNumber == 1) {
-				*pLeaveArea = 1;	
-				openFastTravel(pPlayer);
+				*pLeaveArea = 1;
+				*pPrompt = RH_FAST_TRAVEL_PROMPT;	
+				openFastTravel(pPlayer, pPrompt);
 			}
 			break;
 
@@ -250,7 +257,7 @@ void interactTileSpawn(AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, 
 	Enemy sEnemy;
 
 	if (*pTileSpawnType == NO_SPAWN_YET) {
-		if (pAreaFloor->nAreaIndex != 6) {
+		if (pAreaFloor->nAreaIndex != THE_ELDEN_THRONE) {
 			nSpawnRate = randomNumberBetween(100, 1);
 		}
 		else {

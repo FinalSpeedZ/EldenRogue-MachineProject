@@ -7,9 +7,11 @@ void loadDialogueEnemyTile(StringFullDialogue strFullDialogue, int nDialogueNum)
 void loadDialogueNewUnlockedTile(StringFullDialogue strFullDialogue, int nDialogueNum);
 void loadDialogueBossTile(StringFullDialogue strFullDialogue, int nDialogueNum);
 void loadDialogueLockedTile(StringFullDialogue strFullDialogue, int nDialogueNum);
+void loadDialogueFinishedEldenThrone(StringFullDialogue strFullDialogue, int nDialogueNum);
 
-void printTileDialogueLineText(int nDialogueLine, StringFullDialogue strFullDialogue);
+void loadDialogueFastTravel(StringFullDialogue strFullDialogue, int nDialogueNum);
+void loadDialogueFastTravelLocked(StringFullDialogue strFullDialogue, int nDialogueNum);
 
-
+void printDialogueLineText(int nDialogueLine, StringFullDialogue strFullDialogue);
 
 #endif

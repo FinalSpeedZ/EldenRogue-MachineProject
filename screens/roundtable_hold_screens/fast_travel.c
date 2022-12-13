@@ -3,7 +3,7 @@
 #include "../areas_screens/area_screens.h"
 #include "../../utility/area_utility/area_screen_helper.h"
 
-void openFastTravel(Player* pPlayer) {
+void openFastTravel(Player* pPlayer, int* pPrompt) {
 	int nInput = 0;
 	int nSuccessfulFastTravel = 1;
 	
@@ -20,15 +20,20 @@ void openFastTravel(Player* pPlayer) {
 		printTwoLongOptions(LEYNDELL_ROYAL_CAPITAL, "LEYNDELL ROYAL CAPITAL", THE_ELDEN_THRONE, "THE ELDEN THRONE");
 		printCenterOption(0, OPTION_BACK);
 
+
+		printRoundtableNav(*pPlayer, *pPrompt);
+
 		printFooter();
 		printInputDivider();
 
 		getIntInput(&nInput, 0, 6);
-		processFastTravelInput(nInput, pPlayer, &nSuccessfulFastTravel);	
+		processFastTravelInput(nInput, pPlayer, &nSuccessfulFastTravel, pPrompt);	
 	} while ((nInput < 0 || nInput > 6) || (nSuccessfulFastTravel == 0));
+
+	*pPrompt = NO_PROMPT;
 }
 
-void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTravel) {
+void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTravel, int* pPrompt) {
 	int nFloorNumber = 1;
 	int nUnlocked = 0;
 
@@ -46,7 +51,7 @@ void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTra
 				openAreaScreen(nInput, nFloorNumber, pPlayer);
 			}
 			else {
-				openFastTravelToFloor(nInput, pPlayer);
+				openFastTravelToFloor(nInput, pPlayer, pPrompt);
 			}
 			*pSuccessfulFastTravel = 1;
 			break;
@@ -58,12 +63,13 @@ void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTra
 					openAreaScreen(nInput, nFloorNumber, pPlayer);
 				}
 				else  {
-					openFastTravelToFloor(nInput, pPlayer);
+					openFastTravelToFloor(nInput, pPlayer, pPrompt);
 				}
 				*pSuccessfulFastTravel = 1;
 			}
 			else {
 				*pSuccessfulFastTravel = 0;
+				*pPrompt = RH_FAST_TRAVEL_LOCKED_PROMPT;
 			}
 			break;
 
@@ -75,11 +81,12 @@ void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTra
 			}
 			else {
 				*pSuccessfulFastTravel = 0;
+				*pPrompt = RH_FAST_TRAVEL_LOCKED_PROMPT;
 			}
 	}
 }
 
-void openFastTravelToFloor(int nAreaIndex, Player* pPlayer) {
+void openFastTravelToFloor(int nAreaIndex, Player* pPlayer, int* pPrompt) {
 	int nInput = 0;
 	int nFloorNumber = 1;
 
@@ -110,7 +117,7 @@ void openFastTravelToFloor(int nAreaIndex, Player* pPlayer) {
 	} while (nInput < 0 || nInput > 2);
 
 	if (nInput == 0) {
-		openFastTravel(pPlayer);
+		openFastTravel(pPlayer, pPrompt);
 	}
 
 	else if (nInput == 1) {

@@ -33,6 +33,13 @@ struct unlockedTag {
 }; 
 typedef struct unlockedTag UnlockedAreas;
 
+struct tintTag {
+	int nColor1;
+	int nColor2;
+	int nColor3;
+};
+typedef struct tintTag Tint;
+
 struct playerTag {
 	StringPlayerName strPlayerName;
 	StringJobClass strPlayerJobClass;  
@@ -66,6 +73,8 @@ struct enemyTag {
 	float fPhysicalDef;
 	float fSorceryDef;
 	float fIncantationDef;
+
+	Tint sTint;
 };
 typedef struct enemyTag Enemy;
 

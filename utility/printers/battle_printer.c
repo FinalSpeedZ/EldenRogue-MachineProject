@@ -2,12 +2,12 @@
 
 #include "../area_utility/battle_screen_helper.h"
 
-void printBattleDisplay(Player sPlayer, Enemy sEnemy, int nEnemyTurn, int nBoss) {
+void printBattleDisplay(Player sPlayer, Enemy sEnemy, int nAreaIndex, int nEnemyTurn, int nBoss) {
 	int nLine;
 	int nOffset = (SCREEN_WIDTH - HEALTH_WIDTH - SPRITE_WIDTH) / 2;
 
 	for (nLine = 0; nLine <= SPRITE_HEIGHT + 4; nLine++) {
-		printEnemyBattleDisplayLine(nLine, nOffset + 15, sEnemy, nBoss);
+		printEnemyBattleDisplayLine(nLine, nOffset + 15, sEnemy, nAreaIndex, nBoss);
 	}
 
 	for (nLine = 0; nLine <= SPRITE_HEIGHT + 4; nLine++) {
@@ -23,7 +23,7 @@ void printBattleDisplay(Player sPlayer, Enemy sEnemy, int nEnemyTurn, int nBoss)
 	}
 }
 
-void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy, int nBoss) {
+void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy, int nAreaIndex, int nBoss) {
 	switch (nLine) {
 		case 1:
 			printEnemyBattleEnd(nLine, nOffset);
@@ -40,7 +40,7 @@ void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy, int nBoss
 		case 10:
 		case 11:
 		case 12:
-			printEnemyBattleUI(nLine, nOffset, sEnemy, nBoss);
+			printEnemyBattleUI(nLine, nOffset, sEnemy, nAreaIndex, nBoss);
 			break;
 
 		case 13:
@@ -72,7 +72,7 @@ void printEnemyBattleEnd(int nLine, int nOffset) {
 	}
 }
 
-void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy, int nBoss) {
+void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy, int nAreaIndex, int nBoss) {
 	if (nLine == 2) {
 		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset + HEALTH_WIDTH);
 		printTopBottomSpriteBorders(nLine);
@@ -91,7 +91,7 @@ void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy, int nBoss) {
 	}
 
 	if (nLine != 2) {
-		printEnemySpritePerLineBattle(nLine, nOffset);
+		printEnemySpritePerLineBattle(nLine, nOffset, sEnemy, nAreaIndex);
 	}
 
 	if (nLine == 12) {
@@ -106,7 +106,7 @@ void printEnemyName(int nOffset, char* pEnemyName) {
 	printf("%s ", pEnemyName);
 }
 
-void printEnemySpritePerLineBattle(int nLine, int nOffset) {
+void printEnemySpritePerLineBattle(int nLine, int nOffset, Enemy sEnemy, int nAreaIndex) {
 	if  (nLine != 6 && nLine != 7 && nLine != 8) {
 		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset + HEALTH_WIDTH);
 	}
@@ -115,7 +115,7 @@ void printEnemySpritePerLineBattle(int nLine, int nOffset) {
 		printf("│█");
 	}
 
-	printEnemySprite(nLine - 2);
+	printEnemySprite(nLine - 2, nAreaIndex, sEnemy);
 
 	if (nLine != 12) {
 		printf("█│");
@@ -135,32 +135,40 @@ void printEnemyHealthBar(int nOffset, Enemy sEnemy, int nBoss) {
 
 	if (sEnemy.nCurrentHealth != 0) {
 		for (nDamagedBars = 0; nDamagedBars < nNumberOfDamageBars; nDamagedBars++) {
+			colorText(COLOR_DAMAGED_BAR);
 			printf("░");
 		}
 
 		for (nBars = nDamagedBars; nBars < HEALTH_WIDTH; nBars++) {
 			if (sEnemy.nCurrentHealth >= sEnemy.nFinalHealth * 0.66) {
+				colorText(COLOR_HEALTH_GREEN);
 				printf("█");
 			}
 
 			else if (sEnemy.nCurrentHealth <= sEnemy.nFinalHealth * 0.66 && 
 					 sEnemy.nCurrentHealth >= sEnemy.nFinalHealth * 0.33) {
+				colorText(COLOR_HEALTH_YELLOW);
 				printf("█");
 			}
 
 			else {
+				colorText(COLOR_HEALTH_RED);
 				printf("█");
 			}
 		}
+
+		resetColors();
 	}
 
 	else {
+		colorText(COLOR_HEALTH_RED);
 		if (nBoss == 0) {
 			printf("%50s", "ENEMY FELLED");
 		}
 		else {
 			printf("%50s", "GREAT ENEMY FELLED");
 		}
+		resetColors();
 	}
 
 	printf(" ");
@@ -314,26 +322,34 @@ void printPlayerHealthBar(AreaDetails sPlayerAreaDetails, int nHealthBars) {
 	if (sPlayerAreaDetails.nCurrentHealth != 0) {
 		for (nBars = 0; nBars < nUndamagedBars; nBars++) {
 			if (sPlayerAreaDetails.nCurrentHealth >= sPlayerAreaDetails.nMaxHealth * 0.66) {
+				colorText(COLOR_HEALTH_GREEN);
 				printf("█");
 			}
 
 			else if (sPlayerAreaDetails.nCurrentHealth <= sPlayerAreaDetails.nMaxHealth * 0.66 && 
 					 sPlayerAreaDetails.nCurrentHealth >= sPlayerAreaDetails.nMaxHealth * 0.33) {
+				colorText(COLOR_HEALTH_YELLOW);
 				printf("█");
 			}
 
 			else {
+				colorText(COLOR_HEALTH_RED);
 				printf("█");
 			}
 		}
 
 		for (nDamagedBars = nBars; nDamagedBars < nHealthBars; nDamagedBars++) {
+			colorText(COLOR_DAMAGED_BAR);
 			printf("░");
 		}
+
+		resetColors();
 	}
 
 	else {
+		colorText(COLOR_HEALTH_RED);
 		printf("YOU DIED");
+		resetColors();
 	}
 
 	printf(" ");
@@ -352,12 +368,16 @@ void printPlayerPotions(int nPotions) {
 
 	printf(" ");
 	for (nPotionCount = 1; nPotionCount <= nPotions; nPotionCount++) {
+		colorText(COLOR_POTION);
 		printf("█ ");
 	}
 
 	for (nUsedPotions = 0; nUsedPotions + nPotionCount <= DEFAULT_POTION_COUNT; nUsedPotions++) {
+		colorText(COLOR_DAMAGED_BAR);
 		printf("░ ");
 	}
+
+	resetColors();
 }
 
 void printBattleRunesGained(Player sPlayer, int nRunesGained, int nBoss) {

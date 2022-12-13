@@ -5,7 +5,7 @@
 #define SPRITE_WIDTH  15
 
 void printPlayerSprite(int nSpriteLine);
-void printEnemySprite(int nSpriteLine);
+void printEnemySprite(int nSpriteLine, int nAreaIndex, Enemy sEnemy);
 
 void printTopBottomSpriteBorders(int nLine);
 

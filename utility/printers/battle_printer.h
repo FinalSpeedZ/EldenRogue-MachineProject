@@ -3,14 +3,14 @@
 
 #define HEALTH_WIDTH  50
 
-void printBattleDisplay(Player sPlayer, Enemy sEnemy, int nEnemyTurn, int nBoss);
+void printBattleDisplay(Player sPlayer, Enemy sEnemy, int nAreaIndex, int nEnemyTurn, int nBoss);
 
-void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy, int nBoss);
+void printEnemyBattleDisplayLine(int nLine, int nOffset, Enemy sEnemy, int nAreaIndex, int nBoss);
 
 void printEnemyBattleEnd(int nLine, int nOffset);
-void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy, int nBoss);
+void printEnemyBattleUI(int nLine, int nOffset, Enemy sEnemy, int nAreaIndex, int nBoss);
 void printEnemyName(int nOffset, char* pEnemyName);
-void printEnemySpritePerLineBattle(int nLine, int nOffset);
+void printEnemySpritePerLineBattle(int nLine, int nOffset, Enemy sEnemy, int nAreaIndex);
 void printEnemyHealthBar(int nOffset, Enemy sEnemy, int nBoss);
 void printEnemyHealth(int nOffset, Enemy sEnemy);
 

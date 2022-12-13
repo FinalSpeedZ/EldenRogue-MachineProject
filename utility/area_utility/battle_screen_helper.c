@@ -13,6 +13,7 @@ void setEnemyStats(int nAreaIndex, Enemy* pEnemy) {
 
 	setEnemyDefense(pEnemy);
 	setEnemyName(nAreaIndex, pEnemy);
+	setEnemyColor(nAreaIndex, pEnemy);
 }
 
 void setEnemyType(int* pEnemyType) {
@@ -273,6 +274,120 @@ void setEnemyName(int nAreaIndex, Enemy* pEnemy) {
 	pEnemy->pEnemyName = pEnemyName;
 }
 
+void setEnemyColor(int nAreaIndex, Enemy* pEnemy) {
+	switch (nAreaIndex) {
+		case STORMVEIL_CASTLE:
+			switch (pEnemy->nEnemyType) {
+				case 1:
+					pEnemy->sTint.nColor1 = 46;
+					pEnemy->sTint.nColor2 = 243;
+					pEnemy->sTint.nColor3 = 252;
+					break;
+
+				case 2:
+					pEnemy->sTint.nColor1 = 124;
+					pEnemy->sTint.nColor2 = 243;
+					pEnemy->sTint.nColor3 = 252;
+					break;	
+
+				case 3:
+					pEnemy->sTint.nColor1 = 33;
+					pEnemy->sTint.nColor2 = 243;
+					pEnemy->sTint.nColor3 = 252;
+					break;				
+			}
+		break;
+
+		case RAYA_LUCARIA_ACADEMY:
+			switch (pEnemy->nEnemyType) {
+				case 1:
+					pEnemy->sTint.nColor1 = 226;
+					pEnemy->sTint.nColor2 = 183;
+					pEnemy->sTint.nColor3 = 219;
+					break;
+
+				case 2:
+					pEnemy->sTint.nColor1 = 117;
+					pEnemy->sTint.nColor2 = 183;
+					pEnemy->sTint.nColor3 = 219;
+					break;	
+
+				case 3:
+					pEnemy->sTint.nColor1 = 225;
+					pEnemy->sTint.nColor2 = 186;
+					pEnemy->sTint.nColor3 = 219;
+					break;				
+			}
+		break;
+
+		case REDMANE_CASTLE:
+			switch (pEnemy->nEnemyType) {
+				case 1:
+					pEnemy->sTint.nColor1 = 52;
+					pEnemy->sTint.nColor2 = 22;
+					pEnemy->sTint.nColor3 = 58;
+					break;
+
+				case 2:
+					pEnemy->sTint.nColor1 = 100;
+					pEnemy->sTint.nColor2 = 22;
+					pEnemy->sTint.nColor3 = 58;
+					break;	
+
+				case 3:
+					pEnemy->sTint.nColor1 = 90;
+					pEnemy->sTint.nColor2 = 22;
+					pEnemy->sTint.nColor3 = 58;
+					break;				
+			}
+		break;
+
+		case VOLCANO_MANOR:
+			switch (pEnemy->nEnemyType) {
+				case 1:
+					pEnemy->sTint.nColor1 = 46;
+					pEnemy->sTint.nColor2 = 190;
+					pEnemy->sTint.nColor3 = 154;
+					break;
+
+				case 2:
+					pEnemy->sTint.nColor1 = 115;
+					pEnemy->sTint.nColor2 = 190;
+					pEnemy->sTint.nColor3 = 154;
+					break;	
+
+				case 3:
+					pEnemy->sTint.nColor1 = 184;
+					pEnemy->sTint.nColor2 = 190;
+					pEnemy->sTint.nColor3 = 154;
+					break;				
+			}
+		break;
+
+		case LEYNDELL_ROYAL_CAPITAL:
+			switch (pEnemy->nEnemyType) {
+				case 1:
+					pEnemy->sTint.nColor1 = 39;
+					pEnemy->sTint.nColor2 = 219;
+					pEnemy->sTint.nColor3 = 183;
+					break;
+
+				case 2:
+					pEnemy->sTint.nColor1 = 104;
+					pEnemy->sTint.nColor2 = 219;
+					pEnemy->sTint.nColor3 = 183;
+					break;	
+
+				case 3:
+					pEnemy->sTint.nColor1 = 64;
+					pEnemy->sTint.nColor2 = 219;
+					pEnemy->sTint.nColor3 = 183;
+					break;				
+			}
+		break;
+	}
+}
+
 void checkBattleOver(Player sPlayer, Enemy sEnemy, int* pBattleFinished) {
 	if (sPlayer.sPlayerAreaDetails.nCurrentHealth == 0) {
 		*pBattleFinished = 1;
@@ -402,11 +517,55 @@ int computeGainedRunes(Enemy sEnemy, int nBoss) {
 }
 
 void setBossStats(int nAreaIndex, Enemy* pEnemy, int nEldenThroneBossNum) {
+	setBossColor(nAreaIndex, pEnemy, nEldenThroneBossNum);
 	setBossName(nAreaIndex, nEldenThroneBossNum, pEnemy);
 	setBossHealth(nAreaIndex, nEldenThroneBossNum, pEnemy);
 	setBossAttackRange(nAreaIndex, nEldenThroneBossNum, pEnemy);
 	setBossDefense(nAreaIndex, nEldenThroneBossNum, pEnemy);
 	setBossFinalAttack(pEnemy);
+}
+
+void setBossColor(int nAreaIndex, Enemy* pEnemy, int nEldenThroneBossNum) {
+	switch (nAreaIndex) {
+		case STORMVEIL_CASTLE:
+			pEnemy->sTint.nColor1 = 11;
+			pEnemy->sTint.nColor2 = 243;
+			pEnemy->sTint.nColor3 = 252;
+			break;	
+
+		case RAYA_LUCARIA_ACADEMY:
+			pEnemy->sTint.nColor1 = 11;
+			pEnemy->sTint.nColor2 = 183;
+			pEnemy->sTint.nColor3 = 219;
+			break;	
+
+		case VOLCANO_MANOR:
+			pEnemy->sTint.nColor1 = 11;
+			pEnemy->sTint.nColor2 = 190;
+			pEnemy->sTint.nColor3 = 154;
+			break;	
+
+		case LEYNDELL_ROYAL_CAPITAL:
+			pEnemy->sTint.nColor1 = 11;
+			pEnemy->sTint.nColor2 = 219;
+			pEnemy->sTint.nColor3 = 183;
+			break;	
+
+		case THE_ELDEN_THRONE:
+			switch (nEldenThroneBossNum) {
+				case 1:
+					pEnemy->sTint.nColor1 = 11;
+					pEnemy->sTint.nColor2 = 228;
+					pEnemy->sTint.nColor3 = 230;
+					break;
+
+				case 2:
+					pEnemy->sTint.nColor1 = 226;
+					pEnemy->sTint.nColor2 = 228;
+					pEnemy->sTint.nColor3 = 230;
+					break;
+			}			
+	}	
 }
 
 int getBossNameLength(int nAreaIndex, int nEldenThroneBossNum) {

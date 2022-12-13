@@ -8,18 +8,15 @@ void openLevelUp(Player* pPlayer) {
 
 		printLevelUpHeader();
 
-		//fix UI of this
-		printOneBoxedStats("RUNES", pPlayer->nRunes);
-		printMiddleSubHeader(pPlayer->strPlayerJobClass);
-
-		printStats(*pPlayer);
-
-		printMiddleStats("RUNE COST", calculateRuneCost(pPlayer->nLevel));
+		printf("\n");
+		printMiddleStats("RUNE COST", calculateRuneCost(pPlayer->nLevel));	
 
 		printTwoLongOptions(HEALTH, "LEVEL HEALTH", ENDURANCE, "LEVEL ENDURANCE");
 		printTwoLongOptions(DEXTERITY, "LEVEL DEXTERITY", STRENGTH, "LEVEL STRENGTH");
 		printTwoLongOptions(INTELLIGENCE, "LEVEL INTELLIGENCE", FAITH, "LEVEL FAITH");
 		printCenterOption(0, OPTION_BACK);
+
+		printRoundtableNav(*pPlayer, NO_PROMPT);
 
 		printFooter();
 		printInputDivider();

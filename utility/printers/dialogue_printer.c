@@ -203,7 +203,112 @@ void loadDialogueLockedTile(StringFullDialogue strFullDialogue, int nDialogueNum
 	}	
 }
 
-void printTileDialogueLineText(int nDialogueLine, StringFullDialogue strFullDialogue) {
+void loadDialogueFastTravel(StringFullDialogue strFullDialogue, int nDialogueNum) {
+	int nLength;
+	char strDialogue[DIALOGUE_MAX_LENGTH];
+
+	switch (nDialogueNum) {
+		case 1:
+			strcpy(strDialogue, "The game is afoot! Where do you wish to travel to?");
+			break;
+
+		case 2:
+			strcpy(strDialogue, "Ah a teleporter! Where shall we teleport to?");
+			break;	
+
+		case 3:
+			strcpy(strDialogue, "I am excited for our journey... but to where?");
+			break;					
+
+		case 4:
+			strcpy(strDialogue, "My spidey-senses are tingling! Where shall we explore?");
+			break;		
+
+		case 5:
+			strcpy(strDialogue, "Where going on a trip on our favorite rocketship... but to where?");
+			break;					
+	}
+
+
+	strcpy(strFullDialogue, strDialogue);
+
+	for (nLength = strlen(strFullDialogue); nLength < DIALOGUE_MAX_LENGTH; nLength++) {
+		strcat(strFullDialogue, " ");
+	}	
+
+}
+
+void loadDialogueFastTravelLocked(StringFullDialogue strFullDialogue, int nDialogueNum) {
+	int nLength;
+	char strDialogue[DIALOGUE_MAX_LENGTH];
+
+	switch (nDialogueNum) {
+		case 1:
+			strcpy(strDialogue, "Uh oh! We cannot travel to this area...");
+			break;
+
+		case 2:
+			strcpy(strDialogue, "Our fast travel device seems to be broken for this area.. Gather shards to fix it!");
+			break;	
+
+		case 3:
+			strcpy(strDialogue, "We need more shards to travel to this area!");
+			break;					
+
+		case 4:
+			strcpy(strDialogue, "This area is locked... We need more shards to unlock it!");
+			break;		
+
+		case 5:
+			strcpy(strDialogue, "Oops! I think we lack shards...");
+			break;					
+	}
+
+
+	strcpy(strFullDialogue, strDialogue);
+
+	for (nLength = strlen(strFullDialogue); nLength < DIALOGUE_MAX_LENGTH; nLength++) {
+		strcat(strFullDialogue, " ");
+	}	
+
+}
+
+void loadDialogueFinishedEldenThrone(StringFullDialogue strFullDialogue, int nDialogueNum) {
+	int nLength;
+	char strDialogue[DIALOGUE_MAX_LENGTH];
+
+	switch (nDialogueNum) {
+		case 1:
+			strcpy(strDialogue, "Congratulations! We successfully beat The Elden Throne!");
+			break;
+
+		case 2:
+			strcpy(strDialogue, "Even the mighty beasts of Elden Throne can't stop us!");
+			break;	
+
+		case 3:
+			strcpy(strDialogue, "At long last... The Elden Throne has now succumbed at our hands!");
+			break;					
+
+		case 4:
+			strcpy(strDialogue, "Let's Gooo! We successfully cleared The Elden Throne!");
+			break;		
+
+		case 5:
+			strcpy(strDialogue, "Is that all that The Elden Throne got? Weaklings...");
+			break;					
+	}
+
+
+	strcpy(strFullDialogue, strDialogue);
+
+	for (nLength = strlen(strFullDialogue); nLength < DIALOGUE_MAX_LENGTH; nLength++) {
+		strcat(strFullDialogue, " ");
+	}	
+
+}
+
+void printDialogueLineText(int nDialogueLine, StringFullDialogue strFullDialogue) {
 	char strSingleLine[DIALOGUE_LINE_MAX_LENGTH + 1];
 
 	strcpy(strSingleLine, ""); 
@@ -226,3 +331,4 @@ void printTileDialogueLineText(int nDialogueLine, StringFullDialogue strFullDial
 
 	printf(" %s ", strSingleLine);
 }
+

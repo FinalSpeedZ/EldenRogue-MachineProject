@@ -12,6 +12,7 @@ void setEnemyAttackRange(Enemy* pEnemy);
 void setEnemyBaseAttack(Enemy* pEnemy);
 void setEnemyFinalAttack(int nAreaIndex, Enemy* pEnemy);
 void setEnemyDefense(Enemy* pEnemy);
+void setEnemyColor(int nAreaIndex, Enemy* pEnemy);
 
 int getEnemyNameLength(int nAreaIndex, int nEnemyType);
 void setEnemyName(int nAreaIndex, Enemy* pEnemy);
@@ -38,6 +39,7 @@ void getIncomingDmg(int nAreaIndex, Enemy* pEnemy, int nBoss);
 int computeGainedRunes(Enemy sEnemy, int nBoss);
 
 void setBossStats(int nAreaIndex, Enemy* pEnemy, int nEldenThroneBossNum);
+void setBossColor(int nAreaIndex, Enemy* pEnemy, int nEldenThroneBossNum);
 int getBossNameLength(int nAreaIndex, int nEldenThroneBossNum);
 void setBossName(int nAreaIndex, int nEldenThroneBossNum, Enemy* pEnemy);
 void setBossHealth(int nAreaIndex, int nEldenThroneBossNum, Enemy* pEnemy);

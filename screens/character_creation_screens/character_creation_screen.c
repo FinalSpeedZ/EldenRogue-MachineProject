@@ -1,5 +1,6 @@
 #include "character_creation_screen.h"
 #include "job_class_creation.h"
+#include "customize_character.h"
 
 #include "../roundtable_hold_screens/roundtable_hold.h"
 
@@ -36,6 +37,7 @@ void processCharacterCreationScreenInput(int nInput, Player* pPlayer) {
 			openJobClassSelection(pPlayer);
 			break;
 		case 3: 
+			openCustomizeCharacter(pPlayer);
 			if (checkCharacterCreation(*pPlayer) == TRUE) {
 				openRoundTableHold(*pPlayer);
 			}
@@ -62,10 +64,6 @@ int checkCharacterCreation(Player sPlayer) {
 	}
 }
 
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                            PRINTER FUNCTIONS                            *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void printJobClassStats(Player sPlayer) {
 	if (strlen(sPlayer.strPlayerJobClass) != 0) {
 		printStats(sPlayer);
