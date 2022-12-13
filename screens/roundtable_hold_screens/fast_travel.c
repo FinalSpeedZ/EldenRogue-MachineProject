@@ -36,28 +36,41 @@ void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTra
 		case 0:
 			*pSuccessfulFastTravel = 1;
 			break;
+
 		case STORMVEIL_CASTLE:
 		case RAYA_LUCARIA_ACADEMY:
 		case REDMANE_CASTLE:
 		case VOLCANO_MANOR:
 			nUnlocked = checkFastTravelStatus(nInput, &pPlayer->sPlayerUnlockedAreas);
-			if (nUnlocked == 0){
+			if (nUnlocked == 0) {
 				openAreaScreen(nInput, nFloorNumber, pPlayer);
 			}
 			else {
 				openFastTravelToFloor(nInput, pPlayer);
 			}
+			*pSuccessfulFastTravel = 1;
 			break;
 
 		case LEYNDELL_ROYAL_CAPITAL:
-		case THE_ELDEN_THRONE:
 			if (pPlayer->nShards >= 2) {
 				nUnlocked = checkFastTravelStatus(nInput, &pPlayer->sPlayerUnlockedAreas);
-				if (nUnlocked == 0){
+				if (nUnlocked == 0) {
 					openAreaScreen(nInput, nFloorNumber, pPlayer);
 				}
-				else {
+				else  {
 					openFastTravelToFloor(nInput, pPlayer);
+				}
+				*pSuccessfulFastTravel = 1;
+			}
+			else {
+				*pSuccessfulFastTravel = 0;
+			}
+			break;
+
+		case THE_ELDEN_THRONE:
+			if (pPlayer->nShards >= 2) {
+				if (nUnlocked == 0) {
+					openAreaScreen(nInput, nFloorNumber, pPlayer);
 				}
 			}
 			else {

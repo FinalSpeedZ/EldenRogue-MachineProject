@@ -43,7 +43,7 @@ int openBattleScreen(int nAreaIndex, Player* pPlayer, Enemy* pEnemy, int nBoss) 
 
 		if (!nBattleFinished) {
 			processBattleScreenInput(nAreaIndex, nMoveType, nAttackType, pPlayer, pEnemy, 
-				 					 &nEnemyTurn, nBattleFinished, &nShowAttackTypes, &nSuccessfulDodge);
+				 					 nBoss, &nEnemyTurn, &nShowAttackTypes, &nSuccessfulDodge);
 		}
 
 	} while (!nBattleFinished);
@@ -62,7 +62,7 @@ int openBattleScreen(int nAreaIndex, Player* pPlayer, Enemy* pEnemy, int nBoss) 
 }
 
 void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Player* pPlayer, Enemy* pEnemy, 
-							  int* pEnemyTurn, int nBattleFinished, int* pShowAttackTypes, int* pSuccessfulDodge) {
+							  int nBoss, int* pEnemyTurn, int* pShowAttackTypes, int* pSuccessfulDodge) {
 	int nHealthGained;
 
 	if (*pEnemyTurn) {
@@ -73,7 +73,7 @@ void processBattleScreenInput(int nAreaIndex, int nMoveType, int nAttackType, Pl
 		else {
 			printMessage("PROMPT", "YOU DODGED THE ENEMY'S ATTACK");
 		}
-		getIncomingDmg(nAreaIndex, pEnemy);
+		getIncomingDmg(nAreaIndex, pEnemy, nBoss);
 		pressEnter();
 		*pShowAttackTypes = 0;	
 		*pEnemyTurn = 0;	
@@ -142,7 +142,7 @@ void openWinScreen(Player* pPlayer, Enemy sEnemy, int nBoss) {
 
 	printBattleHeader();
 
-	printRunesGained(*pPlayer, nRunesGained);
+	printBattleRunesGained(*pPlayer, nRunesGained, nBoss);
 
 	pPlayer->nRunes += nRunesGained;
 

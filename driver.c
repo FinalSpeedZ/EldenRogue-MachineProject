@@ -34,6 +34,7 @@
 
 #include "screens/areas_screens/area_screens.c"
 #include "screens/areas_screens/battle.c"
+#include "screens/areas_screens/credits.c"
 
 int main() {
 	Player sPlayer;

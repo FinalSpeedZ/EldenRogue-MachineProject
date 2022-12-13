@@ -35,8 +35,14 @@ void processRoundTableHoldInput(int nInput, Player* pPlayer) {
 		case FAST_TRAVEL:
 			openFastTravel(pPlayer);
 			break;
+
 		case LEVEL_UP:
 			openLevelUp(pPlayer);
+			break;
+
+		case SAVE: 
+			printMessage("SYSTEM MESSAGE", "THIS FEATURE IS NOT AVAILABLE");
+			pressEnter();
 			break;
 	}
 }

@@ -33,7 +33,7 @@ int healthToBeAdded(Player* pPlayer);
 void drinkPotion(Player* pPlayer, int nHealthGained);
 
 void enemyAttack(Player* pPlayer, Enemy sEnemy);
-void getIncomingDmg(int nAreaIndex, Enemy* pEnemy);
+void getIncomingDmg(int nAreaIndex, Enemy* pEnemy, int nBoss);
 
 int computeGainedRunes(Enemy sEnemy, int nBoss);
 

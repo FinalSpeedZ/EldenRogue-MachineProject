@@ -1,6 +1,7 @@
 #include "area_screens.h"
 
 #include "battle.h"
+#include "credits.h"
 
 void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	char cInput = 'A'; // initialize to random char in valid commands 
@@ -10,6 +11,7 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 
 	int nPrompt = NO_PROMPT;
 	int nTileSpawnType = NO_SPAWN_YET;
+	int nBBattleFinished = 0;
 
 	int nNumberOfFloors = determineNumberOfFloors(nAreaIndex);
 	int nNumberOfDoors = determineNumberOfDoors(nAreaIndex);
@@ -51,7 +53,7 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 			printInputDivider();
 			getCharAreaInput(&cInput, aPlayerCommands, 10);
 		}
-		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea, &nPrompt, &nTileSpawnType);
+		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea, &nPrompt, &nTileSpawnType, &nBBattleFinished);
 	} while (!nLeaveArea);
 
 	for (nArrayIndex = nNumberOfFloors - 1; nArrayIndex >= 0; nArrayIndex--) {
@@ -69,7 +71,7 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 }
 
 void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, 
-						    int* pPrompt, int* pTileSpawnType) {
+						    int* pPrompt, int* pTileSpawnType, int* pBBattleFinished) {
 	switch(cInput) {
 		case 'W':
 		case 'w':
@@ -97,7 +99,7 @@ void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer,
 
 		case 'E':
 		case 'e':
-			interactTile(pAreaFloor, pPlayer, pLeaveArea, pPrompt, pTileSpawnType);
+			interactTile(pAreaFloor, pPlayer, pLeaveArea, pPrompt, pTileSpawnType, pBBattleFinished);
 			break;
 	}
 }
@@ -137,7 +139,9 @@ void movePlayer(int nDirection, AreaFloor sAreaFloor, AreaDetails* pPlayerAreaDe
 	free(pFloor);
 }
 
-void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea, int *pPrompt, int* pTileSpawnType) {
+void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea, 
+				  int *pPrompt, int* pTileSpawnType, int* pBBattleFinished) {
+	
 	int nTileType = *(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
 					pPlayer->sPlayerAreaDetails.nColumnLocation);
 	int nResult;
@@ -145,7 +149,7 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea, int *
 
 	switch (nTileType) {
 		case TILE_EMPTY:
-			*pPrompt = 1;
+			*pPrompt = EMPTY_TILE_PROMPT;
 			break;
 			
 		case TILE_DOOR_UP:
@@ -160,39 +164,82 @@ void interactTile(AreaFloor* pAreaFloor, Player* pPlayer, int *pLeaveArea, int *
 			break;
 
 		case TILE_BOSS:
-			switch (pAreaFloor->nAreaIndex) {
-				case THE_ELDEN_THRONE:
-					openEnemySpawn(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE, 1);
-					nResult = openBattleScreen(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE);
-					if (nResult == 1) {
-					openEnemySpawn(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE, 2);
-					nResult = openBattleScreen(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE);						
-					}
-					break;
-
-				default: 
-					openEnemySpawn(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE, 0);
-					nResult = openBattleScreen(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE);
+			if (*pBBattleFinished) {
+				if (*pPrompt == NEW_UNLOCKED_TILE_PROMPT) {
+					pressEnter();
+					*pPrompt = EMPTY_TILE_PROMPT;
+					*(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
+					pPlayer->sPlayerAreaDetails.nColumnLocation) = TILE_EMPTY;
+				}
 			}
-			if (nResult == 0) {
-				*pLeaveArea = 1;
-			}
+	
 			else {
-				openNewFastTravel(pAreaFloor->nAreaIndex, pPlayer);
-			}
+				if (*pPrompt == NO_PROMPT) {
+					*pPrompt = BOSS_TILE_PROMPT;
+				}
 
+				else if (*pPrompt == BOSS_TILE_PROMPT) {
+					pressEnter();
+				
+					switch (pAreaFloor->nAreaIndex) {
+						case THE_ELDEN_THRONE:
+							openEnemySpawn(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE, 1);
+							nResult = openBattleScreen(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE);
+							
+							if (nResult == 1) {
+								openEnemySpawn(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE, 2);
+								nResult = openBattleScreen(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE);						
+							}
+							break;
+
+						default: 
+							openEnemySpawn(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE, 0);
+							nResult = openBattleScreen(pAreaFloor->nAreaIndex, pPlayer, &sEnemy, BOSS_BATTLE);
+					}
+
+					if (nResult == 0) {
+						*pLeaveArea = 1;
+					}
+
+					else {
+						*pBBattleFinished = 1;
+						if (!checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
+							*pPrompt = NEW_UNLOCKED_TILE_PROMPT;
+							openNewFastTravel(pAreaFloor->nAreaIndex, pPlayer);
+						}
+						else {
+							*pPrompt = EMPTY_TILE_PROMPT;
+							*(pAreaFloor->pFloorBoardArray[pAreaFloor->nFloorNumber - 1] + (pPlayer->sPlayerAreaDetails.nRowLocation * pAreaFloor->nColumns) +
+							pPlayer->sPlayerAreaDetails.nColumnLocation) = TILE_EMPTY;
+						}
+					}
+				}
+			}
 			break;
 
 		case TILE_FAST_TRAVEL:
-		case TILE_CREDITS:
 			if (pAreaFloor->nFloorNumber != 1 && checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
 				*pLeaveArea = 1;
 				openFastTravel(pPlayer);
+			}
+			else if (!checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
+				*pPrompt = LOCKED_TILE_PROMPT;
 			}
 			else if (pAreaFloor->nFloorNumber == 1) {
 				*pLeaveArea = 1;	
 				openFastTravel(pPlayer);
 			}
+			break;
+
+		case TILE_CREDITS:
+			if (!checkFastTravelStatus(pAreaFloor->nAreaIndex, &pPlayer->sPlayerUnlockedAreas)) {
+				*pPrompt = LOCKED_TILE_PROMPT;
+			}
+			else {
+				*pLeaveArea = 1;
+				openCredits();
+			}
+			break;
 	}
 }
 
@@ -203,9 +250,12 @@ void interactTileSpawn(AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, 
 	Enemy sEnemy;
 
 	if (*pTileSpawnType == NO_SPAWN_YET) {
-		nSpawnRate = randomNumberBetween(100, 1);
-		printf("%d\n", nSpawnRate);
-		pressEnter();
+		if (pAreaFloor->nAreaIndex != 6) {
+			nSpawnRate = randomNumberBetween(100, 1);
+		}
+		else {
+			nSpawnRate = randomNumberBetween(100, 76);
+		}
 	}
 
 	if (*pTileSpawnType == ENEMY_SPAWN) {

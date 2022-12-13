@@ -8,7 +8,7 @@
 #define JOB_CLASS_LENGTH    10
 
 #define DIALOGUE_MAX_LENGTH            234
-#define DIALOGUE_PAGE_LINE_MAX_LENGTH	26
+#define DIALOGUE_LINE_MAX_LENGTH	26
 
 typedef char StringPlayerName[PLAYER_NAME_LENGTH + 1];
 typedef char StringJobClass[JOB_CLASS_LENGTH + 1];

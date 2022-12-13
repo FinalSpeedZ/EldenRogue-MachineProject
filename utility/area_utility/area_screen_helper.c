@@ -324,4 +324,5 @@ void openNewFastTravel(int nAreaIndex, Player* pPlayer) {
 	pPlayer->nShards = pPlayer->sPlayerUnlockedAreas.nStormveilFastTravel + pPlayer->sPlayerUnlockedAreas.nRayaLucariaFastTravel +
 	 				   pPlayer->sPlayerUnlockedAreas.nRedmaneFastTravel + pPlayer->sPlayerUnlockedAreas.nVolcanoFastTravel +
 	 				   pPlayer->sPlayerUnlockedAreas.nLeyndellFastTravel + pPlayer->sPlayerUnlockedAreas.nEldenThroneCredits;
+
 }

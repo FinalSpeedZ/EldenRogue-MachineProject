@@ -81,6 +81,7 @@ void printBattleHeader() {
 	printf("\n");		
 }
 
+
 void printStormveilCastleHeader() {
 	printMultiple("\n", SCREEN_PADDING_TOP);
 	printMiddleText(" _____ _                                _ _   _____           _   _      ", "", "");

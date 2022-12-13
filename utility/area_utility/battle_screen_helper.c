@@ -380,9 +380,9 @@ void enemyAttack(Player* pPlayer, Enemy sEnemy) {
 	}
 }
 
-void getIncomingDmg(int nAreaIndex, Enemy* pEnemy) {
+void getIncomingDmg(int nAreaIndex, Enemy* pEnemy, int nBoss) {
 	pEnemy->nBaseAttack = randomNumberBetween(pEnemy->nAttackUpper, pEnemy->nAttackLower);
-	if (nAreaIndex != 6) {
+	if (!nBoss) {
 		pEnemy->nFinalAttack = nAreaIndex * pEnemy->nBaseAttack;
 	}
 	else {
@@ -393,7 +393,7 @@ void getIncomingDmg(int nAreaIndex, Enemy* pEnemy) {
 int computeGainedRunes(Enemy sEnemy, int nBoss) {
 	int nMultiplier = 2;
 
-	if (nBoss == 1) {
+	if (nBoss) {
 		nMultiplier = 5;
 	}
 

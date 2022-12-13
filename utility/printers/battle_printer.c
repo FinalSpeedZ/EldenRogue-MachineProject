@@ -360,6 +360,42 @@ void printPlayerPotions(int nPotions) {
 	}
 }
 
+void printBattleRunesGained(Player sPlayer, int nRunesGained, int nBoss) {
+	int nLine;
+	int nOffset = (SCREEN_WIDTH - SPRITE_WIDTH) / 2;
+	int nValueDigits = 0;
+	int nValueCopy = nRunesGained;
+
+	do {
+		nValueCopy = nValueCopy / 10;
+		nValueDigits += 1;	
+	} while (nValueCopy != 0);
+
+	printf("\n");
+	for (nLine = 1; nLine <= SPRITE_HEIGHT - 2; nLine++) {
+		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
+		printRunes(nLine);
+		printf("\n");
+	}
+
+	if (nBoss) {
+		printf("\n");
+		printMiddleText("GREAT ENEMY FELLED", "»", "«");		
+	}
+
+	else {
+		printf("\n");
+		printMiddleText("ENEMY FELLED", "»", "«");
+	}
+
+	nOffset = (SCREEN_WIDTH - strlen("YOU HAVE GAINED ") - nValueDigits - strlen("RUNES!") - 4) / 2;
+	printf("\n");
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
+
+	printf("║ YOU HAVE GAINED %d RUNES! ║\n\n", nRunesGained);
+}
+
+
 void printRunesLost() {
 	int nLine;
 	int nOffset = (SCREEN_WIDTH - SPRITE_WIDTH) / 2;
@@ -370,6 +406,9 @@ void printRunesLost() {
 		printLoseSprite(nLine);
 		printf("\n");
 	}
+
+	printf("\n");
+	printMiddleText("YOU DIED", "»", "«");
 
 	nOffset = (SCREEN_WIDTH - strlen("YOU LOST ALL YOUR RUNES! ") - 4) / 2;
 	printf("\n");

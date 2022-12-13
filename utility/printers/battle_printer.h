@@ -24,6 +24,7 @@ void printPlayerHealthBar(AreaDetails sPlayerAreaDetails, int nHealthBars);
 void printPlayerHealth(AreaDetails sPlayerAreaDetails);
 void printPlayerPotions(int nPotions);
 
+void printBattleRunesGained(Player sPlayer, int nRunesGained, int nBoss);
 void printRunesLost();
 
 #endif

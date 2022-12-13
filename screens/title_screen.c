@@ -26,6 +26,11 @@ void processTitleScreenInput(int nInput, Player sPlayer) {
 		case 1:
 			openCharacterCreationScreen(sPlayer);
 			break;
+
+		case 2:
+			printMessage("SYSTEM MESSAGE", "THIS FEATURE IS NOT AVAILABLE");
+			pressEnter();
+			break;
 	}
 }
 

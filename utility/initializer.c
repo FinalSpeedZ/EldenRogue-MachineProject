@@ -5,10 +5,10 @@ void initializePlayer(Player* pPlayer) {
 	strcpy(pPlayer->strPlayerName, "");
 	initializeJobClassStats(pPlayer);
 	resetRunes(&pPlayer->nRunes);
-	initializeShards(&pPlayer->nShards);
 	resetPotions(&pPlayer->nPotions);
 	initializeAreaDetails(&pPlayer->sPlayerAreaDetails);
 	initializeUnlockedAreas(&pPlayer->sPlayerUnlockedAreas);
+	initializeShards(pPlayer);
 	initializePlayerHealth(&pPlayer->sPlayerAreaDetails);
 }
 
@@ -29,8 +29,10 @@ void resetRunes(int* pRunes) {
 	*pRunes = 0;
 }
 
-void initializeShards(int* pShards) {
-	*pShards = 0;
+void initializeShards(Player* pPlayer) {
+	pPlayer->nShards = pPlayer->sPlayerUnlockedAreas.nStormveilFastTravel + pPlayer->sPlayerUnlockedAreas.nRayaLucariaFastTravel +
+	 		           pPlayer->sPlayerUnlockedAreas.nRedmaneFastTravel + pPlayer->sPlayerUnlockedAreas.nVolcanoFastTravel +
+	 		           pPlayer->sPlayerUnlockedAreas.nLeyndellFastTravel + pPlayer->sPlayerUnlockedAreas.nEldenThroneCredits;
 }
 
 void resetPotions(int* pPotions) {

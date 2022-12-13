@@ -41,12 +41,13 @@
 
 #define DEFAULT_POTION_COUNT 8
 
-#define NO_PROMPT             0
-#define EMPTY_TILE_PROMPT     1
-#define TREASURE_TILE_PROMPT  2
-#define ENEMY_TILE_PROMPT     3
-#define BOSS_TILE_PROMPT      4
-#define LOCKED_TILE_PROMPT    5
+#define NO_PROMPT                0
+#define EMPTY_TILE_PROMPT        1
+#define TREASURE_TILE_PROMPT     2
+#define ENEMY_TILE_PROMPT        3
+#define BOSS_TILE_PROMPT         4
+#define LOCKED_TILE_PROMPT       5
+#define NEW_UNLOCKED_TILE_PROMPT 6
 
 
 
