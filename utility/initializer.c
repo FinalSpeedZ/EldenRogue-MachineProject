@@ -10,6 +10,7 @@ void initializePlayer(Player* pPlayer) {
 	initializeUnlockedAreas(&pPlayer->sPlayerUnlockedAreas);
 	initializeShards(pPlayer);
 	initializePlayerHealth(&pPlayer->sPlayerAreaDetails);
+	initializePlayerColor(pPlayer);
 }
 
 void initializeJobClassStats(Player* pPlayer) {
@@ -27,6 +28,12 @@ void initializeJobClassStats(Player* pPlayer) {
 
 void resetRunes(int* pRunes) {
 	*pRunes = 1000;
+}
+
+void initializePlayerColor(Player *pPlayer) {
+	pPlayer->sTint.nColor1 = 221;
+	pPlayer->sTint.nColor2 = 33;
+	pPlayer->sTint.nColor3 = 204;
 }
 
 void initializeShards(Player* pPlayer) {

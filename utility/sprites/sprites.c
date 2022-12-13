@@ -1,10 +1,10 @@
 #include "sprites.h"
 
-void printPlayerSprite(int nSpriteLine) {
+void printPlayerSprite(int nSpriteLine, Player sPlayer) {
 	switch (nSpriteLine) {
 		case 1:
 			printMultiple(" ", 5);
-			colorText(COLOR_PLAYER_HAIR);
+			colorText(sPlayer.sTint.nColor1);
 			printMultiple("█", 5);
 			resetColors();
 			printMultiple(" ", 5);
@@ -12,9 +12,9 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 2:
 			printMultiple(" ", 4);
-			colorText(COLOR_PLAYER_HAIR);
+			colorText(sPlayer.sTint.nColor1);
 			printMultiple("█", 1);
-			colorBackground(COLOR_PLAYER_HAIR);
+			colorBackground(sPlayer.sTint.nColor1);
 			printMultiple(" ", 5);
 			printMultiple("█", 1);
 			resetColors();
@@ -23,9 +23,9 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 3:
 			printMultiple(" ", 3);
-			colorText(COLOR_PLAYER_HAIR);
+			colorText(sPlayer.sTint.nColor1);
 			printMultiple("█", 1);
-			colorBackground(COLOR_PLAYER_HAIR);
+			colorBackground(sPlayer.sTint.nColor1);
 			printMultiple(" ", 7);
 			printMultiple("█", 1);
 			resetColors();
@@ -34,9 +34,9 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 4:
 			printMultiple(" ", 3);
-			colorText(COLOR_PLAYER_HAIR);
+			colorText(sPlayer.sTint.nColor1);
 			printMultiple("█", 1);
-			colorBackground(COLOR_PLAYER_HAIR);
+			colorBackground(sPlayer.sTint.nColor1);
 			printMultiple(" ", 6);
 			printMultiple("█", 2);
 			resetColors();
@@ -45,9 +45,9 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 5:
 			printMultiple(" ", 2);
-			colorText(COLOR_PLAYER_HAIR);
+			colorText(sPlayer.sTint.nColor1);
 			printMultiple("█", 1);
-			colorBackground(COLOR_PLAYER_HAIR);
+			colorBackground(sPlayer.sTint.nColor1);
 			printMultiple(" ", 2);
 			printMultiple("█", 5);
 			colorBackground(COLOR_PLAYER_SKIN);
@@ -58,11 +58,11 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 6:
 			printMultiple(" ", 2);
-			colorText(COLOR_PLAYER_HAIR);
+			colorText(sPlayer.sTint.nColor1);
 			printMultiple("█", 3);
 			colorBackground(COLOR_PLAYER_SKIN);
 			printMultiple(" ", 1);
-			colorText(COLOR_PLAYER_EYES);
+			colorText(sPlayer.sTint.nColor2);
 			printMultiple("█", 1);
 			printMultiple(" ", 2);
 			printMultiple("█", 1);
@@ -73,10 +73,9 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 7:
 			printMultiple(" ", 4);
-			colorText(COLOR_SPRITE_OUTLINE);
 			colorBackground(COLOR_PLAYER_SKIN);
 			printMultiple(" ", 2);
-			colorText(COLOR_PLAYER_EYES);
+			colorText(sPlayer.sTint.nColor2);
 			printMultiple("█", 1);
 			printMultiple(" ", 2);
 			printMultiple("█", 1);
@@ -89,7 +88,7 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 8:
 			printMultiple(" ", 2);
-			colorText(COLOR_PLAYER_SHIRT);
+			colorText(sPlayer.sTint.nColor3);
 			printMultiple("█", 3);
 			colorBackground(COLOR_PLAYER_SKIN);
 			printMultiple(" ", 5);
@@ -100,9 +99,9 @@ void printPlayerSprite(int nSpriteLine) {
 
 		case 9:
 			printMultiple(" ", 1);
-			colorText(COLOR_PLAYER_SHIRT);
+			colorText(sPlayer.sTint.nColor3);
 			printMultiple("█", 1);
-			colorBackground(COLOR_PLAYER_SHIRT);
+			colorBackground(sPlayer.sTint.nColor3);
 			printMultiple(" ", 3);
 			printMultiple("█", 5);
 			printMultiple(" ", 3);

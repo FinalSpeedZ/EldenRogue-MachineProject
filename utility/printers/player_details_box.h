@@ -17,7 +17,7 @@ void printAreaNavLine(int nLine, int nOffset, Player sPlayer, int nPrompt, int n
 void printNameAndJobClass(int nLine, Player sPlayer, int nOffset);
 
 void printAreaNavUI(int nLine, Player sPlayer, int nOffset, int nPrompt, int nDialogueNum);
-void printPlayerSpritePerLineNav(int nLine, int nOffset);
+void printPlayerSpritePerLineNav(int nLine, int nOffset, Player sPlayer);
 void printNavOptionsPerLine(int nLine);
 void printPlayerStats(int nLine, Player sPlayer);
 

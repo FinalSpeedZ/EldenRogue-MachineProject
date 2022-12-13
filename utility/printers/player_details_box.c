@@ -86,7 +86,7 @@ void printRoundtableNavLine(int nLine, int nOffset, Player sPlayer, int nPrompt,
 }	
 
 void printRoundtableNavUI(int nLine, Player sPlayer, int nOffset, int nPrompt, int nDialogueNum) {
-	printPlayerSpritePerLineNav(nLine, nOffset);
+	printPlayerSpritePerLineNav(nLine, nOffset, sPlayer);
 
 	if (nLine == 12) {
 		printTopBottomSpriteBorders(nLine);
@@ -239,7 +239,7 @@ void printNameAndJobClass(int nLine, Player sPlayer, int nOffset) {
 }
 
 void printAreaNavUI(int nLine, Player sPlayer, int nOffset, int nPrompt, int nDialogueNum) {
-	printPlayerSpritePerLineNav(nLine, nOffset);
+	printPlayerSpritePerLineNav(nLine, nOffset, sPlayer);
 
 	if (nLine == 12) {
 		printTopBottomSpriteBorders(nLine);
@@ -255,7 +255,7 @@ void printAreaNavUI(int nLine, Player sPlayer, int nOffset, int nPrompt, int nDi
 	printPlayerStats(nLine, sPlayer);
 }
 
-void printPlayerSpritePerLineNav(int nLine, int nOffset) {
+void printPlayerSpritePerLineNav(int nLine, int nOffset, Player sPlayer) {
 	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT + nOffset);
 	printf(" ");
 
@@ -263,7 +263,7 @@ void printPlayerSpritePerLineNav(int nLine, int nOffset) {
 		printf("│█");
 	}
 
-	printPlayerSprite(nLine - 2);
+	printPlayerSprite(nLine - 2, sPlayer);
 
 	if (nLine == 3) {
 		printf("█├");

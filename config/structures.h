@@ -52,6 +52,7 @@ struct playerTag {
 	Statistics sPlayerStats;
 	AreaDetails sPlayerAreaDetails;
 	UnlockedAreas sPlayerUnlockedAreas;
+	Tint sTint;
 };
 typedef struct playerTag Player;
 

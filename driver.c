@@ -27,6 +27,7 @@
 
 #include "screens/character_creation_screens/character_creation_screen.c"
 #include "screens/character_creation_screens/job_class_creation.c"
+#include "screens/character_creation_screens/customize_character.c"
 
 #include "screens/roundtable_hold_screens/roundtable_hold.c"
 #include "screens/roundtable_hold_screens/fast_travel.c"

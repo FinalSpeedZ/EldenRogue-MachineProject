@@ -254,7 +254,7 @@ void printPlayerBattleUI(int nLine, int nOffset, Player sPlayer, int nIncomingDa
 	}
 
 	if (nLine != 2) {
-		printPlayerSpritePerLineBattle(nLine);
+		printPlayerSpritePerLineBattle(nLine, sPlayer);
 	}
 
 	if (nLine == 3) {
@@ -297,12 +297,12 @@ void printIncomingDamage(int nIncomingDamage, Player sPlayer) {
 	}
 }
 
-void printPlayerSpritePerLineBattle(int nLine) {
+void printPlayerSpritePerLineBattle(int nLine, Player sPlayer) {
 	if (nLine != 12) {
 		printf("│█");
 	}
 
-	printPlayerSprite(nLine - 2);
+	printPlayerSprite(nLine - 2, sPlayer);
 
 	if (nLine != 12) {
 		printf("█│");

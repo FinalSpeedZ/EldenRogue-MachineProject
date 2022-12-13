@@ -60,7 +60,4 @@
 #define RH_FAST_TRAVEL_PROMPT          8
 #define RH_FAST_TRAVEL_LOCKED_PROMPT   9
 
-
-
-
 #endif

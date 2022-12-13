@@ -19,7 +19,7 @@ void printPlayerBattleEnd(int nLine, int nOffset);
 void printPlayerBattleUI(int nLine, int nOffset, Player sPlayer, int nIncomingDamage);
 void printPlayerNameJob(Player sPlayer);
 void printIncomingDamage(int nIncomingDamage, Player sPlayer);
-void printPlayerSpritePerLineBattle(int nLine);
+void printPlayerSpritePerLineBattle(int nLine, Player sPlayer);
 void printPlayerHealthBar(AreaDetails sPlayerAreaDetails, int nHealthBars);
 void printPlayerHealth(AreaDetails sPlayerAreaDetails);
 void printPlayerPotions(int nPotions);
