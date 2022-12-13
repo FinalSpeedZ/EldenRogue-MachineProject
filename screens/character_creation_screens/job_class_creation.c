@@ -1,5 +1,11 @@
 #include "job_class_creation.h"
 
+/*
+	openJobClassSelection  allows user to select a job class
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openJobClassSelection(Player* pPlayer) {
 	int nInput = 0;
 
@@ -23,6 +29,13 @@ void openJobClassSelection(Player* pPlayer) {
 	} while (nInput < 0 || nInput > 6);
 }
 
+/*
+	processJobSelectionInput  processess job class selection input
+	
+	@param nInput     int containing the input of the player
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void processJobSelectionInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1:
@@ -36,6 +49,13 @@ void processJobSelectionInput(int nInput, Player* pPlayer) {
 	}
 }
 
+/*
+	openJobClassStats  opens the stats of the selected job class
+	
+	@param nJobClass     int containing the input of the player (selected job class)
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openJobClassStats(int nJobClass, Player* pPlayer) {
 	int nInput = 0;
 
@@ -61,6 +81,13 @@ void openJobClassStats(int nJobClass, Player* pPlayer) {
 	initializePlayerHealth(pPlayer);
 }
 
+/*
+	processJobClassStatsInput  processess job class stats input
+	
+	@param nInput     int containing the input of the player
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void processJobClassStatsInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 0:
@@ -69,6 +96,13 @@ void processJobClassStatsInput(int nInput, Player* pPlayer) {
 	}
 }
 
+/*
+	loadJobClassStats  loads the stats of the selected job class
+	
+	@param nJobClass     int containing the input of the player
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void loadJobClassStats(int nJobClass, Player* pPlayer) {
 	switch (nJobClass) {
 		case VAGABOND:
@@ -96,6 +130,12 @@ void loadJobClassStats(int nJobClass, Player* pPlayer) {
 	}
 }
 
+/*
+	loadVagabondStats  loads the stats of the Vagabond job class
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void loadVagabondStats(Player* pPlayer) {
 	pPlayer->nLevel = 9;
 	strcpy(pPlayer->strPlayerJobClass, "VAGABOND");
@@ -108,6 +148,12 @@ void loadVagabondStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nFaith        = 9;
 }
 
+/*
+	loadSamuraiStats  loads the stats of the Samurai job class
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void loadSamuraiStats(Player* pPlayer) {
 	pPlayer->nLevel = 9;
 	strcpy(pPlayer->strPlayerJobClass, "SAMURAI");
@@ -120,6 +166,12 @@ void loadSamuraiStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nFaith        = 8;
 }
 
+/*
+	loadWarriorStats  loads the stats of the Warrior job class
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void loadWarriorStats(Player* pPlayer) {
 	pPlayer->nLevel = 8;
 	strcpy(pPlayer->strPlayerJobClass, "WARRIOR");
@@ -132,6 +184,12 @@ void loadWarriorStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nFaith        = 8;	
 }
 
+/*
+	loadHeroStats  loads the stats of the Hero job class
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void loadHeroStats(Player* pPlayer) {
 	pPlayer->nLevel = 7;
 	strcpy(pPlayer->strPlayerJobClass, "HERO");
@@ -144,6 +202,12 @@ void loadHeroStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nFaith        = 8;	
 }
 
+/*
+	loadAstrologer  loads the stats of the Astrologer job class
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void loadAstrologerStats(Player* pPlayer) {
 	pPlayer->nLevel = 6;
 	strcpy(pPlayer->strPlayerJobClass, "ASTROLOGER");
@@ -156,6 +220,12 @@ void loadAstrologerStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nFaith        = 7;
 }
 
+/*
+	loadProphetStats  loads the stats of the Prophets job class
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void loadProphetStats(Player* pPlayer) {
 	pPlayer->nLevel = 7;
 	strcpy(pPlayer->strPlayerJobClass, "PROPHET");

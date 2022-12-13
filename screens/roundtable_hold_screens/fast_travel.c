@@ -3,6 +3,14 @@
 #include "../areas_screens/area_screens.h"
 #include "../../utility/area_utility/area_screen_helper.h"
 
+
+/*
+	openFastTravel  allows user to fast travel to a specific area
+	
+	@param pPlayer    The pointer to the player structure to be altered
+	@paramp pPrompt   The pointer to an int containing the prompt type
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openFastTravel(Player* pPlayer, int* pPrompt) {
 	int nInput = 0;
 	int nSuccessfulFastTravel = 1;
@@ -33,6 +41,14 @@ void openFastTravel(Player* pPlayer, int* pPrompt) {
 	*pPrompt = NO_PROMPT;
 }
 
+/*
+	processFastTravelInput  processess fast travel selection input
+	
+	@param nInput     int containing the input of the player
+	@param pPlayer    The pointer to the player structure to be altered
+	@param pSuccessfulFastTravel  The pointer to an int determining if it is successful fast travel
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTravel, int* pPrompt) {
 	int nFloorNumber = 1;
 	int nUnlocked = 0;
@@ -86,6 +102,14 @@ void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTra
 	}
 }
 
+/*
+	openFastTravelToFloor  allows user to fast travel to a specific area floor
+	
+	@param nAreaIndex an int to the area index to travel to
+	@param pPlayer    The pointer to the player structure to be altered
+	@paramp pPrompt   The pointer to an int containing the prompt type
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openFastTravelToFloor(int nAreaIndex, Player* pPlayer, int* pPrompt) {
 	int nInput = 0;
 	int nFloorNumber = 1;

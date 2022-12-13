@@ -2,7 +2,7 @@
 
 
 /*
-	openCustomizeCharacter  Opens the battle screen where player battles against an enemy
+	openCustomizeCharacter  Opens the customize character screen to edit player sprite
 
 	@param pPlayer    The pointer to the player structure to be altered
 	Pre-condition:   structure that pPlayer is pointing to is already initialized
@@ -30,6 +30,13 @@ void openCustomizeCharacter(Player* pPlayer) {
 	} while (nInput != 4);
 }
 
+/*
+	processCustomizeCharacterInput  Processes the customize character input
+	
+	@param nInout     The input of the user
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void processCustomizeCharacterInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1:
@@ -46,6 +53,12 @@ void processCustomizeCharacterInput(int nInput, Player* pPlayer) {
 	}
 }
 
+/*
+	 openEditHair Edits the hair color of player sprite
+
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openEditHair(Player* pPlayer) {
 	int nInput = 1;
 
@@ -69,6 +82,13 @@ void openEditHair(Player* pPlayer) {
 	} while (nInput != 4);
 }
 
+/*
+	processEditHair  Processes the edit hair input
+	
+	@param nInout     The input of the user
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void processEditHair(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1: 
@@ -85,6 +105,12 @@ void processEditHair(int nInput, Player* pPlayer) {
 	}
 }
 
+/*
+	openEditEyeCOlor Edits the eye color of player sprite
+
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openEditEyeColor(Player* pPlayer) {
 	int nInput = 1;
 
@@ -108,6 +134,13 @@ void openEditEyeColor(Player* pPlayer) {
 	} while (nInput != 4);
 }
 
+/*
+	processEditEyeColor  Processes the edit eye color input
+	
+	@param nInout     The input of the user
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void processEditEyeColor(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1: 
@@ -124,6 +157,13 @@ void processEditEyeColor(int nInput, Player* pPlayer) {
 	}	
 }
 
+
+/*
+	openEditShirtColor Edits the hair color of player sprite
+
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openEditShirtColor(Player* pPlayer) {
 	int nInput = 1;
 
@@ -147,6 +187,13 @@ void openEditShirtColor(Player* pPlayer) {
 	} while (nInput != 4);
 }
 
+/*
+	processEditShirtColor  Processes the edit shirt color input
+	
+	@param nInout     The input of the user
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void processEditShirtColor(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1: 
