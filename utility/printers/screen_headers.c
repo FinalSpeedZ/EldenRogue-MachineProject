@@ -53,6 +53,36 @@ void printFastTravelHeader() {
 	printf("\n\n");	
 }
 
+void printInventoryHeader() {
+	printMultiple("\n", SCREEN_PADDING_TOP);
+	printMiddleText("   __  _                      _                    __   ", "", "");
+	printMiddleText("  / / (_)                    | |                   \\ \\  ", "", "");
+	printMiddleText(" / /   _ _ ____   _____ _ __ | |_ ___  _ __ _   _   \\ \\ ", "", "");
+	printMiddleText("< <   | | '_ \\ \\ / / _ \\ '_ \\| __/ _ \\| '__| | | |   > >", "", "");
+	printMiddleText(" \\ \\  | | | | \\ V /  __/ | | | || (_) | |  | |_| |  / / ", "", "");
+	printMiddleText("  \\_\\ |_|_| |_|\\_/ \\___|_| |_|\\__\\___/|_|   \\__, | /_/  ", "", "");		
+	printMiddleText("                                             __/ |      ", "", "");
+	printMiddleText("                                            |___/       ", "", "\n");	
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
+	printMultiple("─", SCREEN_WIDTH);
+	printf("\n\n");	
+}
+
+void printShopHeader() {
+	printMultiple("\n", SCREEN_PADDING_TOP);
+	printMiddleText("   __      _                  __   ", "", "");
+	printMiddleText("  / /     | |                 \\ \\  ", "", "");
+	printMiddleText(" / /   ___| |__   ___  _ __    \\ \\ ", "", "");
+	printMiddleText("< <   / __| '_ \\ / _ \\| '_ \\    > >", "", "");
+	printMiddleText(" \\ \\  \\__ \\ | | | (_) | |_) |  / / ", "", "");
+	printMiddleText("  \\_\\ |___/_| |_|\\___/| .__/  /_/  ", "", "");
+	printMiddleText("                      | |          ", "", "");	
+	printMiddleText("                      |_|          ", "", "\n");					
+	printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
+	printMultiple("─", SCREEN_WIDTH);
+	printf("\n\n");		
+}
+
 void printLevelUpHeader() {
 	printMultiple("\n", SCREEN_PADDING_TOP);
 	printMiddleText("   __  _                _                __    ", "", "");

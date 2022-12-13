@@ -7,11 +7,7 @@ void openShop(Player* pPlayerInfo) {
 	int nInput = 0;
 	do {
 		system("cls");
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("SHOP", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printShopHeader();
 		generateShopSlots(&nPage);
 		printf("\n\t\tRUNES: %d", pPlayerInfo->nRunes);
 
@@ -51,11 +47,7 @@ void selectbuyWeapon(Player* pPlayerInfo, int* pPage, int* pMinIndex, int* pMaxI
 	Item* pIdentifyWeapon;
 	do {
 		system("cls");
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("SHOP", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printShopHeader();
 		generateShopSlots(pPage);
 		printf("\n\t\tRUNES: %d", pPlayerInfo->nRunes);
 		printSelectWeaponToBuy();
@@ -79,11 +71,7 @@ void openBuyScreen (Player* pPlayerInfo, Item* pPurchasedWeapon, int* pSelectedW
 	int nInput = 0;
 	do {
 			system("cls");
-			printMultiple("\n", SCREEN_PADDING_TOP);
-			printMiddleText("SHOP", "", "");
-			printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-			printMultiple("─", SCREEN_WIDTH);
-			printf("\n\n");
+			printShopHeader();
 			printShopBox(pPurchasedWeapon);
 			printTwoLongOptions(1, "Confirm Purchase", 0, "Back");
 			getIntInput(&nInput, 0, 1);

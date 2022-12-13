@@ -8,6 +8,7 @@ void printFastTravelHeader();
 void printLevelUpHeader();
 void printBattleHeader();
 void printCreditsHeader();
+void printInventoryHeader();
 
 
 void printStormveilCastleHeader();

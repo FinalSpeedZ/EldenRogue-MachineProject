@@ -14,7 +14,7 @@ Opens the character creation screen
 	openCharacterCreationScreen   Opens the battle screen where player battles against an enemy
 
 	@param sPlayer                The player structure to be created 
-	Pre-condition                 sPlayer already initialized
+	Pre-condition:                sPlayer was already decleared and initialized to initial values
 */
 void openCharacterCreationScreen(Player sPlayer) {
 	int nInput = 0;
@@ -43,7 +43,7 @@ void openCharacterCreationScreen(Player sPlayer) {
 /*
 	processCharacterCreationScreenInput  Process the character creation screen Input
 
-	@param pPlayer                The player structure to be created (already initialized)
+	@param pPlayer A pointer to the player structure that will be altered
 */
 void processCharacterCreationScreenInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
@@ -62,6 +62,12 @@ void processCharacterCreationScreenInput(int nInput, Player* pPlayer) {
 	}
 }
 
+/*
+	checkCharacterCreation   Opens the battle screen where player battles against an enemy
+
+	@param sPlayer    The player structure created
+	@return           an int determining if player is done choosing name and job class
+*/
 int checkCharacterCreation(Player sPlayer) {
 	if (strlen(sPlayer.strPlayerName) == 0) {
 		printMessage(SYSTEM_MESSAGE, "ENTER YOUR CHOSEN NAME");
@@ -81,6 +87,11 @@ int checkCharacterCreation(Player sPlayer) {
 	}
 }
 
+/*
+	printJobClassStats   Prints the job class stats
+
+	@param sPlayer    The player structure created
+*/
 void printJobClassStats(Player sPlayer) {
 	if (strlen(sPlayer.strPlayerJobClass) != 0) {
 		printStats(sPlayer);

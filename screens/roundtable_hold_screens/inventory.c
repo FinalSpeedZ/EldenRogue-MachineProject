@@ -8,11 +8,7 @@ void openInventory(Player* pPlayerInfo) {
 
 	do {
 		system("cls");
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("INVENTORY", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printInventoryHeader();
 		printInventoryList (&nPage, pPlayerInfo);
 		printf("\n\t\tRUNES: %d", pPlayerInfo->nRunes);
 		if (pPlayerInfo->sPlayerEquipment.pCurrentWeapon != NULL){
@@ -40,11 +36,7 @@ void openSelectScreen (Player* pPlayerInfo, int* pPage, int* pMinIndex, int* pMa
 
 	do {
 		system("cls");
-		printMultiple("\n", SCREEN_PADDING_TOP);
-		printMiddleText("INVENTORY", "", "");
-		printMultiple(" ", SCREEN_PADDING_LEFT - HEADER_PADDING_LEFT);
-		printMultiple("─", SCREEN_WIDTH);
-		printf("\n\n");
+		printInventoryHeader();
 		printInventoryList (pPage, pPlayerInfo);
 		printf("\n\t\tRUNES: %d", pPlayerInfo->nRunes);
 

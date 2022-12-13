@@ -1,5 +1,12 @@
 #include "customize_character.h"
 
+
+/*
+	openCustomizeCharacter  Opens the battle screen where player battles against an enemy
+
+	@param pPlayer    The pointer to the player structure to be altered
+	Pre-condition:   structure that pPlayer is pointing to is already initialized
+*/
 void openCustomizeCharacter(Player* pPlayer) {
 	int nInput = 1;
 
