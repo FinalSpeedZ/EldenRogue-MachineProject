@@ -57,6 +57,8 @@ void openJobClassStats(int nJobClass, Player* pPlayer) {
 		getIntInput(&nInput, 0, 1);
 		processJobClassStatsInput(nInput, pPlayer);
 	} while (nInput != 0 && nInput != 1);
+
+	initializePlayerHealth(pPlayer);
 }
 
 void processJobClassStatsInput(int nInput, Player* pPlayer) {
@@ -166,9 +168,7 @@ void loadProphetStats(Player* pPlayer) {
 	pPlayer->sPlayerStats.nFaith        = 16;	
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                            PRINTER FUNCTIONS                            *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
  void printStats(Player sPlayer) {
  	printPlayerLevel(sPlayer.nLevel);
  	printTwoStats("HEALTH", sPlayer.sPlayerStats.nHealth, 

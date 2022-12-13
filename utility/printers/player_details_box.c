@@ -419,7 +419,7 @@ void printPlayerStats(int nLine, Player sPlayer) {
 			break;
 
 		case 9:
-			printPlayerPotions(sPlayer.nPotions); 
+			printPlayerPotions(sPlayer.sPlayerEquipment.nPotions); 
 			printMultiple(" ", 2);
 			printf("│");
 			break;

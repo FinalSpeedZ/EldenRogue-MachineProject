@@ -1,8 +1,11 @@
+/****************************************
+File Name: battle.h
+
+The header file for battle.c
+****************************************/
+
 #ifndef BATTLE_H
 #define BATTLE_H
-
-#define NORMAL_BATTLE 0
-#define BOSS_BATTLE   1
 
 int openBattleScreen(int nAreaIndex, Player* pPlayer, Enemy* pEnemy, int nBoss);
 

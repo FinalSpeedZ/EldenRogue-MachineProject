@@ -278,7 +278,7 @@ void printPlayerBattleUI(int nLine, int nOffset, Player sPlayer, int nIncomingDa
 	}
 
 	if (nLine == 10) {
-		printPlayerPotions(sPlayer.nPotions);
+		printPlayerPotions(sPlayer.sPlayerEquipment.nPotions);
 	} 
 
 	if (nLine == 12) {

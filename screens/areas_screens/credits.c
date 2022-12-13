@@ -1,5 +1,13 @@
+/****************************************
+File Name: credits.c
+
+Contains the opencredits fucntion
+****************************************/
 #include "credits.h"
 
+/*
+	openCredits   Opens the credits
+*/
 void openCredits() {
 	system("cls");
 

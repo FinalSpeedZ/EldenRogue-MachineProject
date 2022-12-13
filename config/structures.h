@@ -51,6 +51,37 @@ struct tintTag {
 };
 typedef struct tintTag Tint;
 
+// for weaponstats
+struct weaponStatsTag {
+	StringWeaponName strWeaponName;
+	int nWeaponHealth;
+	int nWeaponEndurance;
+	int nWeaponDexterity;
+	int nWeaponStrength;
+	int nWeaponIntelligence;
+	int nWeaponFaith;
+	int nCost;
+	int nWeaponType;
+	int nInventoryIndex;
+};
+typedef struct weaponStatsTag WeaponStats;
+
+// for inventory
+struct inventoryTag {
+	WeaponStats* pWeaponStats;
+	struct inventoryTag* pPrev;
+	struct inventoryTag* pNext;
+};
+typedef struct inventoryTag Item;
+
+// equipment
+struct equipTag {
+	Item* pCurrentWeapon;
+	int nPotions;
+};
+typedef struct equipTag Equipment;
+
+
 // Main player structure
 struct playerTag {
 	StringPlayerName strPlayerName;
@@ -59,7 +90,8 @@ struct playerTag {
 	int nLevel;
 	int nRunes;
 	int nShards;
-	int nPotions;
+	Item* pInventory;
+	Equipment sPlayerEquipment;
 	
 	Statistics sPlayerStats;
 	AreaDetails sPlayerAreaDetails;

@@ -1,6 +1,8 @@
 #include "roundtable_hold.h"
 #include "fast_travel.h"
 #include "level_up.h"
+#include "shop.h"
+#include "inventory.h"
 
 void openRoundTableHold(Player sPlayer) {
 	int nInput = 0;
@@ -11,8 +13,8 @@ void openRoundTableHold(Player sPlayer) {
 
 		printRoundtableHoldHeader();
 
-		resetPotions(&sPlayer.nPotions);
-		initializePlayerHealth(&sPlayer.sPlayerAreaDetails);
+		resetPotions(&sPlayer.sPlayerEquipment.nPotions);
+		initializePlayerHealth(&sPlayer);
 
 		printTwoOptions(1, "FAST TRAVEL", 2, "LEVEL UP");
 		printTwoOptions(3, "INVENTORY", 4, "SHOP");
@@ -34,11 +36,15 @@ void processRoundTableHoldInput(int nInput, Player* pPlayer, int* pPrompt) {
 			*pPrompt = RH_FAST_TRAVEL_PROMPT;
 			openFastTravel(pPlayer, pPrompt);
 			break;
-
 		case LEVEL_UP:
 			openLevelUp(pPlayer);
 			break;
-
+		case INVENTORY:
+			openInventory(pPlayer);
+			break;
+		case SHOP:
+			openShop(pPlayer);
+			break;
 		case SAVE: 
 			printMessage("SYSTEM MESSAGE", "THIS FEATURE IS NOT AVAILABLE");
 			pressEnter();

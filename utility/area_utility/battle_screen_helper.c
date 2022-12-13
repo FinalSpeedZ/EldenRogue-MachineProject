@@ -399,17 +399,38 @@ void checkBattleOver(Player sPlayer, Enemy sEnemy, int* pBattleFinished) {
 }
 
 int getPlayerPhysicalDmg(Player sPlayer, Enemy sEnemy) {
-	int nDamageToBeDealt = (sPlayer.sPlayerStats.nStrength) * (1 - sEnemy.fPhysicalDef);
+	int nDamageToBeDealt;
+	if (sPlayer.sPlayerEquipment.pCurrentWeapon == NULL) {
+		nDamageToBeDealt = (sPlayer.sPlayerStats.nStrength + 0) * (1 - sEnemy.fPhysicalDef);
+	}
+	else {
+		nDamageToBeDealt = (sPlayer.sPlayerStats.nStrength + sPlayer.sPlayerEquipment.pCurrentWeapon->pWeaponStats->nWeaponStrength) * (1 - sEnemy.fPhysicalDef);		
+	}
+	
 	return nDamageToBeDealt;
 }
 
 int getPlayerSorceryDmg(Player sPlayer, Enemy sEnemy) {
-	int nDamageToBeDealt = (sPlayer.sPlayerStats.nIntelligence) * (1 - sEnemy.fSorceryDef);
+	int nDamageToBeDealt;
+	if (sPlayer.sPlayerEquipment.pCurrentWeapon == NULL) {
+		nDamageToBeDealt = (sPlayer.sPlayerStats.nIntelligence + 0) * (1 - sEnemy.fPhysicalDef);
+	}
+	else {
+		nDamageToBeDealt = (sPlayer.sPlayerStats.nStrength + sPlayer.sPlayerEquipment.pCurrentWeapon->pWeaponStats->nWeaponIntelligence) * (1 - sEnemy.fPhysicalDef);		
+	}
+	
 	return nDamageToBeDealt;
 }
 
 int getPlayerIncantationDmg(Player sPlayer, Enemy sEnemy) {
-	int nDamageToBeDealt = (sPlayer.sPlayerStats.nFaith) * (1 - sEnemy.fIncantationDef);
+	int nDamageToBeDealt;
+	if (sPlayer.sPlayerEquipment.pCurrentWeapon == NULL) {
+		nDamageToBeDealt = (sPlayer.sPlayerStats.nFaith + 0) * (1 - sEnemy.fPhysicalDef);
+	}
+	else {
+		nDamageToBeDealt = (sPlayer.sPlayerStats.nFaith + sPlayer.sPlayerEquipment.pCurrentWeapon->pWeaponStats->nWeaponFaith) * (1 - sEnemy.fPhysicalDef);		
+	}
+	
 	return nDamageToBeDealt;
 }
 
@@ -444,8 +465,14 @@ void useIncantationAttack(Player sPlayer, Enemy* pEnemy) {
 }
 
 float getDodgeRate(Player sPlayer) {
-	float fDodgeRate = (20 + ((float) (sPlayer.sPlayerStats.nEndurance) / 2)) / 100;
+	float fDodgeRate;
 
+	if (sPlayer.sPlayerEquipment.pCurrentWeapon == NULL) {
+		fDodgeRate = (20 + ((float) (sPlayer.sPlayerStats.nEndurance + 0) / 2)) / 100;
+	}
+	else {
+		fDodgeRate = (20 + ((float) (sPlayer.sPlayerStats.nEndurance + sPlayer.sPlayerEquipment.pCurrentWeapon->pWeaponStats->nWeaponEndurance) / 2)) / 100;		
+	}
 	return fDodgeRate;
 }
 
@@ -477,11 +504,11 @@ int healthToBeAdded(Player* pPlayer) {
 void drinkPotion(Player* pPlayer, int nHealthGained) {
 	int nAddHealth = nHealthGained;
 
-	if (pPlayer->nPotions > 0 && nAddHealth != 0) {
+	if (pPlayer->sPlayerEquipment.nPotions > 0 && nAddHealth != 0) {
 		
 		pPlayer->sPlayerAreaDetails.nCurrentHealth += nAddHealth;
 
-		pPlayer->nPotions--;
+		pPlayer->sPlayerEquipment.nPotions--;
 	}	
 }
 

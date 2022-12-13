@@ -1,9 +1,20 @@
+/****************************************
+File Name: character_creation_screen.c
+
+Opens the character creation screen
+****************************************/
+
 #include "character_creation_screen.h"
 #include "job_class_creation.h"
 #include "customize_character.h"
 
 #include "../roundtable_hold_screens/roundtable_hold.h"
 
+/*
+	openCharacterCreationScreen   Opens the battle screen where player battles against an enemy
+
+	@param sPlayer                The player structure to be created (already initialized)
+*/
 void openCharacterCreationScreen(Player sPlayer) {
 	int nInput = 0;
 

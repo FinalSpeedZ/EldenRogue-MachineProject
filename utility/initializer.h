@@ -9,7 +9,8 @@ void initializeShards(Player* pPlayer);
 void resetPotions(int* pPotions);
 void initializeAreaDetails(AreaDetails* pPlayerAreaDetails);
 void initializeUnlockedAreas(UnlockedAreas* pPlayerUnlockedAreas);
-void initializePlayerHealth(AreaDetails* pPlayerAreaDetails);
+void initializePlayerHealth(Player* pPlayer);
 void initializePlayerColor(Player *pPlayer);
+void initializeInventory(Player* pPlayer);
 
 #endif

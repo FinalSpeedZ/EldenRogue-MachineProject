@@ -1,13 +1,12 @@
+/****************************************
+File Name: area_screens.h
+
+The header file for area_screen.c
+****************************************/
+
 #ifndef AREA_SCREENS_H 
 #define AREA_SCREENS_H
 
-#define UP    1
-#define DOWN  2
-#define LEFT  3
-#define RIGHT 4
-
-#define ENEMY_YIELD    75
-#define TREASURE_YEILD 25
 
 void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer);
 

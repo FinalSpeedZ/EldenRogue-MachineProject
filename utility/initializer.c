@@ -5,12 +5,13 @@ void initializePlayer(Player* pPlayer) {
 	strcpy(pPlayer->strPlayerName, "");
 	initializeJobClassStats(pPlayer);
 	resetRunes(&pPlayer->nRunes);
-	resetPotions(&pPlayer->nPotions);
+	resetPotions(&pPlayer->sPlayerEquipment.nPotions);
 	initializeAreaDetails(&pPlayer->sPlayerAreaDetails);
 	initializeUnlockedAreas(&pPlayer->sPlayerUnlockedAreas);
 	initializeShards(pPlayer);
-	initializePlayerHealth(&pPlayer->sPlayerAreaDetails);
 	initializePlayerColor(pPlayer);
+	initializeInventory(pPlayer);
+	initializePlayerHealth(pPlayer);
 }
 
 void initializeJobClassStats(Player* pPlayer) {
@@ -27,7 +28,7 @@ void initializeJobClassStats(Player* pPlayer) {
 }
 
 void resetRunes(int* pRunes) {
-	*pRunes = 1000;
+	*pRunes = 0;
 }
 
 void initializePlayerColor(Player *pPlayer) {
@@ -54,13 +55,25 @@ void initializeAreaDetails(AreaDetails* pPlayerAreaDetails) {
 void initializeUnlockedAreas(UnlockedAreas* pPlayerUnlockedAreas) {
 	pPlayerUnlockedAreas->nStormveilFastTravel = 0;
 	pPlayerUnlockedAreas->nRayaLucariaFastTravel = 0;
-	pPlayerUnlockedAreas->nRedmaneFastTravel = 0;
-	pPlayerUnlockedAreas->nVolcanoFastTravel = 0;
+	pPlayerUnlockedAreas->nRedmaneFastTravel = 1;
+	pPlayerUnlockedAreas->nVolcanoFastTravel = 1;
 	pPlayerUnlockedAreas->nLeyndellFastTravel = 0;
 	pPlayerUnlockedAreas->nEldenThroneCredits = 0;
 }
 
-void initializePlayerHealth(AreaDetails* pPlayerAreaDetails) {
-	pPlayerAreaDetails->nCurrentHealth = 30;
-	pPlayerAreaDetails->nMaxHealth = 30;
+void initializePlayerHealth(Player* pPlayer) {
+	if (pPlayer->sPlayerEquipment.pCurrentWeapon == NULL) {
+		pPlayer->sPlayerAreaDetails.nMaxHealth = 100 * (pPlayer->sPlayerStats.nHealth) / 2;		
+		pPlayer->sPlayerAreaDetails.nCurrentHealth = pPlayer->sPlayerAreaDetails.nMaxHealth;
+	}
+
+	else {
+		pPlayer->sPlayerAreaDetails.nMaxHealth = 100 * (pPlayer->sPlayerStats.nHealth + pPlayer->sPlayerEquipment.pCurrentWeapon->pWeaponStats->nWeaponHealth) / 2;
+		pPlayer->sPlayerAreaDetails.nCurrentHealth = pPlayer->sPlayerAreaDetails.nMaxHealth;
+	}
+}
+
+void initializeInventory(Player* pPlayer) {
+	pPlayer->pInventory = NULL;
+	pPlayer->sPlayerEquipment.pCurrentWeapon = NULL;
 }

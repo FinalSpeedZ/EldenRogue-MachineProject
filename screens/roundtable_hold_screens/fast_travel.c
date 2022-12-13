@@ -8,8 +8,8 @@ void openFastTravel(Player* pPlayer, int* pPrompt) {
 	int nSuccessfulFastTravel = 1;
 	
 	do {
-		initializePlayerHealth(&pPlayer->sPlayerAreaDetails);
-		resetPotions(&pPlayer->nPotions);
+		initializePlayerHealth(pPlayer);
+		resetPotions(&pPlayer->sPlayerEquipment.nPotions);
 
 		system("cls");
 
@@ -74,7 +74,7 @@ void processFastTravelInput(int nInput, Player* pPlayer, int* pSuccessfulFastTra
 			break;
 
 		case THE_ELDEN_THRONE:
-			if (pPlayer->nShards >= 2) {
+			if (pPlayer->nShards > 2 && checkFastTravelStatus(LEYNDELL_ROYAL_CAPITAL, &pPlayer->sPlayerUnlockedAreas)) {
 				if (nUnlocked == 0) {
 					openAreaScreen(nInput, nFloorNumber, pPlayer);
 				}

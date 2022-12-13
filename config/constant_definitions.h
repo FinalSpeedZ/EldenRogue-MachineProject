@@ -44,9 +44,47 @@ Elden Rougue MP
 #define TILE_CREDITS     9
 #define TILE_INVALID     10
 
+#define SHORT_SWORD 1
+#define ROGIER_RAPIER 2
+#define CODED_SWORD 3
+#define SWORD_OF_NIGHT_AND_FIRE 4
+
+#define UCHIGATANA 5
+#define MOONVEIL 6
+#define RIVERS_OF_BLOOD 7
+#define HAND_OF_MALENIA 8
+
+#define BASE_WHIP 9
+#define URUMI 10
+#define THORNED_WHIP 11
+#define HOSLOW_PETAL_WHIP 12
+
+#define CLAYMORE 13
+#define STARSCOURGE_GREATSWORD 14
+#define INSEPARABLE_SWORD 15
+#define MALIKETH_BLACK_BLADE 16
+
+#define ASTROLOGER_STAFF 17
+#define ALBINAURIC_STAFF 18
+#define STAFF_OF_THE_GUILTY 19
+#define CARIAN_REGAL_SCEPTER 20
+
+#define FINGER_SEAL 21
+#define GODSLAYER_SEAL 22
+#define GOLDEN_ORDEAL_SEAL 23
+#define DRAGON_COMMUNION_SEAL 24
+
 #define TREASURE_SPAWN    1
 #define ENEMY_SPAWN       2
 #define NO_SPAWN_YET      3
+
+#define UP    1
+#define DOWN  2
+#define LEFT  3
+#define RIGHT 4
+
+#define NORMAL_BATTLE 0
+#define BOSS_BATTLE   1
 
 #define ENEMY_YIELD    75
 #define TREASURE_YIELD 25
