@@ -13,7 +13,8 @@ Opens the character creation screen
 /*
 	openCharacterCreationScreen   Opens the battle screen where player battles against an enemy
 
-	@param sPlayer                The player structure to be created (already initialized)
+	@param sPlayer                The player structure to be created 
+	Pre-condition                 sPlayer already initialized
 */
 void openCharacterCreationScreen(Player sPlayer) {
 	int nInput = 0;
@@ -39,6 +40,11 @@ void openCharacterCreationScreen(Player sPlayer) {
 	} while (nInput != 0 && (nInput != 3 || (strlen(sPlayer.strPlayerName) == 0) || strlen(sPlayer.strPlayerJobClass) == 0));
 }
 
+/*
+	processCharacterCreationScreenInput  Process the character creation screen Input
+
+	@param pPlayer                The player structure to be created (already initialized)
+*/
 void processCharacterCreationScreenInput(int nInput, Player* pPlayer) {
 	switch (nInput) {
 		case 1:
