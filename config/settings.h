@@ -1,3 +1,10 @@
+/****************************************
+File Name: settings.h
+
+Contains the settings (such as padding) 
+for Elden Rogue MP
+****************************************/
+
 #ifndef SETTINGS_H
 #define SETTINGS_H
 

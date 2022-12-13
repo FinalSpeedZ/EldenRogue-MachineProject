@@ -1,9 +1,17 @@
+/****************************************
+File Name: structures.h
+
+Contains the structures to be used for 
+Elden Rougue MP
+****************************************/
+
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
 #include "string_definitions.h"
 #include "constant_definitions.h"
 
+// For player Area Details
 struct areadetailsTag {
 	int nRowLocation;
 	int nColumnLocation;
@@ -13,6 +21,7 @@ struct areadetailsTag {
 };
 typedef struct areadetailsTag AreaDetails;
 
+// For player Stats
 struct statsTag {
 	int nHealth;
 	int nEndurance;
@@ -23,6 +32,7 @@ struct statsTag {
 };
 typedef struct statsTag Statistics;
 
+// To know if Second Fast Travel Tile is locked/unlocked
 struct unlockedTag {
 	int nStormveilFastTravel;
 	int nRayaLucariaFastTravel;
@@ -33,6 +43,7 @@ struct unlockedTag {
 }; 
 typedef struct unlockedTag UnlockedAreas;
 
+// For colors
 struct tintTag {
 	int nColor1;
 	int nColor2;
@@ -40,6 +51,7 @@ struct tintTag {
 };
 typedef struct tintTag Tint;
 
+// Main player structure
 struct playerTag {
 	StringPlayerName strPlayerName;
 	StringJobClass strPlayerJobClass;  
@@ -56,6 +68,7 @@ struct playerTag {
 };
 typedef struct playerTag Player;
 
+// Main enemy structure
 struct enemyTag {
 	char* pEnemyName;
 	int nEnemyType;
@@ -79,6 +92,7 @@ struct enemyTag {
 };
 typedef struct enemyTag Enemy;
 
+// For area doors linked list
 struct doorTag {
 	int nFloorNumber;
 	int nRowLocation;
@@ -89,6 +103,8 @@ struct doorTag {
 };
 typedef struct doorTag Door;
 
+
+// for area floors
 struct floorTag {
 	int nAreaIndex;
 	int nFloorNumber;

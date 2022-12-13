@@ -1,3 +1,10 @@
+/****************************************
+File Name: constant_definitions.h
+
+Contains the constant definitions for 
+Elden Rougue MP
+****************************************/
+
 #ifndef CONSTANT_DEFINITIONS_H
 #define CONSTANT_DEFINITIONS_H
 

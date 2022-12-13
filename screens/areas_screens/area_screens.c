@@ -1,17 +1,35 @@
+/****************************************
+File Name: area_screens.c
+
+Opens the specific area screen (i.e Stormveil) 
+based on player input
+****************************************/
+
 #include "area_screens.h"
 
 #include "battle.h"
 #include "credits.h"
 
+/*
+	openAreaScreen      Opens a specific area screen as well as the 
+					    area board, floor number, and player position
+
+	@param nAreaIndex   Contains the specific area that will be opened
+	@param nFloorNumber Contains the specific floor number of the certain 
+					    area
+	@pPlayer            A pointer to the Player structure
+*/
 void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
+	
+	// VARIABLE DECLARATIONS
 	char cInput = 'A'; // initialize to random char in valid commands 
 	char aPlayerCommands[] = {'W', 'A', 'S', 'D', 'E',
 						      'w', 'a', 's', 'd', 'e'};
-	int nLeaveArea = 0;
+	int nLeaveArea = FALSE;
 
 	int nPrompt = NO_PROMPT;
 	int nTileSpawnType = NO_SPAWN_YET;
-	int nBBattleFinished = 0;
+	int nBBattleFinished = FALSE;
 
 	int nNumberOfFloors = determineNumberOfFloors(nAreaIndex);
 	int nNumberOfDoors = determineNumberOfDoors(nAreaIndex);
@@ -19,49 +37,75 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	Door* pAreaDoors[nNumberOfDoors / 2];
 	int nArrayIndex;
 
+	AreaFloor sAreaFloor;
+
+	// set all indices of pAreaBoard to NULL, this is a preparation for
+	// loading the floors of the area
 	for (nArrayIndex = 0; nArrayIndex < nNumberOfFloors; nArrayIndex++) {
 		pAreaBoard[nArrayIndex] = NULL;
 	}
 
+	// set all indices of pAreaDoors to NULL, this is a preparation for
+	// loading the doors of the area
 	for (nArrayIndex = 0; nArrayIndex < nNumberOfDoors / 2; nArrayIndex++) {
 		pAreaDoors[nArrayIndex] = NULL;
 	} 
 
-	AreaFloor sAreaFloor;
+	// initiliaze contents of the structure
 	sAreaFloor.nFloorNumber = nFloorNumber;
 	sAreaFloor.nAreaIndex = nAreaIndex;
 	sAreaFloor.pFloorBoardArray = pAreaBoard;
 	sAreaFloor.pAreaDoorArray = pAreaDoors;
 
-	determineAreaRowsColumns(&sAreaFloor);
+	// determine how many rows and columns the current
+	// area floor number has
+	determineAreaRowsColumns(&sAreaFloor);  
+
+	// generate the current area floor number and store it at pFloorBoardArray
 	sAreaFloor.pFloorBoardArray[sAreaFloor.nFloorNumber - 1] = generateArea(sAreaFloor);
+
+	// load all the doors for that area
 	loadDoors(sAreaFloor.nAreaIndex, sAreaFloor.pAreaDoorArray);
+
+	// identify player starting tile
 	findPlayerSpawn(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 
+	// main UI of this function
 	do {
 		system("cls");
 
+		// prints the Area Name as a Header
 		printAreaName(nAreaIndex);
 
+		// prints the Area Map
 		printAreaMap(sAreaFloor, &pPlayer->sPlayerAreaDetails);
 		printf("\n");
 
+		// prints player navigation/dialogue box
 		printAreaNav(*pPlayer, nPrompt);
+
 		printFooter();
 
+		// checker if there is a current prompt that needs to be printed only and not ask for input
 		if (nPrompt == NO_PROMPT || nPrompt == EMPTY_TILE_PROMPT || nPrompt == LOCKED_TILE_PROMPT) {
 			printInputDivider();
 			getCharAreaInput(&cInput, aPlayerCommands, 10);
 		}
-		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea, &nPrompt, &nTileSpawnType, &nBBattleFinished);
-	} while (!nLeaveArea);
 
+		// process the input from the user
+		processAreaScreenInput(cInput, &sAreaFloor, pPlayer, &nLeaveArea, &nPrompt, &nTileSpawnType, &nBBattleFinished);
+	
+	// only exit the area screen if nLeaveArea is TRUE
+	} while (!nLeaveArea); 
+
+	// free the allocated floors for the area
 	for (nArrayIndex = nNumberOfFloors - 1; nArrayIndex >= 0; nArrayIndex--) {
 		if (sAreaFloor.pFloorBoardArray[nArrayIndex] != NULL) {
 			free (sAreaFloor.pFloorBoardArray[nArrayIndex]);
 		}
 	}
 
+	// free the allocated doors for the area
 	for (nArrayIndex = nNumberOfDoors / 2 - 1; nArrayIndex >= 0; nArrayIndex--) {
 		if (sAreaFloor.pAreaDoorArray[nArrayIndex] != NULL) {
 			free (sAreaFloor.pAreaDoorArray[nArrayIndex]->pNext);
@@ -70,21 +114,44 @@ void openAreaScreen(int nAreaIndex, int nFloorNumber, Player* pPlayer) {
 	}
 }
 
+
+/*
+	processAreaScreenInput   Processes the Input of the User and does desired functions 
+
+	@param cInput            Contains the input of the user
+	@param pAreaFloor        A pointer to the AreaFloor structure 
+	@param pPlayer           A pointer to the Player structure
+	@param pLeaveArea        A pointer to an int that determines if player wishes to leave the area screen
+
+	@param pPrompt           A pointer to an int that determines what kind of prompt to be printed
+	@param pTileSpawnType    A pointer to an int that determines what kind of Spawn Tile Treasure/Enemy
+							 the player triggered. This is a helper for prompts.
+	@param pBBattleFinished  A pointer to an int that determines whether the Boss Battle is finished or not.
+	                         This is also a helper for prompts
+
+*/
 void processAreaScreenInput(char cInput, AreaFloor* pAreaFloor, Player* pPlayer, int* pLeaveArea, 
 						    int* pPrompt, int* pTileSpawnType, int* pBBattleFinished) {
 	switch(cInput) {
+		// if player inputs 'w'
 		case 'W':
 		case 'w':
+			// call movePlayer with UP as first param (player wishes to move UP)
 			movePlayer(UP, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			// no prompt shall be printed by moving UP
 			*pPrompt = NO_PROMPT;
 			break;
 
+		// if player inputs 'A'
 		case 'A':
 		case 'a':
+			// call movePlayer with DOWN as first param (player wishes to move DOWN)
 			movePlayer(LEFT, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
+			// no prompt shall be printed by moving DOWN
 			*pPrompt = NO_PROMPT;
 			break;
 
+		// if player inputs
 		case 'S':
 		case 's':
 			movePlayer(DOWN, *pAreaFloor, &pPlayer->sPlayerAreaDetails);
